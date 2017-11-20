@@ -1,6 +1,6 @@
-package com.hexaware.ftpxx.persistence;
+package com.hexaware.ftp01.persistence;
 
-import com.hexaware.ftpxx.model.Employee;
+import com.hexaware.ftp01.model.Employee;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;

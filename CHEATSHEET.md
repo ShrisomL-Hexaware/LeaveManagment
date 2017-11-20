@@ -3,7 +3,7 @@
 ## repository actions
 
 ### clone
-  * ```git clone git@github.com:HexaInnovLab/ftpxx.git```
+  * ```git clone git@github.com:HexaInnovLab/ftp01.git```
 
 ### reset
 
@@ -42,7 +42,7 @@
 ## Deploy
 
   * Copy the war file to the webapps folder
-    * ```cp target/<some>.war /path/to/apache-tomcat-9.0.0.M22/webapps/ftpxx.war```
+    * ```cp target/<some>.war /path/to/apache-tomcat-9.0.0.M22/webapps/ftp01.war```
 
 # angular
 

@@ -13,8 +13,8 @@
       * create a repository for each team : ftp01 to ftp10
       * create a team for each team : ftp01 to ftp10
       * Add FTP-Admins as a group w/ Admin access, and ftpnn team w/ R/W to these repositories
-    * `git clone --bare git@github.com:HexaInnovLab/ftp-fork-me.git ftpxx`
-    * `cd ftpxx`
+    * `git clone --bare git@github.com:HexaInnovLab/ftp-fork-me.git ftp01`
+    * `cd ftp01`
     * For each team, nn = 01 to 10
       * `git push --mirror git@github.com:HexaInnovLab/ftpnn.git`
     * For each team, nn = 01 to 10
@@ -22,12 +22,12 @@
       * `git clone git@github.com:HexaInnovLab/ftpnn.git`
       * cd ftpnn
       * For windows
-        * use VS Code, find/replace in files to do the following: replacing ftpxx -> ftpnn, FTPXX -> FTPnn
-        * Rename directory restservice/leavemanager/src/main/java/com/hexaware/ftpxx/ to restservice/leavemanager/src/main/java/com/hexaware/ftpnn/
+        * use VS Code, find/replace in files to do the following: replacing ftp01 -> ftpnn, FTP01 -> FTPnn
+        * Rename directory restservice/leavemanager/src/main/java/com/hexaware/ftp01/ to restservice/leavemanager/src/main/java/com/hexaware/ftpnn/
       * For Mac OS
         * NOTE: replace nn with the team-id in the following three commands
-        * `find . -type f -not -path '*/\.*' -not -path "*/node_modules/*" -exec sed -i '' -e 's/ftpxx/ftpnn/g' {} \; -exec sed -i '' -e 's/FTPXX/FTPnn/g' {} \;`
-        * `mv restservice/leavemanager/src/main/java/com/hexaware/ftpxx/ restservice/leavemanager/src/main/java/com/hexaware/ftpnn/`
+        * `find . -type f -not -path '*/\.*' -not -path "*/node_modules/*" -exec sed -i '' -e 's/ftp01/ftpnn/g' {} \; -exec sed -i '' -e 's/FTP01/FTPnn/g' {} \;`
+        * `mv restservice/leavemanager/src/main/java/com/hexaware/ftp01/ restservice/leavemanager/src/main/java/com/hexaware/ftpnn/`
       * `git add restservice/leavemanager/src/main/java/com/hexaware/ftpnn/`
       * `git commit -a -m "replacing xx with the team number"`
       * `git push origin HEAD`
@@ -49,15 +49,15 @@
       * `export PATH=$PATH:/Applications/MySQLWorkbench.app/Contents/MacOS`
       * `mysql -u root -po7Vb6H4bcrnC -h ftp-integration.c1jpaaszplju.us-east-1.rds.amazonaws.com`
       * 
-    * `CREATE DATABASE FTPXX;` -- XX from 01 to 10
-    * `CREATE USER 'FTPXX'@'%' IDENTIFIED BY 'FTPXX';`
-    * `GRANT ALL ON FTPXX.* TO 'FTPXX'@'%';`
+    * `CREATE DATABASE FTP01;` -- XX from 01 to 10
+    * `CREATE USER 'FTP01'@'%' IDENTIFIED BY 'FTP01';`
+    * `GRANT ALL ON FTP01.* TO 'FTP01'@'%';`
     * `select Host, User, Password from mysql.user order by user;`
     * `select * from mysql.db order by Db;`
   * Jenkins jobs - 3 per team
-    * FTPXX-10-UNIT
-    * FTPXX-30-INTEGRATION
-    * FTPXX-50-STAGING
+    * FTP01-10-UNIT
+    * FTP01-30-INTEGRATION
+    * FTP01-50-STAGING
     * For each team, nn = 01 to 10
       * Create a tab FTPnn
       * Create New Item, for stage = 10-UNIT, 30-INTEGRATION, and 50-STAGING

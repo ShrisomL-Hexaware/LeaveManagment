@@ -1,4 +1,4 @@
-package com.hexaware.ftpxx.integration.test;
+package com.hexaware.ftp01.integration.test;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -16,7 +16,7 @@ public class CommonUtil {
     static {
         host = System.getProperty("service.host", "localhost");
         port = System.getProperty("service.port", "8080");
-        webapp = System.getProperty("service.webapp", "ftpxx");
+        webapp = System.getProperty("service.webapp", "ftp01");
         uri_prefix = "http://" + host + ":" + port + "/" + webapp;
     }
     public static URI getURI(String path) throws URISyntaxException {

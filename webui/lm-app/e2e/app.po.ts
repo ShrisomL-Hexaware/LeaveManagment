@@ -2,7 +2,7 @@ import { browser, by, element } from 'protractor';
 
 export class AppPage {
   navigateTo() {
-    return browser.get('/ftpxx/');
+    return browser.get('/ftp01/');
   }
 
   getParagraphText() {

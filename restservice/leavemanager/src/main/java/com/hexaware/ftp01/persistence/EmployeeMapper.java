@@ -1,4 +1,4 @@
-package com.hexaware.ftpxx.persistence;
+package com.hexaware.ftp01.persistence;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 import org.skife.jdbi.v2.StatementContext;
 
-import com.hexaware.ftpxx.model.Employee;
+import com.hexaware.ftp01.model.Employee;
 /**
  * Mapper class to map from result set to employee object.
  */

@@ -1,7 +1,7 @@
-package com.hexaware.ftpxx.util;
+package com.hexaware.ftp01.util;
 import java.util.Scanner;
 
-import com.hexaware.ftpxx.model.Employee;
+import com.hexaware.ftp01.model.Employee;
 
 /**
  * Class CliMain provides the command line interface to the leavemanagement

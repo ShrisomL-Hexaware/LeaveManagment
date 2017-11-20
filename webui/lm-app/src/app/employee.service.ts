@@ -14,7 +14,7 @@ export class EmployeeService {
 
     getEmployees(): Promise<Employee[]> {
         console.log('getEmployees called on employee.service');
-        return this.http.get('/ftpxx/api/employees')
+        return this.http.get('/ftp01/api/employees')
         .toPromise()
         .then(response => response.json() as Employee[])
         .catch(this.handleError);

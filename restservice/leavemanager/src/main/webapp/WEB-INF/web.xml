@@ -2,14 +2,14 @@
        xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
        http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-       <display-name>FTPXX REST Application</display-name>
+       <display-name>FTP01 REST Application</display-name>
 
        <servlet>
             <servlet-name>jersey-serlvet</servlet-name>
             <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
             <init-param>
                 <param-name>javax.ws.rs.Application</param-name>
-                <param-value>com.hexaware.ftpxx.util.FTPApplication</param-value>
+                <param-value>com.hexaware.ftp01.util.FTPApplication</param-value>
             </init-param>
             <init-param>
                 <param-name>jersey.config.server.tracing</param-name>

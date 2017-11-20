@@ -1,6 +1,6 @@
-package com.hexaware.ftpxx.model;
+package com.hexaware.ftp01.model;
 
-import com.hexaware.ftpxx.persistence.EmployeeDAO;
+import com.hexaware.ftp01.persistence.EmployeeDAO;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

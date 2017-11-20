@@ -1,5 +1,5 @@
 -- change this to your team id
-use FTPXX;
+use FTP01;
 
 -- comment this line for the very first time
 drop table if exists EMPLOYEE;

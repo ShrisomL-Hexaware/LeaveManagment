@@ -4,4 +4,4 @@
  and the sub-directory 'integration_tests' contains the integration tests for the rest service (which is also another maven project)
 
 # manual testing for the rest api
-  * ```curl http://localhost:8080/ftpxx/api/employees```
+  * ```curl http://localhost:8080/ftp01/api/employees```

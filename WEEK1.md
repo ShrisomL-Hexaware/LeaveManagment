@@ -106,14 +106,14 @@
     * `git config --global user.name "<your name>"`
     * `git config --global user.email <your email>`
     * `git config --global -l`
-    * Open https://github.com/HexaInnovLab/ftpxx
+    * Open https://github.com/HexaInnovLab/ftp01
       * look at source code organization
     * Go back to gitbash and clone the project
-    * `git clone git@github.com:HexaInnovLab/ftpxx.git`
-    * `cd ftpxx`
+    * `git clone git@github.com:HexaInnovLab/ftp01.git`
+    * `cd ftp01`
     * `git status`
   * open Visual Studio Code
-    * Open folder c:\users\Hvuser\workspace\ftpxx
+    * Open folder c:\users\Hvuser\workspace\ftp01
     * Browse the directories to understand the repository structure
 
 # Workshop material - Day #2 - MySQL Workbench/Cli/Curl/Browser to interact w/ application
@@ -121,9 +121,9 @@
   * Open MySQL Workbench
   * Open the localhost connection
     * Mac OS: `export PATH=$PATH:/Applications/MySQLWorkbench.app/Contents/MacOS` and then you can use the command line `mysql -u root -p hexawareftpdev`
-  * `CREATE DATABASE FTPXX;` and click the lightning button
-  * `CREATE USER 'FTPXX'@'localhost' IDENTIFIED BY 'FTPXX';`
-  * `GRANT ALL ON FTPXX.* TO 'FTPXX'@'localhost';`
+  * `CREATE DATABASE FTP01;` and click the lightning button
+  * `CREATE USER 'FTP01'@'localhost' IDENTIFIED BY 'FTP01';`
+  * `GRANT ALL ON FTP01.* TO 'FTP01'@'localhost';`
   * Open database/database.ddl in VS code
   * Copy the entire contents to MySQL Workbench
   * Execute the ddl 
@@ -139,33 +139,33 @@
     * At the end of all the playing around, leave the database with 5 records with ids (1000, 2001
     
   * Next, we will build and run the java code
-  * go to gitbash, ensure you are in workspace/ftpxx
+  * go to gitbash, ensure you are in workspace/ftp01
   * `cd restservice/leavemanager`
   * `mvn compile`
-  * `mvn exec:java -Dexec.mainClass=com.hexaware.ftpxx.util.CliMain`
+  * `mvn exec:java -Dexec.mainClass=com.hexaware.ftp01.util.CliMain`
     * As expected, the cli displays only the employee id for the employee; we need to do some code changes before the other attributes such as name will start appearing in the cli. But before that we will test the application as a REST service.
     * Due to a bug in the database connection code, after exiting, there will be an error with a stack trace. Ignore this error.
   * Build the war file as follows:
     * `mvn package` -- This build a war (java web archive with the code for the REST service)
-    * `cp target/ftpxx-0.0.1-SNAPSHOT.war /D/FTP/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/ftpxx.war`
+    * `cp target/ftp01-0.0.1-SNAPSHOT.war /D/FTP/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/ftp01.war`
     * start tomcat and tail its logs
       * `cd D/FTP/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16`
       * `rm -rf logs/*`
       * `./bin/startup.sh`
       * `tail -f logs/*`
-      * `curl -vvv http://localhost:8080/ftpxx/api/employees | python -m json.tool`
-      * `curl -vvv http://localhost:8080/ftpxx/api/employees/2000 | python -m json.tool`
+      * `curl -vvv http://localhost:8080/ftp01/api/employees | python -m json.tool`
+      * `curl -vvv http://localhost:8080/ftp01/api/employees/2000 | python -m json.tool`
    * `cd ../../webui/lm-app/`
    * `npm install`
    * `ng build`
-   * `cp ../../restservice/leavemanager/target/ftpxx-0.0.1-SNAPSHOT.war ./ftpxx.war`
+   * `cp ../../restservice/leavemanager/target/ftp01-0.0.1-SNAPSHOT.war ./ftp01.war`
    * `cd dist`
-   * `jar -uvf ../ftpxx.war *`
+   * `jar -uvf ../ftp01.war *`
    * `cd ..`
-   * `jar -tvf ftpxx.war`
-   * `cp ftpxx.war /D/FTP/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/ftpxx.war`
+   * `jar -tvf ftp01.war`
+   * `cp ftp01.war /D/FTP/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/ftp01.war`
    * Notice that the tail terminal shows that the new version of the web application archive is now getting deployed
-   * Open Chrome browser and navigate to http://localhost:8080/ftpxx/
+   * Open Chrome browser and navigate to http://localhost:8080/ftp01/
    * You should be able to see the employee ids as you have entered them in the local mysql database
       
 # Workshop material - Day #3 - Setup Jira
