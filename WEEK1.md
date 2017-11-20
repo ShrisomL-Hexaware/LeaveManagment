@@ -87,7 +87,7 @@
     * You will get mail to verify your mail address; click the link to complete the verification
     * The facilitator will add you to the hexaware github organization and also give you access to the team's repository
     * You will get a mail inviting you to the HexaInnovLab organization. Please join the organization.
-    * Open https://github.com/HexaInnovLab/ftpnn, and look at the WEEK1.md
+    * Open https://github.com/HexaInnovLab/ftp01, and look at the WEEK1.md
     * Follow the instructions as in https://help.github.com/articles/connecting-to-github-with-ssh/
       * Skip "Checking for existing SSH keys" as this is a fresh installation
       * Run the ssh-keygen command and save the private key in C:\users\Hvuser\.ssh\id_rsa. *Do not* use a passphrase in step #4 - just press enter twice.
