@@ -4,7 +4,7 @@
  
   <tr align="center" height="300"><td width="300"></td><td width="300"></td><td width="300"></td></tr>
   <tr align="center" height="300"><td>o</td><td>x</td><td></td></tr><tr align="center" height="300"><td></td>
-  <td>x</td><td></td></tr>
+  <td>x</td><td>o</td></tr>
  
 </table>
 </font>
