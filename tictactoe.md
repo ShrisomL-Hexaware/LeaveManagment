@@ -2,7 +2,7 @@
 <font size="7">
 <table style="text-align:center" border="20">
  
-  <tr align="center" height="300"><td width="300"></td><td width="300">x</td><td width="300"></td></tr>
+  <tr align="center" height="300"><td width="300"></td><td width="300">x</td><td width="300">o</td></tr>
   <tr align="center" height="300"><td>o</td><td>x</td><td>x</td></tr><tr align="center" height="300"><td>x</td>
   <td>x</td><td>o</td></tr>
  
