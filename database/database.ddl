@@ -25,6 +25,8 @@ CREATE TABLE `ftp01`.`employee` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION));
 
+-- if any leave_history table exists
+
 drop table leave_history;
 
 -- create the table LEAVE_HISTORY
@@ -36,8 +38,8 @@ CREATE TABLE `ftp01`.`leave_history` (
   `END_DATE` DATE NOT NULL,
   `NO_OF_DAYS` INT NULL,
   `LEAVE_STATUS` ENUM('APLLIED','DENIED,'PENDING') NULL,
-  `REASON` TEXT(100) NULL,
-  `APLLIED_ON` DATE NOT NULL,
+  `LEAVE_REASON` TEXT(100) NULL,
+  `LEAVE_APLLIED_ON` DATE NOT NULL,
   `MANAGER_COMMENTS` TEXT(100) NULL,
   `EMP_ID` INT NULL,
   PRIMARY KEY (`LEAVE_ID`),
