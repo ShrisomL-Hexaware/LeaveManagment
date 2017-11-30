@@ -1,3 +1,6 @@
+--Create database
+create database FTP01;
+
 -- change this to your team id
 use FTP01;
 
