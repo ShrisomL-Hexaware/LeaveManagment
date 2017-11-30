@@ -22,8 +22,8 @@ public class Employee {
      empLeaveBalance to store employee leave balance.
      empDoj to store employee date of joining.
    */
-  private int empId,empPhone,empManagerId,empLeaveBalance;
-  private String empName,empEmail,empDept,empDoj;
+  private int empId, empPhone, empManagerId, empLeaveBalance;
+  private String empName, empEmail, empDept, empDoj;
 
   @Override
   public final boolean equals(final Object obj) {
