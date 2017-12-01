@@ -24,7 +24,7 @@ public class Employee {
    */
 
   private int empId;
-  private int empPhone;
+  private long empPhone;
   private int empManagerId;
   private int empLeaveBalance;
   private String empName;
@@ -94,7 +94,7 @@ public class Employee {
    *
    * @param argEmpPhone to set employee Phone.
    */
-  public final void setEmpPhone(final int argEmpPhone) {
+  public final void setEmpPhone(final long argEmpPhone) {
     this.empPhone = argEmpPhone;
   }
 
@@ -102,7 +102,7 @@ public class Employee {
    * Gets the EmployeePhone.
    * @return this Employee's Phone.
    */
-  public final int getEmpPhone() {
+  public final long getEmpPhone() {
     return empPhone;
   }
 
