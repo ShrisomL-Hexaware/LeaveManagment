@@ -24,7 +24,7 @@ public class Employee {
    */
 
   private int empId;
-  private int empPhone;
+  private long empPhone;
   private int empManagerId;
   private int empLeaveBalance;
   private String empName;
@@ -58,41 +58,31 @@ public class Employee {
   public Employee(final int argEmpId) {
     this.empId = argEmpId;
   }
-  /**
-
-* @param argEmpId to initialize employee id.
-
-* @param argEmpName to initialize employee name.
-
-* @param argEmpDept to initialize employee department.
-
-* @param argEmpPhone to initialize employee Phone.
-
-* @param argEmpEmail to initialize employee Email.
-
-* @param argEmpDoj to initialize employee date of join.
-
-* @param argEmpLeaveBalance to initialize employee Leave balance.
-
-* @param argEmpManagerId to initialize employee manager id.
-
-*/
-
-public Employee(final String argEmpName, final long argEmpPhone, final String argEmpEmail, final String argEmpDept,
-                final int argEmpManagerId, final int argEmpLeaveBalance, final String argEmpDoj) {
-this.empName = argEmpName;
-this.empDept = argEmpDept;
-this.empPhone = argEmpPhone;
-this.empEmail = argEmpEmail;
-this.empDoj = argEmpDoj;
-this.empLeaveBalance = argEmpLeaveBalance;
-this.empManagerId = argEmpManagerId;
-}
 
   /**
-   * Gets the EmployeeId.
-   * @return this Employee's ID.
+   * @param argEmpName to initialize employee name.
+   * @param argEmpDept to initialize employee department.
+   * @param argEmpPhone to initialize employee Phone.
+   * @param argEmpEmail to initialize employee Email.
+   * @param argEmpDoj to initialize employee date of join.
+   * @param argEmpLeaveBalance to initialize employee Leave balance.
+   * @param argEmpManagerId to initialize employee manager id.
    */
+
+  public Employee(final String argEmpName, final long argEmpPhone, final String argEmpEmail, final String argEmpDept,
+                final int argEmpManagerId, final int argEmpLeaveBalance, final String argEmpDoj) {
+    this.empName = argEmpName;
+    this.empDept = argEmpDept;
+    this.empPhone = argEmpPhone;
+    this.empEmail = argEmpEmail;
+    this.empDoj = argEmpDoj;
+    this.empLeaveBalance = argEmpLeaveBalance;
+    this.empManagerId = argEmpManagerId;
+  }
+/**
+  * Gets the EmployeeId.
+  * @return this Employee's ID.
+*/
   public final int getEmpId() {
     return empId;
   }
@@ -111,7 +101,6 @@ this.empManagerId = argEmpManagerId;
   public final void setEmpName(final String argEmpName) {
     this.empName = argEmpName;
   }
-  
    /**
    * Gets the EmployeeName.
    * @return this Employee's Name.
@@ -121,10 +110,9 @@ this.empManagerId = argEmpManagerId;
   }
 
   /**
-   *
    * @param argEmpPhone to set employee Phone.
    */
-  public final void setEmpPhone(final int argEmpPhone) {
+  public final void setEmpPhone(final long argEmpPhone) {
     this.empPhone = argEmpPhone;
   }
 
@@ -132,7 +120,7 @@ this.empManagerId = argEmpManagerId;
    * Gets the EmployeePhone.
    * @return this Employee's Phone.
    */
-  public final int getEmpPhone() {
+  public final long getEmpPhone() {
     return empPhone;
   }
 
