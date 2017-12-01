@@ -22,8 +22,15 @@ public class Employee {
      empLeaveBalance to store employee leave balance.
      empDoj to store employee date of joining.
    */
-  private int empId, empPhone, empManagerId, empLeaveBalance;
-  private String empName, empEmail, empDept, empDoj;
+
+  private int empId;
+  private int empPhone;
+  private int empManagerId;
+  private int empLeaveBalance;
+  private String empName;
+  private String empEmail;
+  private String empDept;
+  private String empDoj;
 
   @Override
   public final boolean equals(final Object obj) {
@@ -58,6 +65,13 @@ public class Employee {
    */
   public final int getEmpId() {
     return empId;
+  }
+  /**
+   *
+   * @param argEmpId to set employee id.
+   */
+  public final void setEmpId(final int argEmpId) {
+    this.empId = argEmpId;
   }
 
   /**
@@ -172,13 +186,6 @@ public class Employee {
     return empDoj;
   }
 
-  /**
-   *
-   * @param argEmpId to set employee id.
-   */
-  public final void setEmpId(final int argEmpId) {
-    this.empId = argEmpId;
-  }
   /**
    * The dao for employee.
    */
