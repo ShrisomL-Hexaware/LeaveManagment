@@ -64,7 +64,7 @@ public class Employee {
    *
    * @param argEmpName to set employee name.
    */
-  public final void setEmpName(final int argEmpName) {
+  public final void setEmpName(final String argEmpName) {
     this.empName = argEmpName;
   }
 
@@ -72,7 +72,7 @@ public class Employee {
    * Gets the EmployeeName.
    * @return this Employee's Name.
    */
-  public final int getEmpName() {
+  public final String getEmpName() {
     return empName;
   }
 
@@ -96,7 +96,7 @@ public class Employee {
    *
    * @param argEmpEmail to set employee Email.
    */
-  public final void setEmpEmail(final int argEmpEmail) {
+  public final void setEmpEmail(final String argEmpEmail) {
     this.empEmail = argEmpEmail;
   }
 
@@ -104,7 +104,7 @@ public class Employee {
    * Gets the EmployeeEmail.
    * @return this Employee's email.
    */
-  public final int getEmpEmail() {
+  public final String getEmpEmail() {
     return empEmail;
   }
 
@@ -112,7 +112,7 @@ public class Employee {
    *
    * @param argEmpDept to set employee Dept.
    */
-  public final void setEmpDept(final int argEmpDept) {
+  public final void setEmpDept(final String argEmpDept) {
     this.empDept = argEmpDept;
   }
 
@@ -120,7 +120,7 @@ public class Employee {
    * Gets the EmployeeDept.
    * @return this Employee's Dept.
    */
-  public final int getEmpDept() {
+  public final String getEmpDept() {
     return empDept;
   }
 
@@ -160,7 +160,7 @@ public class Employee {
    *
    * @param argEmpDoj to set employee Doj.
    */
-  public final void setEmpDoj(final int argEmpDoj) {
+  public final void setEmpDoj(final String argEmpDoj) {
     this.empDoj = argEmpDoj;
   }
 
@@ -168,7 +168,7 @@ public class Employee {
    * Gets the EmployeeDoj.
    * @return this Employee's Doj.
    */
-  public final int getEmpDoj() {
+  public final String getEmpDoj() {
     return empDoj;
   }
 
