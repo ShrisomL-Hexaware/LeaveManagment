@@ -53,13 +53,15 @@ public class Employee {
   }
 
   /**
-   * @param argEmpId to initialize employee id.
+   *
    */
-  public Employee(final int argEmpId) {
+  /** public Employee(final int argEmpId) {
     this.empId = argEmpId;
   }
+  */
 
   /**
+   * @param argEmpId to initialize employee id.
    * @param argEmpName to initialize employee name.
    * @param argEmpDept to initialize employee department.
    * @param argEmpPhone to initialize employee Phone.
@@ -69,8 +71,10 @@ public class Employee {
    * @param argEmpManagerId to initialize employee manager id.
    */
 
-  public Employee(final String argEmpName, final long argEmpPhone, final String argEmpEmail, final String argEmpDept,
-                final int argEmpManagerId, final int argEmpLeaveBalance, final String argEmpDoj) {
+  public Employee(final int argEmpId, final String argEmpName, final long argEmpPhone, final String argEmpEmail,
+                  final String argEmpDept, final int argEmpManagerId, final int argEmpLeaveBalance,
+                  final String argEmpDoj) {
+    this.empId = argEmpId;
     this.empName = argEmpName;
     this.empDept = argEmpDept;
     this.empPhone = argEmpPhone;
