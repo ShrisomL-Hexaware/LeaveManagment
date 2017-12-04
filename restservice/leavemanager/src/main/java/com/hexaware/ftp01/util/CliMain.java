@@ -49,7 +49,9 @@ public class CliMain {
   private void listEmployeesDetails() {
     Employee[] employee = Employee.listAll();
     for (Employee e : employee) {
-      System.out.println(e.getEmpId());
+      System.out.println(e.getEmpId() + " " + e.getEmpName() + " " + e.getEmpPhone() + " " + e.getEmpEmail() + " "
+                         + e.getEmpDept() + " " + e.getEmpManagerId() + " " + e.getEmpLeaveBalance() + " "
+                         + e.getEmpDoj());
     }
   }
   /**
