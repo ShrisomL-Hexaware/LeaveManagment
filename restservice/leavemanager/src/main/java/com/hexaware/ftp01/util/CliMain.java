@@ -43,7 +43,9 @@ public class CliMain {
     if (employee == null) {
       System.out.println("Sorry, No such employee");
     } else {
-      System.out.println(employee.getEmpId());
+      System.out.println(employee.getEmpId() + " " + employee.getEmpName() + " " + employee.getEmpPhone() + " "
+                         + employee.getEmpEmail() + " " + employee.getEmpDept() + " " + employee.getEmpManagerId() + " "
+                         + employee.getEmpLeaveBalance() + " " + employee.getEmpDoj());
     }
   }
   private void listEmployeesDetails() {
