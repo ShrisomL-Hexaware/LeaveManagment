@@ -60,9 +60,32 @@ public class Employee {
   }
 
   /**
-   * Gets the EmployeeId.
-   * @return this Employee's ID.
+   * @param argEmpId to initialize employee id.
+   * @param argEmpName to initialize employee name.
+   * @param argEmpDept to initialize employee department.
+   * @param argEmpPhone to initialize employee Phone.
+   * @param argEmpEmail to initialize employee Email.
+   * @param argEmpDoj to initialize employee date of join.
+   * @param argEmpLeaveBalance to initialize employee Leave balance.
+   * @param argEmpManagerId to initialize employee manager id.
    */
+
+  public Employee(final int argEmpId, final String argEmpName, final long argEmpPhone, final String argEmpEmail,
+                  final String argEmpDept, final int argEmpManagerId, final int argEmpLeaveBalance,
+                  final String argEmpDoj) {
+    this.empId = argEmpId;
+    this.empName = argEmpName;
+    this.empDept = argEmpDept;
+    this.empPhone = argEmpPhone;
+    this.empEmail = argEmpEmail;
+    this.empDoj = argEmpDoj;
+    this.empLeaveBalance = argEmpLeaveBalance;
+    this.empManagerId = argEmpManagerId;
+  }
+/**
+  * Gets the EmployeeId.
+  * @return this Employee's ID.
+*/
   public final int getEmpId() {
     return empId;
   }
@@ -81,7 +104,6 @@ public class Employee {
   public final void setEmpName(final String argEmpName) {
     this.empName = argEmpName;
   }
-
    /**
    * Gets the EmployeeName.
    * @return this Employee's Name.
@@ -91,7 +113,6 @@ public class Employee {
   }
 
   /**
-   *
    * @param argEmpPhone to set employee Phone.
    */
   public final void setEmpPhone(final long argEmpPhone) {
