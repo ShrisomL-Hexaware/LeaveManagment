@@ -53,12 +53,11 @@ public class Employee {
   }
 
   /**
-   *
+   * @param argEmpId to initialize employee id.
    */
-  /** public Employee(final int argEmpId) {
+  public Employee(final int argEmpId) {
     this.empId = argEmpId;
   }
-  */
 
   /**
    * @param argEmpId to initialize employee id.
