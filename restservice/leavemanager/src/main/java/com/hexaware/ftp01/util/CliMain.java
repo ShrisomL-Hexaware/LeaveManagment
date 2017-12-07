@@ -15,7 +15,11 @@ public class CliMain {
     System.out.println("-----------------------");
     System.out.println("1. List All Employees Info");
     System.out.println("2. Display Employee Info");
-    System.out.println("3. Exit");
+    System.out.println("3. Apply For leave");
+    System.out.println("4. Leave History");
+    System.out.println("5. Pending Leave Status");
+    System.out.println("6. Approve Or Deny");
+    System.out.println("7. Exit");
     System.out.println("Enter your choice:");
     int menuOption = option.nextInt();
     mainMenuDetails(menuOption);
@@ -29,6 +33,18 @@ public class CliMain {
         listEmployeeDetail();
         break;
       case 3:
+        applyForLeave();
+        break;
+      case 4:
+        listLeaveHistory();
+        break;
+      case 5:
+        listPendingLeaveStatus();
+        break;
+      case 6:
+        approveOrDenyLeave();
+        break;
+      case 7:
         // halt since normal exit throws a stacktrace due to jdbc threads not responding
         Runtime.getRuntime().halt(0);
       default:
@@ -55,6 +71,18 @@ public class CliMain {
                          + e.getEmpDept() + " " + e.getEmpManagerId() + " " + e.getEmpLeaveBalance() + " "
                          + e.getEmpDoj());
     }
+  }
+  private void applyForLeave() {
+    System.out.println("To apply wait till friday");
+  }
+  private void listLeaveHistory() {
+    System.out.println("To see leave history wait till friday");
+  }
+  private void listPendingLeaveStatus() {
+    System.out.println("To see leave status wait till friday");
+  }
+  private void approveOrDenyLeave() {
+    System.out.println("To approve or deny wait till friday");
   }
   /**
    * The main entry point.
