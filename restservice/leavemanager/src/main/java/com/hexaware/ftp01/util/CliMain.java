@@ -36,13 +36,13 @@ public class CliMain {
         applyForLeave();
         break;
       case 4:
-        leaveHistory();
+        listLeaveHistory();
         break;
       case 5:
-        leaveStatus();
+        listPendingLeaveStatus();
         break;
       case 6:
-        approveOrDeny();
+        approveOrDenyLeave();
         break;
       case 7:
         // halt since normal exit throws a stacktrace due to jdbc threads not responding
@@ -75,13 +75,13 @@ public class CliMain {
   private void applyForLeave() {
     System.out.println("To apply wait till friday");
   }
-  private void leaveHistory() {
+  private void listLeaveHistory() {
     System.out.println("To see leave history wait till friday");
   }
-  private void leaveStatus() {
+  private void listPendingLeaveStatus() {
     System.out.println("To see leave status wait till friday");
   }
-  private void approveOrDeny() {
+  private void approveOrDenyLeave() {
     System.out.println("To approve or deny wait till friday");
   }
   /**
