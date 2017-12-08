@@ -42,7 +42,11 @@ public class LeaveDetails {
       return false;
     }
     LeaveDetails lev = (LeaveDetails) obj;
-    if (Objects.equals(leaveId, lev.leaveId)) {
+    if (Objects.equals(leaveId, lev.leaveId) && Objects.equals(leaveType, lev.leaveType)
+        && Objects.equals(startDate, lev.startDate) && Objects.equals(endDate, lev.endDate)
+        && Objects.equals(numberOfDays, lev.numberOfDays) && Objects.equals(leaveStatus, lev.leaveStatus)
+        && Objects.equals(leaveReason, lev.leaveReason) && Objects.equals(leaveAppliedOn, lev.leaveAppliedOn)
+        && Objects.equals(managerComments, lev.managerComments) && Objects.equals(empId, lev.empId)) {
       return true;
     }
     return false;
@@ -50,7 +54,14 @@ public class LeaveDetails {
 
   @Override
   public final int hashCode() {
-    return Objects.hash(leaveId);
+    return Objects.hash(leaveId, leaveType, startDate, endDate, numberOfDays, leaveStatus, leaveReason,
+                        leaveAppliedOn, managerComments, empId);
+  }
+  @Override
+  public final String toString() {
+    return "leave id" + leaveId + "leave type" + leaveType + "start date" + startDate + "end date" + endDate
+      + "number of days" + numberOfDays + "leave status" + leaveStatus + "leave reason" + leaveReason
+      + "leave applied on" + leaveAppliedOn + "managerComments" + managerComments + "empId" + empId;
   }
 
   /**
