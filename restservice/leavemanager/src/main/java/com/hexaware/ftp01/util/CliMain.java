@@ -1,7 +1,11 @@
 package com.hexaware.ftp01.util;
 import java.util.Scanner;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 import com.hexaware.ftp01.model.Employee;
+import com.hexaware.ftp01.model.LeaveType;
 
 /**
  * Class CliMain provides the command line interface to the leavemanagement
@@ -73,7 +77,34 @@ public class CliMain {
     }
   }
   private void applyForLeave() {
-    System.out.println("To apply wait till friday");
+    try {
+      System.out.println("To apply wait till friday");
+      System.out.println("Enter the empId");
+      int empId = option.nextInt();
+      Employee employee = Employee.listById(empId);
+      if (employee == null) {
+        System.out.println("Sorry, No such employee");
+      } else {
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("Enter Leave Type :");
+        String levType  = option.next();
+        LeaveType leaveType = LeaveType.valueOf(levType);
+        System.out.println("Enter Starting Date :");
+        String date1 = option.next();
+        Date startDate = myFormat.parse(date1);
+        System.out.println("Enter Ending Date :");
+        String date2 = option.next();
+        Date endDate = myFormat.parse(date2);
+        System.out.println("Total Number of days :");
+        int numberOfDays = option.nextInt();
+        System.out.println("Reason :");
+        String leaveReason = option.next();
+        System.out.println("Leave applied" + employee.getEmpLeaveBalance());
+        employee.applyForLeave(leaveType, startDate, endDate, numberOfDays, leaveReason);
+      }
+    } catch (ParseException e) {
+      System.out.println(e);
+    }
   }
   private void listLeaveHistory() {
     System.out.println("To see leave history wait till friday");
@@ -87,8 +118,9 @@ public class CliMain {
   /**
    * The main entry point.
    * @param ar the list of arguments
+   * @throws ParseException throw parseexception.
    */
-  public static void main(final String[] ar) {
+  public static void main(final String[] ar) throws ParseException {
     final CliMain mainObj = new CliMain();
     mainObj.mainMenu();
   }
