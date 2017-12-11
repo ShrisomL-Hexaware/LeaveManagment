@@ -51,7 +51,6 @@ public class Employee {
   public final int hashCode() {
     return Objects.hash(empId);
   }
-
   /**
    * @param argEmpId to initialize employee id.
    */
@@ -232,6 +231,10 @@ public class Employee {
    */
   public static Employee listById(final int empID) {
     return dao().find(empID);
+  }
+
+  private void approve() {
+      
   }
 
 }
