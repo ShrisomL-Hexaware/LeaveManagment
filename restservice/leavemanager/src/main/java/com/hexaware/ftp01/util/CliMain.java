@@ -78,7 +78,6 @@ public class CliMain {
   }
   private void applyForLeave() {
     try {
-      System.out.println("To apply wait till friday");
       System.out.println("Enter the empId");
       int empId = option.nextInt();
       Employee employee = Employee.listById(empId);
