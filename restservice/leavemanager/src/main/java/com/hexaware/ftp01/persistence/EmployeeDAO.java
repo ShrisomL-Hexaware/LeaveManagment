@@ -50,11 +50,11 @@ public interface EmployeeDAO  {
              +
              " END_DATE, "
              +
-             " TOTAL_DAYS, "
+             " NUMBER_OF_DAYS, "
              +
-             " REASON, "
+             " LEAVE_REASON, "
              +
-             " APPLIED_ON, "
+             " LEAVE_APPLIED_ON, "
              +
              " EMP_ID) "
              +

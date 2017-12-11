@@ -26,15 +26,15 @@ public class LeaveDetailsMapper implements ResultSetMapper<LeaveDetails> {
     String s = rs.getString("LEAVE_TYPE");
     LeaveType lt = LeaveType.valueOf(s);
 
-    String s1 = rs.getString("STATUS");
+    String s1 = rs.getString("LEAVE_STATUS");
     LeaveStatus lt1 = LeaveStatus.valueOf(s1);
 
     /**
      * @return Leave Details
      */
     return new LeaveDetails(rs.getInt("LEAVE_ID"), lt, rs.getDate("START_DATE"),
-                        rs.getDate("END_DATE"), rs.getInt("TOTAL_DAYS"), lt1,
-                        rs.getString("REASON"), rs.getDate("APPLIED_ON"), rs.getString("MANAGER_COMMENTS"),
+                        rs.getDate("END_DATE"), rs.getInt("NUMBER_OF_DAYS"), lt1,
+                        rs.getString("LEAVE_REASON"), rs.getDate("lEAVE_APPLIED_ON"), rs.getString("MANAGER_COMMENTS"),
                         rs.getInt("EMP_ID"));
   }
 }
