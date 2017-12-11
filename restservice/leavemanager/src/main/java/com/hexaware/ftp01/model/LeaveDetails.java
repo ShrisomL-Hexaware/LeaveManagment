@@ -34,7 +34,7 @@ public class LeaveDetails {
   private int empId;
 
   @Override
-  public final boolean equals(final Object obj) {
+  public final boolean equals(final Object obj) {  
     if (obj == null) {
       return false;
     }
@@ -59,9 +59,10 @@ public class LeaveDetails {
   }
   @Override
   public final String toString() {
-    return "leave id" + leaveId + "leave type" + leaveType + "start date" + startDate + "end date" + endDate
-      + "number of days" + numberOfDays + "leave status" + leaveStatus + "leave reason" + leaveReason
-      + "leave applied on" + leaveAppliedOn + "managerComments" + managerComments + "empId" + empId;
+    return "leave id :" + leaveId + " " + "leave type :" + leaveType + " " + "start date :" + startDate + " "
+      + "end date :" + endDate + " " + "number of days :" + numberOfDays + " " + "leave status :" + leaveStatus
+      + " " +  "leave reason :" + leaveReason + " " + "leave applied on :" + leaveAppliedOn + " "
+      + "managerComments :" + managerComments + " " + "empId :" + empId;
   }
 
   /**
@@ -83,12 +84,12 @@ public class LeaveDetails {
                       final int argEmpId) {
     this.leaveId = argLeaveId;
     this.leaveType = argLeaveType;
-    this.startDate = argStartDate;
-    this.endDate = argEndDate;
+    this.startDate = new Date (argStartDate.getTime());
+    this.endDate = new Date (argEndDate.getTime());
     this.numberOfDays = argNumberOfDays;
     this.leaveStatus = argLeaveStatus;
     this.leaveReason = argLeaveReason;
-    this.leaveAppliedOn = argLeaveAppliedOn;
+    this.leaveAppliedOn = new Date (argLeaveAppliedOn.getTime());
     this.managerComments = argManagerComments;
     this.empId = argEmpId;
   }

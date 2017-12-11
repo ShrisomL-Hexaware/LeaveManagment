@@ -233,4 +233,8 @@ public class Employee {
     return dao().find(empID);
   }
 
+  private void approve() {
+      
+  }
+
 }
