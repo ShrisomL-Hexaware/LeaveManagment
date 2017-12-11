@@ -34,7 +34,7 @@ public class LeaveDetailsMapper implements ResultSetMapper<LeaveDetails> {
      */
     return new LeaveDetails(rs.getInt("LEAVE_ID"), lt, rs.getDate("START_DATE"),
                         rs.getDate("END_DATE"), rs.getInt("NUMBER_OF_DAYS"), lt1,
-                        rs.getString("LEAVE_REASON"), rs.getDate("lEAVE_APPLIED_ON"), rs.getString("MANAGER_COMMENTS"),
+                        rs.getString("LEAVE_REASON"), rs.getDate("LEAVE_APPLIED_ON"), rs.getString("MANAGER_COMMENTS"),
                         rs.getInt("EMP_ID"));
   }
 }

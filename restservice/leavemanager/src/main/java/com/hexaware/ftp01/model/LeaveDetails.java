@@ -3,6 +3,9 @@ package com.hexaware.ftp01.model;
 import java.util.Objects;
 import java.util.Date;
 
+import com.hexaware.ftp01.persistence.DbConnection;
+import com.hexaware.ftp01.persistence.LeaveDetailsDAO;
+
  /**
   * LeaveDetails class to store leave details.
   * @author hexware
@@ -91,6 +94,15 @@ public class LeaveDetails {
     this.leaveAppliedOn = argLeaveAppliedOn;
     this.managerComments = argManagerComments;
     this.empId = argEmpId;
+  }
+
+  /**
+   * The dao for leave details.
+   * @return the object.
+   */
+  public static LeaveDetailsDAO dao() {
+    DbConnection db = new DbConnection();
+    return db.getConnect().onDemand(LeaveDetailsDAO.class);
   }
 
  /**

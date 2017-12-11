@@ -258,10 +258,11 @@ public class Employee {
     Employee e = new Employee(empId);
     int empID = e.getEmpId();
     Date levAppliedOn = new Date();
-    if (empLeaveBalance > levNumberOfDays || empLeaveBalance == levNumberOfDays) {
+    if (empLeaveBalance > levNumberOfDays) {
       empLeaveBalance = empLeaveBalance - levNumberOfDays;
       System.out.println("Your updated Leave Balance is : " + empLeaveBalance);
-      dao().insert(levType, levStartDate, levEndDate, levNumberOfDays, levReason, levAppliedOn, empID);
+      LeaveDetails.dao().insert(levType, levStartDate, levEndDate, levNumberOfDays, levReason,
+                                   levAppliedOn, empID);
       dao().updateLeaveBalance(empLeaveBalance, empID);
     } else {
       System.out.println("You dont have sufficient balance left");
