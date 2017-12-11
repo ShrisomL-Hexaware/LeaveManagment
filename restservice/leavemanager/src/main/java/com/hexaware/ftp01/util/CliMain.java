@@ -84,22 +84,26 @@ public class CliMain {
       if (employee == null) {
         System.out.println("Sorry, No such employee");
       } else {
-        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println("Enter Leave Type :");
-        String levType  = option.next();
-        LeaveType leaveType = LeaveType.valueOf(levType);
-        System.out.println("Enter Starting Date :");
-        String date1 = option.next();
-        Date startDate = myFormat.parse(date1);
-        System.out.println("Enter Ending Date :");
-        String date2 = option.next();
-        Date endDate = myFormat.parse(date2);
-        System.out.println("Total Number of days :");
-        int numberOfDays = option.nextInt();
-        System.out.println("Reason :");
-        String leaveReason = option.next();
-        System.out.println("Leave applied" + employee.getEmpLeaveBalance());
-        employee.applyForLeave(leaveType, startDate, endDate, numberOfDays, leaveReason);
+        if (employee.getEmpLeaveBalance() == 0) {
+          System.out.println("You have zero(0) leaveBalance");
+        } else {
+          SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+          System.out.println("Enter Leave Type :");
+          String levType  = option.next();
+          LeaveType leaveType = LeaveType.valueOf(levType);
+          System.out.println("Enter Starting Date :");
+          String date1 = option.next();
+          Date startDate = myFormat.parse(date1);
+          System.out.println("Enter Ending Date :");
+          String date2 = option.next();
+          Date endDate = myFormat.parse(date2);
+          System.out.println("Total Number of days :");
+          int numberOfDays = option.nextInt();
+          System.out.println("Reason :");
+          String leaveReason = option.next();
+          System.out.println("Leave applied" + employee.getEmpLeaveBalance());
+          employee.applyForLeave(leaveType, startDate, endDate, numberOfDays, leaveReason);
+        }
       }
     } catch (ParseException e) {
       System.out.println(e);
