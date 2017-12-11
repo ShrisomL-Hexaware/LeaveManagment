@@ -87,7 +87,7 @@ public class CliMain {
         if (employee.getEmpLeaveBalance() == 0) {
           System.out.println("You have zero(0) leaveBalance");
         } else {
-          SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+          SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
           System.out.println("Enter Leave Type :");
           String levType  = option.next();
           LeaveType leaveType = LeaveType.valueOf(levType);
