@@ -251,21 +251,23 @@ public class Employee {
    * @param levEndDate to get end date.
    * @param levNumberOfDays to get total days.
    * @param levReason to get reason of leave.
+   * @throws IllegalArgumentException to handle exception.
    */
   public final void applyForLeave(final LeaveType levType, final Date levStartDate, final Date levEndDate,
-                                  final int levNumberOfDays, final String levReason) {
+                                  final int levNumberOfDays, final String levReason) throws IllegalArgumentException {
     System.out.println("Your available leave balance is : " + empLeaveBalance);
     Employee e = new Employee(empId);
     int empID = e.getEmpId();
     Date levAppliedOn = new Date();
     if (empLeaveBalance > levNumberOfDays) {
       empLeaveBalance = empLeaveBalance - levNumberOfDays;
+      System.out.println("Leave applied for : " + e.getEmpLeaveBalance() + "Days");
       System.out.println("Your updated Leave Balance is : " + empLeaveBalance);
       LeaveDetails.dao().insert(levType, levStartDate, levEndDate, levNumberOfDays, levReason,
                                    levAppliedOn, empID);
       dao().updateLeaveBalance(empLeaveBalance, empID);
     } else {
-      System.out.println("You dont have sufficient balance left");
+      throw new IllegalArgumentException();
     }
   }
 }
