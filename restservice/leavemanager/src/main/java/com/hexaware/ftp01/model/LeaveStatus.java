@@ -8,13 +8,13 @@ public enum LeaveStatus {
  /**
  * leaveStatus to store leave status.
  */
- Approved,
+APPROVED,
  /**
  * leaveStatus to store leave status.
  */
- Denied,
+DENIED,
  /**
  * leaveStatus to store leave status.
  */
- Pending
+PENDING
 }
