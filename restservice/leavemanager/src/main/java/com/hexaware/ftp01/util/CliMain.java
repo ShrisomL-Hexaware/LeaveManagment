@@ -128,30 +128,11 @@ public class CliMain {
     System.out.println("To see leave history wait till friday");
  
   }
-  public void approve() {
-    System.out.println("Enter the leave ID that you want to approve: ");
-    int leaveId = option.nextInt();
-
-    LeaveDetails leaveDetails = LeaveDetails.listById(leaveId);
-    if (leaveDetails == null) {
-      System.out.println("Leave ID not found");
-    } else {
-      System.out.println("Enter your Comment here");
-      String managerComments = option.nextLine();
-      LeaveDetails.approveLeave(managerComments, leaveId);
-    }
-  }
-  public void deny() {
-    System.out.println("Enter the leave ID that you want to deny: ");
-    int leaveId = option.nextInt();
-
-    LeaveDetails leaveDetails = LeaveDetails.listById(leaveId);
-    if (leaveDetails == null) {
-      System.out.println("Leave ID not found");
-    } else {
-      System.out.println("Enter your Comment here");
-      String managerComments = option.nextLine();
-      LeaveDetails.denyLeave(managerComments, leaveId);
+  
+ 
+  private void approveOrDenyLeave(); {
+    System.out.println("To approve or deny wait till friday");
+ 
   }
   /**
    * The main entry point.
