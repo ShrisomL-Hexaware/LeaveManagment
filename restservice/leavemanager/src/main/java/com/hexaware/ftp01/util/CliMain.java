@@ -104,9 +104,13 @@ public class CliMain {
           } else {
             System.out.println("Total Number of days :");
             int numberOfDays = option.nextInt();
-            System.out.println("Reason :");
-            String leaveReason = option.next();
-            employee.applyForLeave(leaveType, startDate, endDate, numberOfDays, leaveReason);
+            if (numberOfDays < 0) {
+              throw new Exception("Enter positive value for number of days.");
+            } else {
+              System.out.println("Reason :");
+              String leaveReason = option.next();
+              employee.applyForLeave(leaveType, startDate, endDate, numberOfDays, leaveReason);
+            }
           }
         }
       } catch (IllegalArgumentException e) {
@@ -114,7 +118,7 @@ public class CliMain {
       } catch (ParseException e) {
         System.out.println(e);
       } catch (Exception e) {
-        System.out.println("Enter correct date" + e);
+        System.out.println("Enter correct data. " + e);
       }
     }
   }
