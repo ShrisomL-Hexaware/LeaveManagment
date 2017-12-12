@@ -2,7 +2,11 @@ package com.hexaware.ftp01.model;
 
 import java.util.Objects;
 import java.util.Date;
+ 
+import com.hexaware.ftp01.persistence.DbConnection;
+import com.hexaware.ftp01.persistence.LeaveDetailsDAO;
 
+ 
  /**
   * LeaveDetails class to store leave details.
   * @author hexware
@@ -35,7 +39,7 @@ public class LeaveDetails {
 
   @Override
   public final boolean equals(final Object obj) {  
-    if (obj == null) {
+   if (obj == null) {
       return false;
     }
     if (getClass() != obj.getClass()) {
@@ -59,10 +63,12 @@ public class LeaveDetails {
   }
   @Override
   public final String toString() {
+ 
     return "leave id :" + leaveId + " " + "leave type :" + leaveType + " " + "start date :" + startDate + " "
       + "end date :" + endDate + " " + "number of days :" + numberOfDays + " " + "leave status :" + leaveStatus
       + " " +  "leave reason :" + leaveReason + " " + "leave applied on :" + leaveAppliedOn + " "
       + "managerComments :" + managerComments + " " + "empId :" + empId;
+ 
   }
 
   /**
@@ -84,16 +90,20 @@ public class LeaveDetails {
                       final int argEmpId) {
     this.leaveId = argLeaveId;
     this.leaveType = argLeaveType;
+ 
     this.startDate = new Date (argStartDate.getTime());
     this.endDate = new Date (argEndDate.getTime());
     this.numberOfDays = argNumberOfDays;
     this.leaveStatus = argLeaveStatus;
     this.leaveReason = argLeaveReason;
     this.leaveAppliedOn = new Date (argLeaveAppliedOn.getTime());
+ 
     this.managerComments = argManagerComments;
     this.empId = argEmpId;
   }
 
+ 
+ 
  /**
   * Gets the LeaveId.
   * @return this Leave ID.
@@ -243,4 +253,6 @@ public class LeaveDetails {
   public final void setEmpId(final int argEmpId) {
     this.empId = argEmpId;
   }
+ 
 }
+ 

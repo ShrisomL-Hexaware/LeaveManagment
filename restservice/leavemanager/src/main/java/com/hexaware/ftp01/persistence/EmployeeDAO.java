@@ -4,6 +4,7 @@ import com.hexaware.ftp01.model.Employee;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
+import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 
 import java.util.List;
@@ -28,6 +29,16 @@ public interface EmployeeDAO  {
   @SqlQuery("SELECT * FROM EMPLOYEE WHERE EMP_ID = :empID")
   @Mapper(EmployeeMapper.class)
   Employee find(@Bind("empID") int empID);
+
+  /**
+   * Update empLeaveBalance.
+   * @param empLeaveBalance to update the available balance.
+   * @param empID to get employee id.
+   */
+  @SqlUpdate("UPDATE EMPLOYEE SET EMP_LEAVE_BALANCE = :empLeaveBalance WHERE EMP_ID = :empID")
+  @Mapper(EmployeeMapper.class)
+  void updateLeaveBalance(@Bind("empLeaveBalance") int empLeaveBalance,
+                          @Bind("empID") int empID);
 
   /**
   * close with no args is used to close the connection.

@@ -1,7 +1,11 @@
 package com.hexaware.ftp01.util;
 import java.util.Scanner;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 import com.hexaware.ftp01.model.Employee;
+import com.hexaware.ftp01.model.LeaveType;
 
 /**
  * Class CliMain provides the command line interface to the leavemanagement
@@ -72,34 +76,57 @@ public class CliMain {
                          + e.getEmpDoj());
     }
   }
-  private void approveOrDenyLeave() {
-    System.out.println("Enter Manager ID");
+ 
+  private void applyForLeave()  {
+    System.out.println("Enter the empId");
     int empId = option.nextInt();
     Employee employee = Employee.listById(empId);
-
     if (employee == null) {
-      System.out.println("No such employee");
-  } else {
-    LeaveDetails [] leaveDetails = LeaveDetails.listPendingApplication(empId);
-    for (LeaveDetails ld : leaveDetails) {
-      System.out.println(ld.toString());
+      System.out.println("Sorry, No such employee");
+    } else {
+      try {
+        if (employee.getEmpLeaveBalance() == 0) {
+          throw new IllegalArgumentException();
+        } else {
+          SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
+          System.out.println("Enter Leave Type :");
+          String levType  = option.next();
+          LeaveType leaveType = LeaveType.valueOf(levType);
+          System.out.println("Enter Starting Date :");
+          String date1 = option.next();
+          Date startDate = myFormat.parse(date1);
+          System.out.println("Enter Ending Date :");
+          String date2 = option.next();
+          Date endDate = myFormat.parse(date2);
+          long epochstartDate = myFormat.parse(date1).getTime() / 1000;
+          long epochendDate = myFormat.parse(date2).getTime() / 1000;
+          if ((epochendDate - epochstartDate) < 0) {
+            throw new Exception("Sorry, end date is before start date");
+          } else {
+            System.out.println("Total Number of days :");
+            int numberOfDays = option.nextInt();
+            if (numberOfDays < 0) {
+              throw new Exception("Enter positive value for number of days.");
+            } else {
+              System.out.println("Reason :");
+              String leaveReason = option.next();
+              employee.applyForLeave(leaveType, startDate, endDate, numberOfDays, leaveReason);
+            }
+          }
+        }
+      } catch (IllegalArgumentException e) {
+        System.out.println("You dont have sufficient leave balance");
+      } catch (ParseException e) {
+        System.out.println(e);
+      } catch (Exception e) {
+        System.out.println("Enter correct data. " + e);
+      }
     }
-    System.out.println("1) Aprrove\n2) Deny");
-    int menuOption = option.nextInt();
-    menuDetails (menuOption);
   }
-  public final void menuDetails( final int menuOption) {
-    switch (menuOption) {
-      case 1:
-        approve();
-        break;
-      case 2:
-        deny();
-        break;
-      default:
-        System.out.println("Wrong Choice!! Choose either 1 or 2");
-    }
-    mainMenu();
+
+  private void listLeaveHistory() {
+    System.out.println("To see leave history wait till friday");
+ 
   }
   public void approve() {
     System.out.println("Enter the leave ID that you want to approve: ");
@@ -129,6 +156,7 @@ public class CliMain {
   /**
    * The main entry point.
    * @param ar the list of arguments
+   * @throws ParseException throw parseexception.
    */
   public static void main(final String[] ar) {
     final CliMain mainObj = new CliMain();

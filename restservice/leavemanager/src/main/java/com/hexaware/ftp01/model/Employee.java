@@ -5,6 +5,7 @@ import com.hexaware.ftp01.persistence.EmployeeDAO;
 
 import java.util.Objects;
 import java.util.List;
+import java.util.Date;
 
 /**
  * Employee class to store employee personal details.
@@ -14,13 +15,13 @@ public class Employee {
 
   /**
    * empId to store employee id.
-     empName to store employee name.
-     empPhone to store employee phone number.
-     empEmail to store employee email.
-     empDept to store employee department.
-     empManagerId to store manager id.
-     empLeaveBalance to store employee leave balance.
-     empDoj to store employee date of joining.
+   * empName to store employee name.
+   * empPhone to store employee phone number.
+   * empEmail to store employee email.
+   * empDept to store employee department.
+   * empManagerId to store manager id.
+   * empLeaveBalance to store employee leave balance.
+   * empDoj to store employee date of joining.
    */
 
   private int empId;
@@ -60,6 +61,15 @@ public class Employee {
 
   /**
    * @param argEmpId to initialize employee id.
+   * @param argEmpLeaveBalance to initialize employee leave balance.
+   */
+  public Employee(final int argEmpId, final int argEmpLeaveBalance) {
+    this.empId = argEmpId;
+    this.empLeaveBalance = argEmpLeaveBalance;
+  }
+
+  /**
+   * @param argEmpId to initialize employee id.
    * @param argEmpName to initialize employee name.
    * @param argEmpDept to initialize employee department.
    * @param argEmpPhone to initialize employee Phone.
@@ -81,10 +91,10 @@ public class Employee {
     this.empLeaveBalance = argEmpLeaveBalance;
     this.empManagerId = argEmpManagerId;
   }
-/**
-  * Gets the EmployeeId.
-  * @return this Employee's ID.
-*/
+  /**
+   * Gets the EmployeeId.
+   * @return this Employee's ID.
+   */
   public final int getEmpId() {
     return empId;
   }
@@ -118,7 +128,7 @@ public class Employee {
     this.empPhone = argEmpPhone;
   }
 
- /**
+  /**
    * Gets the EmployeePhone.
    * @return this Employee's Phone.
    */
@@ -159,7 +169,7 @@ public class Employee {
   }
 
   /**
-   *
+   * Sets the ManagerId.
    * @param argEmpManagerId to set employee ManagerId.
    */
   public final void setEmpManagerId(final int argEmpManagerId) {
@@ -233,8 +243,32 @@ public class Employee {
     return dao().find(empID);
   }
 
-  private void approve() {
-      
+ 
+  /**
+   * list employee leave balance.
+   * @param levType to get type of leave.
+   * @param levStartDate to get start date.
+   * @param levEndDate to get end date.
+   * @param levNumberOfDays to get total days.
+   * @param levReason to get reason of leave.
+   * @throws IllegalArgumentException to handle exception.
+   */
+  public final void applyForLeave(final LeaveType levType, final Date levStartDate, final Date levEndDate,
+                                  final int levNumberOfDays, final String levReason) throws IllegalArgumentException {
+    System.out.println("Your available leave balance is : " + empLeaveBalance);
+    Employee e = new Employee(empId);
+    int empID = e.getEmpId();
+    Date levAppliedOn = new Date();
+    if (empLeaveBalance > levNumberOfDays) {
+      empLeaveBalance = empLeaveBalance - levNumberOfDays;
+      System.out.println("Leave applied for : " + e.getEmpLeaveBalance() + "Days");
+      System.out.println("Your updated Leave Balance is : " + empLeaveBalance);
+      LeaveDetails.dao().insert(levType, levStartDate, levEndDate, levNumberOfDays, levReason,
+                                   levAppliedOn, empID);
+      dao().updateLeaveBalance(empLeaveBalance, empID);
+    } else {
+      throw new IllegalArgumentException();
+    }
   }
-
+  
 }
