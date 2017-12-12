@@ -85,7 +85,7 @@ public class CliMain {
     } else {
       try {
         if (employee.getEmpLeaveBalance() == 0) {
-          throw new IllegalArgumentException();
+          throw new IllegalArgumentException("You dont have sufficient leave balance");
         } else {
           SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
           System.out.println("Enter Leave Type :");
@@ -114,7 +114,7 @@ public class CliMain {
           }
         }
       } catch (IllegalArgumentException e) {
-        System.out.println("You dont have sufficient leave balance");
+        System.out.println(e);
       } catch (ParseException e) {
         System.out.println(e);
       } catch (Exception e) {
