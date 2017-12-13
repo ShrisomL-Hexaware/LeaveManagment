@@ -129,7 +129,7 @@ public class CliMain {
   private void listPendingLeaveStatus() {
     System.out.println("To see leave status wait till friday");
   }
-  private void approveOrDenyLeave(); {
+  private void approveOrDenyLeave() {
     System.out.println("To approve or deny wait till friday");
   }
   /**
