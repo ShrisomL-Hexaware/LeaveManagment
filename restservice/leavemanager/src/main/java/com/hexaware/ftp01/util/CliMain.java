@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 import com.hexaware.ftp01.model.Employee;
+import com.hexaware.ftp01.model.LeaveDetails;
 import com.hexaware.ftp01.model.LeaveType;
 
 /**
@@ -126,9 +127,21 @@ public class CliMain {
   private void listLeaveHistory() {
     System.out.println("To see leave history wait till friday");
   }
+
   private void listPendingLeaveStatus() {
-    System.out.println("To see leave status wait till friday");
+    System.out.println("Enter the manager Id");
+    int empId = option.nextInt();
+    Employee employee = Employee.listById(empId);
+    if (employee == null) {
+      System.out.println("Sorry, No such employee");
+    } else {
+      LeaveDetails[] leaveDetails = LeaveDetails.listPendingApplication(empId);
+      for (LeaveDetails ld : leaveDetails) {
+        System.out.println(ld.toString());
+      }
+    }
   }
+
   private void approveOrDenyLeave() {
     System.out.println("To approve or deny wait till friday");
   }
