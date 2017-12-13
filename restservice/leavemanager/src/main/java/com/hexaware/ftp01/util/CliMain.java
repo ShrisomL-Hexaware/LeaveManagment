@@ -128,9 +128,12 @@ public class CliMain {
     System.out.println("To see leave history wait till friday");
  
   }
-  
  
-  private void approveOrDenyLeave(); {
+  private void listPendingLeaveStatus() {
+    System.out.println("To see leave status wait till friday");
+  }
+  private void approveOrDenyLeave() {
+ 
     System.out.println("To approve or deny wait till friday");
  
   }
