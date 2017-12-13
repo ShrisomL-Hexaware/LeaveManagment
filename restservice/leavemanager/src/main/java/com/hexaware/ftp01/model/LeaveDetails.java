@@ -95,7 +95,6 @@ public class LeaveDetails {
     this.managerComments = argManagerComments;
     this.empId = argEmpId;
   }
-
   /**
    * The dao for leave details.
    * @return the object.
