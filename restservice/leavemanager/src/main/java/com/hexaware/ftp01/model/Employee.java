@@ -52,7 +52,6 @@ public class Employee {
   public final int hashCode() {
     return Objects.hash(empId);
   }
-
   /**
    * @param argEmpId to initialize employee id.
    */
@@ -244,6 +243,7 @@ public class Employee {
     return dao().find(empID);
   }
 
+ 
   /**
    * list employee leave balance.
    * @param levType to get type of leave.
@@ -270,4 +270,5 @@ public class Employee {
       throw new IllegalArgumentException();
     }
   }
+  
 }

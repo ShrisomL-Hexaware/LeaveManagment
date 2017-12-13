@@ -76,6 +76,7 @@ public class CliMain {
                          + e.getEmpDoj());
     }
   }
+ 
   private void applyForLeave()  {
     System.out.println("Enter the empId");
     int empId = option.nextInt();
@@ -125,12 +126,16 @@ public class CliMain {
 
   private void listLeaveHistory() {
     System.out.println("To see leave history wait till friday");
+ 
   }
+ 
   private void listPendingLeaveStatus() {
     System.out.println("To see leave status wait till friday");
   }
   private void approveOrDenyLeave() {
+ 
     System.out.println("To approve or deny wait till friday");
+ 
   }
   /**
    * The main entry point.
