@@ -76,7 +76,7 @@ public class CliMain {
                          + e.getEmpDoj());
     }
   }
- 
+
   private void applyForLeave()  {
     System.out.println("Enter the empId");
     int empId = option.nextInt();
@@ -123,35 +123,9 @@ public class CliMain {
       }
     }
   }
-
   private void listLeaveHistory() {
     System.out.println("To see leave history wait till friday");
- 
-  }
-  public void approve() {
-    System.out.println("Enter the leave ID that you want to approve: ");
-    int leaveId = option.nextInt();
 
-    LeaveDetails leaveDetails = LeaveDetails.listById(leaveId);
-    if (leaveDetails == null) {
-      System.out.println("Leave ID not found");
-    } else {
-      System.out.println("Enter your Comment here");
-      String managerComments = option.nextLine();
-      LeaveDetails.approveLeave(managerComments, leaveId);
-    }
-  }
-  public void deny() {
-    System.out.println("Enter the leave ID that you want to deny: ");
-    int leaveId = option.nextInt();
-
-    LeaveDetails leaveDetails = LeaveDetails.listById(leaveId);
-    if (leaveDetails == null) {
-      System.out.println("Leave ID not found");
-    } else {
-      System.out.println("Enter your Comment here");
-      String managerComments = option.nextLine();
-      LeaveDetails.denyLeave(managerComments, leaveId);
   }
   /**
    * The main entry point.
