@@ -77,7 +77,7 @@ public class CliMain {
                          + e.getEmpDoj());
     }
   }
- 
+
   private void applyForLeave()  {
     System.out.println("Enter the empId");
     int empId = option.nextInt();
@@ -125,7 +125,6 @@ public class CliMain {
 
   private void listLeaveHistory() {
     System.out.println("To see leave history wait till friday");
- 
   }
  
   private void listPendingLeaveStatus() {
@@ -141,11 +140,78 @@ public class CliMain {
       }
     }
   }
+ 
+  private void approveOrDenyLeave() throws ParseException {
+    System.out.println("Enter your Manager Id: ");
+    int empId = option.nextInt();
+    Employee employee = Employee.listById(empId);
+    LeaveDetails[] leaveDetails = LeaveDetails.listPendingApplications(empId);
+    if (employee == null) {
+      System.out.println("No such employee");
+    }
+    try {
+      if (leaveDetails.length == 0) {
+        throw new IllegalArgumentException("No Pending Applications");
+      }
+    } catch (IllegalArgumentException e) {
+      System.out.println(e);
+      approveOrDeny();
+    }
+    for (LeaveDetails ld : leaveDetails) {
+      System.out.println(ld.toString());
+      System.out.println("1. Approve the application ");
+      System.out.println("2. Deny the Application");
+      int menuOption = option.nextInt();
+      menuDetails(menuOption);
+    }
+  }
+  private void menuDetails(final int menuOption) throws ParseException {
+    switch (menuOption) {
+      case 1:
+        approve();
+        break;
+      case 2:
+        deny();
+        break;
+      default:
+        System.out.println("Choose either 1 or 2");
+    }
+    mainMenu();
+  }
 
-  private void approveOrDenyLeave() {
- 
-    System.out.println("To approve or deny wait till friday");
- 
+  private void approve() {
+    System.out.println("Enter the Leave id of the application you want to approve");
+    int levId = option.nextInt();
+    LeaveDetails l = LeaveDetails.listByLeaveId(levId);
+    if (l == null) {
+      System.out.println("No Such Leave Application exists");
+    } else {
+      System.out.println("Enter the Employee id for that leave id");
+      int employeeId = option.nextInt();
+      Employee employee = Employee.listById(employeeId);
+      int leaveBal = employee.getEmpAvailLeaveBal();
+      System.out.println("Enter your comments here");
+      String managerComments1 = option.nextLine();
+      String managerComments2 = option.nextLine();
+      String managerComments = managerComments1 + managerComments2;
+      int empLeaveBalance = leaveBal - l.getleaveNoOfDays();
+      LeaveDetails.approveLeave(managerComments, levId, empLeaveBalance, employeeId);
+    }
+  }
+
+  private void deny() {
+    System.out.println("Enter the Leave id of the application you want to deny");
+    int levId = option.nextInt();
+    LeaveDetails l = LeaveDetails.listByLeaveId(levId);
+    if (l == null) {
+      System.out.println("No Such Leave Application exists");
+    } else {
+      System.out.println("Enter your comments here");
+      String managerComments1 = option.nextLine();
+      String managerComments2 = option.nextLine();
+      String managerComments = managerComments1 + managerComments2;
+      LeaveDetails.denyLeave(managerComments, levId);
+    }
   }
   /**
    * The main entry point.

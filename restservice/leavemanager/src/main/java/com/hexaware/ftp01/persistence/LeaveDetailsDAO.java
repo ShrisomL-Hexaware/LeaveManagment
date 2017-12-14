@@ -98,5 +98,47 @@ void insert(@Bind("levType") LeaveType levType,
   /**
   * close with no args is used to close the connection.
   */
+    /**
+     * @param mgrComments the id of the employee
+     * @param levId the id of the Leave application
+     * @param status is the status of application
+     */
+  @SqlUpdate("UPDATE LEAVE_HISTORY SET"
+            +
+            "    LEAVE_MNGR_COMMENTS = :mgrComments, "
+            +
+            "    LEAVE_STATUS = :status"
+            +
+            "    WHERE LEAVE_ID = :levId")
+    void approve(@Bind("mgrComments") String mgrComments, @Bind("status") String status, @Bind("levId") int levId);
+
+    /**
+     * @param mgrComments the id of the employee.
+     * @param levId the id of the Leave application.
+     * @param status is the status of application.
+     */
+  @SqlUpdate("UPDATE LEAVE_HISTORY SET"
+            +
+            "    LEAVE_MNGR_COMMENTS = :mgrComments, "
+            +
+            "    LEAVE_STATUS = :status"
+            +
+            "    WHERE LEAVE_ID = :levId")
+    void deny(@Bind("mgrComments") String mgrComments, @Bind("status") String status, @Bind("levId") int levId);
+
+    /**
+     * @param newavailLeave display new avail leave.
+     * @param empId the id of the Leave application
+     */
+  @SqlUpdate("UPDATE EMPLOYEE SET"
+            +
+            " EMP_AVAIL_LEAVE_BAL = :newavailLeave "
+            +
+            " WHERE EMP_ID = :empId")
+    void leaveBal(@Bind("newavailLeave") int newavailLeave, @Bind("empId") int empId);
+     /**
+     * close with no args is used to close the connection.
+     */
   void close();
 }
+

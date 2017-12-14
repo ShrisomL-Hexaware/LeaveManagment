@@ -2,12 +2,10 @@ package com.hexaware.ftp01.model;
 
 import java.util.Objects;
 import java.util.Date;
-import java.util.List;
 
 import com.hexaware.ftp01.persistence.DbConnection;
 import com.hexaware.ftp01.persistence.LeaveDetailsDAO;
 
- 
  /**
   * LeaveDetails class to store leave details.
   * @author hexware
@@ -39,8 +37,8 @@ public class LeaveDetails {
   private int empId;
 
   @Override
-  public final boolean equals(final Object obj) {  
-   if (obj == null) {
+  public final boolean equals(final Object obj) {
+    if (obj == null) {
       return false;
     }
     if (getClass() != obj.getClass()) {
@@ -64,14 +62,11 @@ public class LeaveDetails {
   }
   @Override
   public final String toString() {
- 
     return "leave id :" + leaveId + " " + "leave type :" + leaveType + " " + "start date :" + startDate + " "
       + "end date :" + endDate + " " + "number of days :" + numberOfDays + " " + "leave status :" + leaveStatus
       + " " +  "leave reason :" + leaveReason + " " + "leave applied on :" + leaveAppliedOn + " "
       + "managerComments :" + managerComments + " " + "empId :" + empId;
- 
   }
-
   /**
    * @param argLeaveId to initialize leave id.
    * @param argLeaveType to initialize leave type.
@@ -91,25 +86,14 @@ public class LeaveDetails {
                       final int argEmpId) {
     this.leaveId = argLeaveId;
     this.leaveType = argLeaveType;
- 
-    this.startDate = new Date (argStartDate.getTime());
-    this.endDate = new Date (argEndDate.getTime());
+    this.startDate = new Date(argStartDate.getTime());
+    this.endDate = new Date(argEndDate.getTime());
     this.numberOfDays = argNumberOfDays;
     this.leaveStatus = argLeaveStatus;
     this.leaveReason = argLeaveReason;
-    this.leaveAppliedOn = new Date (argLeaveAppliedOn.getTime());
- 
+    this.leaveAppliedOn = new Date(argLeaveAppliedOn.getTime());
     this.managerComments = argManagerComments;
     this.empId = argEmpId;
-  }
-
- /**
-  * The dao for employee.
-  * @return Leave details.
-  */
-  public static LeaveDetailsDAO dao() {
-    DbConnection db = new DbConnection();
-    return db.getConnect().onDemand(LeaveDetailsDAO.class);
   }
 
  /**
@@ -119,6 +103,7 @@ public class LeaveDetails {
   public final int getLeaveId() {
     return leaveId;
   }
+
  /**
   *
   * @param argLeaveId to set leave id.
@@ -278,6 +263,54 @@ public class LeaveDetails {
   public static LeaveDetails[] listPendingApplication(final int empId) {
     List<LeaveDetails> l = dao().finds(empId);
     return l.toArray(new LeaveDetails[l.size()]);
+
+ /**
+  * approve the leave application.
+  * @param leaveId id to get leave details.
+  * @param managerComments id to update manager comments.
+  * @param empLeaveBalance to check balance.
+  * @param empId to get employee id.
+  */
+  public static void approveLeave(final String managerComments, final int leaveId,
+                                  final int empLeaveBalance, final int empId) {
+    String status = "APPROVED";
+    dao().approve(managerComments, status, leaveId);
+  }
+
+ /**
+  * deny the leave application.
+  * @param leaveId id to get leave details.
+  * @param managerComments id to update manager comments.
+  */
+  public static void denyLeave(final String managerComments, final int leaveId) {
+    String status = "DENIED";
+    dao().deny(managerComments, status, leaveId);
+
+  }
+  /**
+   * The dao for leave details.
+   */
+  private static LeaveDetailsDAO dao() {
+    DbConnection db = new DbConnection();
+    return db.getConnect().onDemand(LeaveDetailsDAO.class);
+  }
+
+  /**
+   * list all employee details.
+   * @return all employees' details
+   */
+  public static LeaveDetails[] listAll() {
+
+    List<LeaveDetails> ld = dao().list();
+    return ld.toArray(new LeaveDetails[ld.size()]);
+  }
+
+  /**
+   * list leave details by id.
+   * @param leaveId id to get leave details.
+   * @return Employee
+   */
+  public static LeaveDetails listById(final int leaveId) {
+    return dao().find(leaveId);
   }
 }
- 
