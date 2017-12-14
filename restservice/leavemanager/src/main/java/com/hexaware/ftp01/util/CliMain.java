@@ -98,16 +98,14 @@ public class CliMain {
           System.out.println("Enter Leave Type :");
           String levType  = option.next();
           LeaveType leaveType = LeaveType.valueOf(levType);
-          System.out.println("Enter Starting Date :");
+          System.out.println("Enter Starting Date(yyyy/MM/dd) :");
           String date1 = option.next();
           Date startDate = myFormat.parse(date1);
-          System.out.println("Enter Ending Date :");
+          System.out.println("Enter Ending Date(yyyy/MM/dd) :");
           String date2 = option.next();
           Date endDate = myFormat.parse(date2);
           long epochstartDate = myFormat.parse(date1).getTime() / 1000;
           long epochendDate = myFormat.parse(date2).getTime() / 1000;
-          String date3 = employee.getEmpDoj();
-          long epochDateOfjoining = myFormat.parse(date3).getTime() / 1000;
           if ((epochendDate - epochstartDate) < 0) {
             throw new IllegalArgumentException("Sorry, end date is before start date");
           } else {
