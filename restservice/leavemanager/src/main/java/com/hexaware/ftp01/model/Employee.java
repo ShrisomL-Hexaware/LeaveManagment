@@ -243,7 +243,7 @@ public class Employee {
     return dao().find(empID);
   }
 
- 
+
   /**
    * list employee leave balance.
    * @param levType to get type of leave.
@@ -270,5 +270,5 @@ public class Employee {
       throw new IllegalArgumentException();
     }
   }
-  
+
 }
