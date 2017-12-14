@@ -126,7 +126,7 @@ public class CliMain {
 
   }
 
-   private void listPendingLeaveStatus() {
+  private void listPendingLeaveStatus() {
     try {
       System.out.println("Enter the manager Id");
       int empId = option.nextInt();
@@ -185,7 +185,7 @@ public class CliMain {
    * @param ar the list of arguments
    * @throws ParseException throw parseexception.
    */
-  public static void main(final String[] args) {
+  public static void main(final String[] ar) {
     final CliMain mainObj = new CliMain();
     mainObj.mainMenu();
   }
