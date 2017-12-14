@@ -2,6 +2,10 @@ package com.hexaware.ftp01.model;
 
 import java.util.Objects;
 import java.util.Date;
+<<<<<<< HEAD
+=======
+import java.util.List;
+>>>>>>> 384523688ac638f7e75e1c3ee3b49c074550d496
 
 import com.hexaware.ftp01.persistence.DbConnection;
 import com.hexaware.ftp01.persistence.LeaveDetailsDAO;
@@ -106,6 +110,18 @@ public class LeaveDetails {
     return db.getConnect().onDemand(LeaveDetailsDAO.class);
   }
 
+<<<<<<< HEAD
+=======
+ /**
+  * The dao for leave details.
+  * @return Leave details.
+  */
+  public static LeaveDetailsDAO dao() {
+    DbConnection db = new DbConnection();
+    return db.getConnect().onDemand(LeaveDetailsDAO.class);
+  }
+
+>>>>>>> 384523688ac638f7e75e1c3ee3b49c074550d496
  /**
   * Gets the LeaveId.
   * @return this Leave ID.
@@ -255,5 +271,22 @@ public class LeaveDetails {
   public final void setEmpId(final int argEmpId) {
     this.empId = argEmpId;
   }
+<<<<<<< HEAD
+=======
+ /**
+  * list employee's leave details by id.
+  * @param empID id to get employee's leave details.
+  * @return LeaveDetails.
+  */
+ /**
+  * list pending leave details.
+  * @param empId id to get employee details.
+  * @return LeaveDetails array.
+  */
+  public static LeaveDetails[] listPendingApplication(final int empId) {
+    List<LeaveDetails> l = dao().finds(empId);
+    return l.toArray(new LeaveDetails[l.size()]);
+  }
+>>>>>>> 384523688ac638f7e75e1c3ee3b49c074550d496
 }
 
