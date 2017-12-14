@@ -2,7 +2,8 @@ package com.hexaware.ftp01.model;
 
 import java.util.Objects;
 import java.util.Date;
- 
+import java.util.List;
+
 import com.hexaware.ftp01.persistence.DbConnection;
 import com.hexaware.ftp01.persistence.LeaveDetailsDAO;
 
@@ -102,8 +103,15 @@ public class LeaveDetails {
     this.empId = argEmpId;
   }
 
- 
- 
+ /**
+  * The dao for employee.
+  * @return Leave details.
+  */
+  public static LeaveDetailsDAO dao() {
+    DbConnection db = new DbConnection();
+    return db.getConnect().onDemand(LeaveDetailsDAO.class);
+  }
+
  /**
   * Gets the LeaveId.
   * @return this Leave ID.
@@ -253,6 +261,23 @@ public class LeaveDetails {
   public final void setEmpId(final int argEmpId) {
     this.empId = argEmpId;
   }
- 
+ /**
+  * list employee details by id.
+  * @param empID id to get employee details.
+  * @return Employee.
+  */
+  public static LeaveDetails listById(final int empID) {
+    return dao().find(empID);
+  }
+
+ /**
+  * list employee details by id.
+  * @param empId id to get employee details.
+  * @return Employee array.
+  */
+  public static LeaveDetails[] listPendingApplication(final int empId) {
+    List<LeaveDetails> l = dao().finds(empId);
+    return l.toArray(new LeaveDetails[l.size()]);
+  }
 }
  

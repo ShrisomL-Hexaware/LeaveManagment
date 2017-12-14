@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 import com.hexaware.ftp01.model.Employee;
+import com.hexaware.ftp01.model.LeaveDetails;
 import com.hexaware.ftp01.model.LeaveType;
 
 /**
@@ -115,12 +116,10 @@ public class CliMain {
           }
         }
       } catch (IllegalArgumentException e) {
-        System.out.println(e);
+        System.out.println(e.getMessage());
       } catch (ParseException e) {
-        System.out.println(e);
-      } catch (Exception e) {
-        System.out.println("Enter correct data. " + e);
-      }
+        System.out.println(e.getMessage());
+      } 
     }
   }
 
@@ -130,8 +129,19 @@ public class CliMain {
   }
  
   private void listPendingLeaveStatus() {
-    System.out.println("To see leave status wait till friday");
+    System.out.println("Enter the manager Id");
+    int empId = option.nextInt();
+    LeaveDetails leavedetails = LeaveDetails.listById(empId);
+    if (leavedetails == null) {
+      System.out.println("Sorry, No such employee");
+    } else {
+      LeaveDetails[] leaveDetails = LeaveDetails.listPendingApplication(empId);
+      for (LeaveDetails ld : leaveDetails) {
+        System.out.println(ld.toString());
+      }
+    }
   }
+
   private void approveOrDenyLeave() {
  
     System.out.println("To approve or deny wait till friday");

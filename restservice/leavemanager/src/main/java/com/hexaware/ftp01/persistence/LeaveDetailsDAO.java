@@ -1,10 +1,14 @@
 package com.hexaware.ftp01.persistence;
 
 import com.hexaware.ftp01.model.LeaveType;
+import com.hexaware.ftp01.model.LeaveDetails;
 import java.util.Date;
+import java.util.List;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.SqlQuery;
+import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 
 /**
  * The DAO class for employee.
@@ -59,6 +63,37 @@ void insert(@Bind("levType") LeaveType levType,
                 @Bind("levReason") String levReason,
                 @Bind("levAppliedOn")Date levAppliedOn,
                 @Bind("empID") int empID);
+
+ /**
+  * return all the details of the selected employee.
+  *
+  * @param empId the id of the employee
+  * @return the employee object
+  */
+  @SqlQuery("SELECT * "
+            +
+            "FROM LEAVE_HISTORY "
+            +
+            "INNER JOIN EMPLOYEE ON EMPLOYEE.EMP_ID = LEAVE_HISTORY.EMP_ID "
+            +
+            "WHERE "
+            +
+            "EMPLOYEE.EMP_MANAGER_ID = :empId "
+            +
+            "AND "
+            +
+            "LEAVE_HISTORY.LEAVE_STATUS = 'PENDING'")
+  @Mapper(LeaveDetailsMapper.class)
+  List<LeaveDetails> finds(@Bind("empId") int empId);
+
+  /**
+   * return all the details of the selected employee.
+   * @param empID the id of the employee
+   * @return the employee object
+   */
+  @SqlQuery("SELECT * FROM LEAVE_HISTORY WHERE EMP_ID = :empID")
+  @Mapper(LeaveDetailsMapper.class)
+  LeaveDetails find(@Bind("empID") int empID);
 
   /**
   * close with no args is used to close the connection.
