@@ -127,11 +127,7 @@ public class CliMain {
     System.out.println("To see leave history wait till friday");
  
   }
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 73ecd2e8da3f256e09469e1f0dc756d51c8efe09
   private void listPendingLeaveStatus() {
     System.out.println("Enter the manager Id");
     int empId = option.nextInt();
