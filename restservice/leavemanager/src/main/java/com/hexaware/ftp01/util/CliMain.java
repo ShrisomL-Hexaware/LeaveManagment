@@ -1,6 +1,7 @@
 package com.hexaware.ftp01.util;
 import java.util.Scanner;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
@@ -25,9 +26,13 @@ public class CliMain {
     System.out.println("5. Pending Leave Status");
     System.out.println("6. Approve Or Deny");
     System.out.println("7. Exit");
-    System.out.println("Enter your choice:");
-    int menuOption = option.nextInt();
-    mainMenuDetails(menuOption);
+    try {
+      System.out.println("Enter your choice:");
+      int menuOption = option.nextInt();
+      mainMenuDetails(menuOption);
+    } catch (InputMismatchException e) {
+      System.out.println("Enter the value 1 - 7");
+    }
   }
   private void mainMenuDetails(final int selectedOption) {
     switch (selectedOption) {
@@ -77,15 +82,15 @@ public class CliMain {
                          + e.getEmpDoj());
     }
   }
- 
+
   private void applyForLeave()  {
-    System.out.println("Enter the empId");
-    int empId = option.nextInt();
-    Employee employee = Employee.listById(empId);
-    if (employee == null) {
-      System.out.println("Sorry, No such employee");
-    } else {
-      try {
+    try {
+      System.out.println("Enter the empId");
+      int empId = option.nextInt();
+      Employee employee = Employee.listById(empId);
+      if (employee == null) {
+        throw new IllegalArgumentException("Sorry no such employee");
+      } else {
         if (employee.getEmpLeaveBalance() == 0) {
           throw new IllegalArgumentException("You dont have sufficient leave balance");
         } else {
@@ -101,13 +106,15 @@ public class CliMain {
           Date endDate = myFormat.parse(date2);
           long epochstartDate = myFormat.parse(date1).getTime() / 1000;
           long epochendDate = myFormat.parse(date2).getTime() / 1000;
+          String date3 = employee.getEmpDoj();
+          long epochDateOfjoining = myFormat.parse(date3).getTime() / 1000;
           if ((epochendDate - epochstartDate) < 0) {
-            throw new Exception("Sorry, end date is before start date");
+            throw new IllegalArgumentException("Sorry, end date is before start date");
           } else {
             System.out.println("Total Number of days :");
             int numberOfDays = option.nextInt();
             if (numberOfDays < 0) {
-              throw new Exception("Enter positive value for number of days.");
+              throw new IllegalArgumentException("Enter positive value for number of days.");
             } else {
               System.out.println("Reason :");
               String leaveReason = option.next();
@@ -115,19 +122,19 @@ public class CliMain {
             }
           }
         }
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage());
-      } catch (ParseException e) {
-        System.out.println(e.getMessage());
-      } 
+      }
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
+    } catch (ParseException e) {
+      System.out.println(e.getMessage());
     }
   }
 
   private void listLeaveHistory() {
     System.out.println("To see leave history wait till friday");
- 
+
   }
- 
+
   private void listPendingLeaveStatus() {
     System.out.println("Enter the manager Id");
     int empId = option.nextInt();
@@ -143,9 +150,9 @@ public class CliMain {
   }
 
   private void approveOrDenyLeave() {
- 
+
     System.out.println("To approve or deny wait till friday");
- 
+
   }
   /**
    * The main entry point.

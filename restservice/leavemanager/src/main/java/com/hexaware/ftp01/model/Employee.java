@@ -243,7 +243,6 @@ public class Employee {
     return dao().find(empID);
   }
 
- 
   /**
    * list employee leave balance.
    * @param levType to get type of leave.
@@ -255,13 +254,14 @@ public class Employee {
    */
   public final void applyForLeave(final LeaveType levType, final Date levStartDate, final Date levEndDate,
                                   final int levNumberOfDays, final String levReason) throws IllegalArgumentException {
-    System.out.println("Your available leave balance is : " + empLeaveBalance);
+
     Employee e = new Employee(empId);
+    System.out.println("Your available leave balance was : " + empLeaveBalance);
     int empID = e.getEmpId();
     Date levAppliedOn = new Date();
     if (empLeaveBalance > levNumberOfDays) {
       empLeaveBalance = empLeaveBalance - levNumberOfDays;
-      System.out.println("Leave applied for : " + e.getEmpLeaveBalance() + "Days");
+      System.out.println("Leave applied for : " + levNumberOfDays + " Days");
       System.out.println("Your updated Leave Balance is : " + empLeaveBalance);
       LeaveDetails.dao().insert(levType, levStartDate, levEndDate, levNumberOfDays, levReason,
                                    levAppliedOn, empID);
@@ -270,5 +270,4 @@ public class Employee {
       throw new IllegalArgumentException();
     }
   }
-  
 }
