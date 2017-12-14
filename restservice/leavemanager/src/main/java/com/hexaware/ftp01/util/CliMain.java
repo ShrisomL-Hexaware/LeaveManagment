@@ -115,12 +115,10 @@ public class CliMain {
           }
         }
       } catch (IllegalArgumentException e) {
-        System.out.println(e);
+        System.out.println(e.getMessage());
       } catch (ParseException e) {
-        System.out.println(e);
-      } catch (Exception e) {
-        System.out.println("Enter correct data. " + e);
-      }
+        System.out.println(e.getMessage());
+      } 
     }
   }
 
@@ -131,8 +129,8 @@ public class CliMain {
   private void listPendingLeaveStatus() {
     System.out.println("Enter the manager Id");
     int empId = option.nextInt();
-    Employee employee = Employee.listById(empId);
-    if (employee == null) {
+    LeaveDetails leavedetails = LeaveDetails.listById(empId);
+    if (leavedetails == null) {
       System.out.println("Sorry, No such employee");
     } else {
       LeaveDetails[] leaveDetails = LeaveDetails.listPendingApplication(empId);
