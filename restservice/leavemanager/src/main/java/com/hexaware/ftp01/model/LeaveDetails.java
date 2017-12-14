@@ -2,6 +2,7 @@ package com.hexaware.ftp01.model;
 
 import java.util.Objects;
 import java.util.Date;
+import java.util.List;
 
 import com.hexaware.ftp01.persistence.DbConnection;
 import com.hexaware.ftp01.persistence.LeaveDetailsDAO;
@@ -94,6 +95,14 @@ public class LeaveDetails {
     this.leaveAppliedOn = new Date(argLeaveAppliedOn.getTime());
     this.managerComments = argManagerComments;
     this.empId = argEmpId;
+  }
+   /**
+   * The dao for leave details.
+   * @return Leave details object.
+   */
+  public static LeaveDetailsDAO dao() {
+    DbConnection db = new DbConnection();
+    return db.getConnect().onDemand(LeaveDetailsDAO.class);
   }
 
  /**
@@ -195,7 +204,6 @@ public class LeaveDetails {
     return leaveReason;
   }
  /**
-  *
   * @param argLeaveReason to set leave reason.
   */
   public final void setLeaveReason(final String argLeaveReason) {
@@ -246,71 +254,57 @@ public class LeaveDetails {
   public final void setEmpId(final int argEmpId) {
     this.empId = argEmpId;
   }
- /**
-  * list employee details by id.
-  * @param empID id to get employee details.
-  * @return Employee.
-  */
-  public static LeaveDetails listById(final int empID) {
-    return dao().find(empID);
-  }
 
  /**
   * list employee details by id.
   * @param empId id to get employee details.
   * @return Employee array.
   */
-  public static LeaveDetails[] listPendingApplication(final int empId) {
+  public static LeaveDetails[] listPendingLeaveStatus(final int empId) {
     List<LeaveDetails> l = dao().finds(empId);
     return l.toArray(new LeaveDetails[l.size()]);
-
- /**
-  * approve the leave application.
-  * @param leaveId id to get leave details.
-  * @param managerComments id to update manager comments.
-  * @param empLeaveBalance to check balance.
-  * @param empId to get employee id.
-  */
-  public static void approveLeave(final String managerComments, final int leaveId,
-                                  final int empLeaveBalance, final int empId) {
-    String status = "APPROVED";
-    dao().approve(managerComments, status, leaveId);
   }
 
- /**
-  * deny the leave application.
-  * @param leaveId id to get leave details.
-  * @param managerComments id to update manager comments.
-  */
-  public static void denyLeave(final String managerComments, final int leaveId) {
-    String status = "DENIED";
-    dao().deny(managerComments, status, leaveId);
-
-  }
-  /**
-   * The dao for leave details.
+/**
+   * update leave status.
+   * @param leaveStatus id to update leave status.
+   * @param leaveId to update leave Id.
+   * @param managerComments to update Manager Comments.
    */
-  private static LeaveDetailsDAO dao() {
-    DbConnection db = new DbConnection();
-    return db.getConnect().onDemand(LeaveDetailsDAO.class);
+  public static void status(final LeaveStatus leaveStatus, final int leaveId, final String managerComments) {
+    dao().update(leaveStatus, leaveId, managerComments);
   }
 
   /**
-   * list all employee details.
-   * @return all employees' details
+   * update number od days after deny.
+   * @param leaveId to update leave Id.
    */
-  public static LeaveDetails[] listAll() {
-
-    List<LeaveDetails> ld = dao().list();
-    return ld.toArray(new LeaveDetails[ld.size()]);
+  public static void increment(final int leaveId) {
+    dao().increase(leaveId);
   }
-
+/**
+ * list all leave details.
+ * @param empId for emp id
+ * @return all leave details
+ */
+  public static LeaveDetails[] listLeaveDetails(final int empId) {
+    List<LeaveDetails> ls = dao().list(empId);
+    return ls.toArray(new LeaveDetails[ls.size()]);
+  }
+/**
+  * list leave details by id.
+  * @param leaveId id to get employee details.
+  * @return Employee
+  */
+  public static LeaveDetails listAll(final int leaveId) {
+    return dao().fetch(leaveId);
+  }
   /**
    * list leave details by id.
    * @param leaveId id to get leave details.
    * @return Employee
    */
   public static LeaveDetails listById(final int leaveId) {
-    return dao().find(leaveId);
+    return dao().fetch(leaveId);
   }
 }
