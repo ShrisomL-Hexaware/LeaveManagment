@@ -255,14 +255,14 @@ public class LeaveDetails {
 
   /**
   * Gets the EmpId.
-  * @return this Emp ID.
+  * @return this EmpID.
   */
   public final int getEmpId() {
     return empId;
   }
  /**
   *
-  * @param argEmpId to set emp id.
+  * @param argEmpId to set empid.
   */
   public final void setEmpId(final int argEmpId) {
     this.empId = argEmpId;

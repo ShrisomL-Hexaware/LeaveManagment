@@ -185,7 +185,7 @@ public class CliMain {
    * @param ar the list of arguments
    * @throws ParseException throw parseexception.
    */
-  public static void main(final String[] ar) {
+  public static void main(final String[] args) {
     final CliMain mainObj = new CliMain();
     mainObj.mainMenu();
   }
