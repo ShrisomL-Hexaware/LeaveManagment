@@ -32,7 +32,7 @@ drop table leave_history;
 -- create the table LEAVE_HISTORY
 
 CREATE TABLE `ftp01`.`leave_history` (
-  `LEAVE_ID` INT NOT NULL,
+  `LEAVE_ID` INT NOT NULL  AUTO_INCREMENT,
   `LEAVE_TYPE` ENUM('EL') NOT NULL,
   `START_DATE` DATE NOT NULL,
   `END_DATE` DATE NOT NULL,
