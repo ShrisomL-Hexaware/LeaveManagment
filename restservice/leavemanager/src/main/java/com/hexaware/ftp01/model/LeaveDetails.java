@@ -100,7 +100,7 @@ public class LeaveDetails {
   }
 
  /**
-  * The dao for employee.
+  * The dao for leave details.
   * @return Leave details.
   */
   public static LeaveDetailsDAO dao() {
@@ -258,18 +258,14 @@ public class LeaveDetails {
     this.empId = argEmpId;
   }
  /**
-  * list employee details by id.
-  * @param empID id to get employee details.
-  * @return Employee.
+  * list employee's leave details by id.
+  * @param empID id to get employee's leave details.
+  * @return LeaveDetails.
   */
-  public static LeaveDetails listById(final int empID) {
-    return dao().find(empID);
-  }
-
  /**
-  * list employee details by id.
+  * list pending leave details.
   * @param empId id to get employee details.
-  * @return Employee array.
+  * @return LeaveDetails array.
   */
   public static LeaveDetails[] listPendingApplication(final int empId) {
     List<LeaveDetails> l = dao().finds(empId);

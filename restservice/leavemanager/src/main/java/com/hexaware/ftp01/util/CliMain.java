@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.util.InputMismatchException;
 
 import com.hexaware.ftp01.model.Employee;
 import com.hexaware.ftp01.model.LeaveDetails;
@@ -120,11 +121,12 @@ public class CliMain {
             }
           }
         }
+
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+      } catch (ParseException e) {
+        System.out.println(e.getMessage());
       }
-    } catch (IllegalArgumentException e) {
-      System.out.println(e.getMessage());
-    } catch (ParseException e) {
-      System.out.println(e.getMessage());
     }
   }
 
@@ -134,16 +136,26 @@ public class CliMain {
   }
 
   private void listPendingLeaveStatus() {
-    System.out.println("Enter the manager Id");
-    int empId = option.nextInt();
-    LeaveDetails leavedetails = LeaveDetails.listById(empId);
-    if (leavedetails == null) {
-      System.out.println("Sorry, No such employee");
-    } else {
-      LeaveDetails[] leaveDetails = LeaveDetails.listPendingApplication(empId);
-      for (LeaveDetails ld : leaveDetails) {
-        System.out.println(ld.toString());
+    try {
+      System.out.println("Enter the manager Id");
+      int empId = option.nextInt();
+      Employee employee = Employee.listById(empId);
+      if (employee == null) {
+        System.out.println("Sorry, No such employee");
+      } else {
+        LeaveDetails[] leaveDetails = LeaveDetails.listPendingApplication(empId);
+        System.out.println("leave id" + " " + "leave type" + " " + "start date"
+                        + " " + "end date" + " " + "number of days" + " " + "leave status"
+                        + " " +  "leave reason" + " " + "leave applied on" + " " + "managerComments" + " " + "empId");
+        for (LeaveDetails leave : leaveDetails) {
+          System.out.println(leave.getLeaveId() + " " + leave.getLeaveType() + " " + leave.getStartDate()
+                          + " " + leave.getEndDate() + " " + leave.getNumberOfDays() + " " + leave.getLeaveStatus()
+                          + " " + leave.getLeaveReason() + " " + leave.getLeaveAppliedOn()
+                          + " " + leave.getManagerComments() + " " + leave.getEmpId());
+        }
       }
+    } catch (InputMismatchException em) {
+      System.out.println("Enter Correct Employee Id");
     }
   }
 
