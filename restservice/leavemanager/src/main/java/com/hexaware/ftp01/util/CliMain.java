@@ -136,13 +136,16 @@ public class CliMain {
       } else {
         LeaveDetails[] leaveDetails = LeaveDetails.listPendingApplication(empId);
         System.out.println("leave id" + " " + "leave type" + " " + "start date"
-                        + " " + "end date" + " " + "number of days" + " " + "leave status"
-                        + " " +  "leave reason" + " " + "leave applied on" + " " + "managerComments" + " " + "empId");
+                        + "   " + "end date" + "   " + "number of days" + "   " + "leave status"
+                        + "   " +  "leave reason" + "   " + "leave applied on" + "   "
+                        + "managerComments" + "   " + "empId");
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
         for (LeaveDetails leave : leaveDetails) {
-          System.out.println(leave.getLeaveId() + " " + leave.getLeaveType() + " " + leave.getStartDate()
-                          + " " + leave.getEndDate() + " " + leave.getNumberOfDays() + " " + leave.getLeaveStatus()
-                          + " " + leave.getLeaveReason() + " " + leave.getLeaveAppliedOn()
-                          + " " + leave.getManagerComments() + " " + leave.getEmpId());
+          System.out.println(leave.getLeaveId() + " " + leave.getLeaveType() + " " + sf.format(leave.getStartDate())
+                          + "   " + sf.format(leave.getEndDate()) + "   " + leave.getNumberOfDays()
+                          + "   " + leave.getLeaveStatus() + "   " + leave.getLeaveReason()
+                          + "   " + sf.format(leave.getLeaveAppliedOn()) + "   " + leave.getManagerComments()
+                          + "   " + leave.getEmpId());
         }
       }
     } catch (InputMismatchException em) {

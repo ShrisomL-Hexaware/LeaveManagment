@@ -11,10 +11,7 @@ import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
-<<<<<<< HEAD
 import com.hexaware.ftp01.model.LeaveStatus;
-=======
->>>>>>> 75e16b0... changes
 
 /**
  * The DAO class for employee.

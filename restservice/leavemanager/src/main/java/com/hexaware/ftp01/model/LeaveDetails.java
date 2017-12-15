@@ -3,6 +3,7 @@ package com.hexaware.ftp01.model;
 import java.util.Objects;
 import java.util.Date;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.hexaware.ftp01.persistence.DbConnection;
@@ -66,10 +67,13 @@ public class LeaveDetails {
   }
   @Override
   public final String toString() {
-    return "leave id :" + leaveId + " " + "leave type :" + leaveType + " " + "start date :" + startDate + " "
-      + "end date :" + endDate + " " + "number of days :" + numberOfDays + " " + "leave status :" + leaveStatus
-      + " " +  "leave reason :" + leaveReason + " " + "leave applied on :" + leaveAppliedOn + " "
-      + "managerComments :" + managerComments + " " + "empId :" + empId;
+    SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+    return "leave id :" + leaveId + " " + "leave type :" + leaveType + " " + "start date :" + sf.format(startDate)
+      + " " + "end date :" + sf.format(endDate) + " " + "number of days :" + numberOfDays + " " + "leave status :"
+      + leaveStatus + " " +  "leave reason :" + leaveReason + " " + "leave applied on :" + sf.format(leaveAppliedOn)
+      + " " + "managerComments :" + managerComments + " " + "empId :" + empId;
+  }
+
   }
   /**
    * @param argLeaveId to initialize leave id.
