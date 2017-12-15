@@ -96,6 +96,7 @@ public class LeaveDetails {
     this.managerComments = argManagerComments;
     this.empId = argEmpId;
   }
+
    /**
    * The dao for leave details.
    * @return Leave details object.
@@ -256,9 +257,9 @@ public class LeaveDetails {
   }
 
  /**
-  * list employee details by id.
-  * @param empId id to get employee details.
-  * @return Employee array.
+  * list employee's leave details by id.
+  * @param empID id to get employee's leave details.
+  * @return LeaveDetails.
   */
   public static LeaveDetails[] listPendingLeaveStatus(final int empId) {
     List<LeaveDetails> l = dao().finds(empId);
@@ -308,3 +309,4 @@ public class LeaveDetails {
     return dao().fetch(leaveId);
   }
 }
+

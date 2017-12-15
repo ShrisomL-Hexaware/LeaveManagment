@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.util.InputMismatchException;
 
 import com.hexaware.ftp01.model.Employee;
 import com.hexaware.ftp01.model.LeaveDetails;
@@ -126,22 +127,37 @@ public class CliMain {
 
   private void listLeaveHistory() {
     System.out.println("To see leave history wait till friday");
+
   }
 
+
+
   private void listPendingLeaveStatus() {
-    System.out.println("Enter the manager Id");
-    int empId = option.nextInt();
-    LeaveDetails leavedetails = LeaveDetails.listAll(empId);
-    if (leavedetails == null) {
-      System.out.println("Sorry, No such employee");
-    } else {
-      LeaveDetails[] leaveDetails = LeaveDetails.listPendingLeaveStatus(empId);
-      for (LeaveDetails ld : leaveDetails) {
-        System.out.println(ld.toString());
+    try {
+      System.out.println("Enter the manager Id");
+      int empId = option.nextInt();
+      Employee employee = Employee.listById(empId);
+      if (employee == null) {
+        System.out.println("Sorry, No such employee");
+      } else {
+        LeaveDetails[] leaveDetails = LeaveDetails.listPendingApplication(empId);
+        System.out.println("leave id" + " " + "leave type" + " " + "start date"
+                        + " " + "end date" + " " + "number of days" + " " + "leave status"
+                        + " " +  "leave reason" + " " + "leave applied on" + " " + "managerComments" + " " + "empId");
+        for (LeaveDetails leave : leaveDetails) {
+          System.out.println(leave.getLeaveId() + " " + leave.getLeaveType() + " " + leave.getStartDate()
+                          + " " + leave.getEndDate() + " " + leave.getNumberOfDays() + " " + leave.getLeaveStatus()
+                          + " " + leave.getLeaveReason() + " " + leave.getLeaveAppliedOn()
+                          + " " + leave.getManagerComments() + " " + leave.getEmpId());
+        }
       }
+    } catch (InputMismatchException em) {
+      System.out.println("Enter Correct Employee Id");
     }
   }
+  
   private void approveOrDenyLeave() {
+
     System.out.println("Enter leave Id");
     int leaveId = option.nextInt();
     LeaveDetails leaveData = LeaveDetails.listById(leaveId);
@@ -168,6 +184,7 @@ public class CliMain {
         System.out.println("Enter correct choice");
       }
     }
+
   }
   /**
    * The main entry point.
