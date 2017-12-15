@@ -126,11 +126,7 @@ public class CliMain {
 
   }
 
-<<<<<<< HEAD
-  private void listPendingLeaveStatus() {
-=======
    private void listPendingLeaveStatus() {
->>>>>>> 0d0d569... pending leave status updated
     try {
       System.out.println("Enter the manager Id");
       int empId = option.nextInt();
