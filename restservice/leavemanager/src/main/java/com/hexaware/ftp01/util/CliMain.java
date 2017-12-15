@@ -8,6 +8,7 @@ import java.util.InputMismatchException;
 import com.hexaware.ftp01.model.Employee;
 import com.hexaware.ftp01.model.LeaveDetails;
 import com.hexaware.ftp01.model.LeaveType;
+import com.hexaware.ftp01.model.LeaveStatus;
 
 /**
  * Class CliMain provides the command line interface to the leavemanagement
@@ -94,10 +95,10 @@ public class CliMain {
           System.out.println("Enter Leave Type :");
           String levType  = option.next();
           LeaveType leaveType = LeaveType.valueOf(levType);
-          System.out.println("Enter Starting Date :");
+          System.out.println("Enter Starting Date (dd/mm/yyyy) :");
           String date1 = option.next();
           Date startDate = myFormat.parse(date1);
-          System.out.println("Enter Ending Date :");
+          System.out.println("Enter Ending Date (dd/mm/yyyy) :");
           String date2 = option.next();
           Date endDate = myFormat.parse(date2);
           long epochstartDate = myFormat.parse(date1).getTime() / 1000;
@@ -129,6 +130,8 @@ public class CliMain {
 
   }
 
+
+
   private void listPendingLeaveStatus() {
     try {
       System.out.println("Enter the manager Id");
@@ -152,10 +155,35 @@ public class CliMain {
       System.out.println("Enter Correct Employee Id");
     }
   }
-
+  
   private void approveOrDenyLeave() {
 
-    System.out.println("To approve or deny wait till friday");
+    System.out.println("Enter leave Id");
+    int leaveId = option.nextInt();
+    LeaveDetails leaveData = LeaveDetails.listById(leaveId);
+    if (leaveData == null) {
+      System.out.println("Sorry, No such Leave detail");
+    } else {
+      System.out.println(leaveData.toString());
+      System.out.println("Select Option");
+      System.out.println("1.Approve");
+      System.out.println("2.Deny");
+      int select = option.nextInt();
+      if (select == 1) {
+        option.nextLine();
+        System.out.println("Enter comments");
+        String managerComments = option.nextLine();
+        LeaveDetails.status(LeaveStatus.APPROVED, leaveId, managerComments);
+      } else if (select == 2) {
+        option.nextLine();
+        System.out.println("Enter comments");
+        String managerComments = option.nextLine();
+        LeaveDetails.status(LeaveStatus.DENIED, leaveId, managerComments);
+        LeaveDetails.increment(leaveId);
+      } else {
+        System.out.println("Enter correct choice");
+      }
+    }
 
   }
   /**

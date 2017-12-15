@@ -242,8 +242,6 @@ public class Employee {
   public static Employee listById(final int empID) {
     return dao().find(empID);
   }
-
-
   /**
    * list employee leave balance.
    * @param levType to get type of leave.
