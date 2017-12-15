@@ -67,20 +67,12 @@ void insert(@Bind("levType") LeaveType levType,
                 @Bind("levAppliedOn")Date levAppliedOn,
                 @Bind("empID") int empID);
 
-<<<<<<< HEAD
  /**
   * return all the details of the selected employee.
   *
   * @param empId the id of the employee
   * @return the employee object
   */
-=======
-  /**
-   * return all the details of the selected employee.
-   * @param empId the id of the employee.
-   * @return the employee object.
-   */
->>>>>>> 75e16b0... changes
   @SqlQuery("SELECT * "
             +
             "FROM LEAVE_HISTORY "
@@ -98,7 +90,6 @@ void insert(@Bind("levType") LeaveType levType,
   List<LeaveDetails> finds(@Bind("empId") int empId);
 
   /**
-<<<<<<< HEAD
    * return all the details of all the employee's leave details.
    * @param empID the id of the employee
    * @return the employee array
@@ -150,9 +141,5 @@ void insert(@Bind("levType") LeaveType levType,
      /**
      * close with no args is used to close the connection.
      */
-=======
-   * close with no args is used to close the connection.
-   */
->>>>>>> 75e16b0... changes
   void close();
 }
