@@ -98,7 +98,7 @@ public class LeaveDetails {
     this.managerComments = argManagerComments;
     this.empId = argEmpId;
   }
-   /**
+  /** 
    * The dao for leave details.
    * @return Leave details object.
    */
@@ -107,6 +107,8 @@ public class LeaveDetails {
     return db.getConnect().onDemand(LeaveDetailsDAO.class);
   }
 
+=======
+>>>>>>> 75e16b0... changes
  /**
   * Gets the LeaveId.
   * @return this Leave ID.

@@ -1,5 +1,7 @@
 package com.hexaware.ftp01.persistence;
 
+import com.hexaware.ftp01.model.LeaveDetails;
+
 import com.hexaware.ftp01.model.LeaveType;
 import com.hexaware.ftp01.model.LeaveDetails;
 import java.util.Date;
@@ -9,7 +11,10 @@ import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
+<<<<<<< HEAD
 import com.hexaware.ftp01.model.LeaveStatus;
+=======
+>>>>>>> 75e16b0... changes
 
 /**
  * The DAO class for employee.
@@ -65,12 +70,20 @@ void insert(@Bind("levType") LeaveType levType,
                 @Bind("levAppliedOn")Date levAppliedOn,
                 @Bind("empID") int empID);
 
+<<<<<<< HEAD
  /**
   * return all the details of the selected employee.
   *
   * @param empId the id of the employee
   * @return the employee object
   */
+=======
+  /**
+   * return all the details of the selected employee.
+   * @param empId the id of the employee.
+   * @return the employee object.
+   */
+>>>>>>> 75e16b0... changes
   @SqlQuery("SELECT * "
             +
             "FROM LEAVE_HISTORY "
@@ -88,6 +101,7 @@ void insert(@Bind("levType") LeaveType levType,
   List<LeaveDetails> finds(@Bind("empId") int empId);
 
   /**
+<<<<<<< HEAD
    * return all the details of all the employee's leave details.
    * @param empID the id of the employee
    * @return the employee array
@@ -139,5 +153,9 @@ void insert(@Bind("levType") LeaveType levType,
      /**
      * close with no args is used to close the connection.
      */
+=======
+   * close with no args is used to close the connection.
+   */
+>>>>>>> 75e16b0... changes
   void close();
 }
