@@ -7,6 +7,7 @@ import java.text.ParseException;
 import com.hexaware.ftp01.model.Employee;
 import com.hexaware.ftp01.model.LeaveDetails;
 import com.hexaware.ftp01.model.LeaveType;
+import com.hexaware.ftp01.model.LeaveStatus;
 
 /**
  * Class CliMain provides the command line interface to the leavemanagement
@@ -93,21 +94,21 @@ public class CliMain {
           System.out.println("Enter Leave Type :");
           String levType  = option.next();
           LeaveType leaveType = LeaveType.valueOf(levType);
-          System.out.println("Enter Starting Date :");
+          System.out.println("Enter Starting Date (dd/mm/yyyy) :");
           String date1 = option.next();
           Date startDate = myFormat.parse(date1);
-          System.out.println("Enter Ending Date :");
+          System.out.println("Enter Ending Date (dd/mm/yyyy) :");
           String date2 = option.next();
           Date endDate = myFormat.parse(date2);
           long epochstartDate = myFormat.parse(date1).getTime() / 1000;
           long epochendDate = myFormat.parse(date2).getTime() / 1000;
           if ((epochendDate - epochstartDate) < 0) {
-            throw new Exception("Sorry, end date is before start date");
+            throw new IllegalArgumentException("Sorry, end date is before start date");
           } else {
             System.out.println("Total Number of days :");
             int numberOfDays = option.nextInt();
             if (numberOfDays < 0) {
-              throw new Exception("Enter positive value for number of days.");
+              throw new IllegalArgumentException("Enter positive value for number of days.");
             } else {
               System.out.println("Reason :");
               String leaveReason = option.next();
@@ -119,98 +120,53 @@ public class CliMain {
         System.out.println(e.getMessage());
       } catch (ParseException e) {
         System.out.println(e.getMessage());
-      } 
+      }
     }
   }
 
   private void listLeaveHistory() {
     System.out.println("To see leave history wait till friday");
   }
- 
+
   private void listPendingLeaveStatus() {
     System.out.println("Enter the manager Id");
     int empId = option.nextInt();
-    LeaveDetails leavedetails = LeaveDetails.listById(empId);
+    LeaveDetails leavedetails = LeaveDetails.listAll(empId);
     if (leavedetails == null) {
       System.out.println("Sorry, No such employee");
     } else {
-      LeaveDetails[] leaveDetails = LeaveDetails.listPendingApplication(empId);
+      LeaveDetails[] leaveDetails = LeaveDetails.listPendingLeaveStatus(empId);
       for (LeaveDetails ld : leaveDetails) {
         System.out.println(ld.toString());
       }
     }
   }
- 
-  private void approveOrDenyLeave() throws ParseException {
-    System.out.println("Enter your Manager Id: ");
-    int empId = option.nextInt();
-    Employee employee = Employee.listById(empId);
-    LeaveDetails[] leaveDetails = LeaveDetails.listPendingApplications(empId);
-    if (employee == null) {
-      System.out.println("No such employee");
-    }
-    try {
-      if (leaveDetails.length == 0) {
-        throw new IllegalArgumentException("No Pending Applications");
+  private void approveOrDenyLeave() {
+    System.out.println("Enter leave Id");
+    int leaveId = option.nextInt();
+    LeaveDetails leaveData = LeaveDetails.listById(leaveId);
+    if (leaveData == null) {
+      System.out.println("Sorry, No such Leave detail");
+    } else {
+      System.out.println(leaveData.toString());
+      System.out.println("Select Option");
+      System.out.println("1.Approve");
+      System.out.println("2.Deny");
+      int select = option.nextInt();
+      if (select == 1) {
+        option.nextLine();
+        System.out.println("Enter comments");
+        String managerComments = option.nextLine();
+        LeaveDetails.status(LeaveStatus.APPROVED, leaveId, managerComments);
+      } else if (select == 2) {
+        option.nextLine();
+        System.out.println("Enter comments");
+        String managerComments = option.nextLine();
+        LeaveDetails.status(LeaveStatus.DENIED, leaveId, managerComments);
+        LeaveDetails.increment(leaveId);
+      } else {
+        System.out.println("Enter correct choice");
       }
-    } catch (IllegalArgumentException e) {
-      System.out.println(e);
-      approveOrDeny();
-    }
-    for (LeaveDetails ld : leaveDetails) {
-      System.out.println(ld.toString());
-      System.out.println("1. Approve the application ");
-      System.out.println("2. Deny the Application");
-      int menuOption = option.nextInt();
-      menuDetails(menuOption);
-    }
-  }
-  private void menuDetails(final int menuOption) throws ParseException {
-    switch (menuOption) {
-      case 1:
-        approve();
-        break;
-      case 2:
-        deny();
-        break;
-      default:
-        System.out.println("Choose either 1 or 2");
-    }
-    mainMenu();
-  }
-
-  private void approve() {
-    System.out.println("Enter the Leave id of the application you want to approve");
-    int levId = option.nextInt();
-    LeaveDetails l = LeaveDetails.listByLeaveId(levId);
-    if (l == null) {
-      System.out.println("No Such Leave Application exists");
-    } else {
-      System.out.println("Enter the Employee id for that leave id");
-      int employeeId = option.nextInt();
-      Employee employee = Employee.listById(employeeId);
-      int leaveBal = employee.getEmpAvailLeaveBal();
-      System.out.println("Enter your comments here");
-      String managerComments1 = option.nextLine();
-      String managerComments2 = option.nextLine();
-      String managerComments = managerComments1 + managerComments2;
-      int empLeaveBalance = leaveBal - l.getleaveNoOfDays();
-      LeaveDetails.approveLeave(managerComments, levId, empLeaveBalance, employeeId);
-    }
-  }
-
-  private void deny() {
-    System.out.println("Enter the Leave id of the application you want to deny");
-    int levId = option.nextInt();
-    LeaveDetails l = LeaveDetails.listByLeaveId(levId);
-    if (l == null) {
-      System.out.println("No Such Leave Application exists");
-    } else {
-      System.out.println("Enter your comments here");
-      String managerComments1 = option.nextLine();
-      String managerComments2 = option.nextLine();
-      String managerComments = managerComments1 + managerComments2;
-      LeaveDetails.denyLeave(managerComments, levId);
     }
   }
   /**
