@@ -109,7 +109,7 @@ public class LeaveDetails {
     DbConnection db = new DbConnection();
     return db.getConnect().onDemand(LeaveDetailsDAO.class);
   }
-  
+
  /**
   * Gets the LeaveId.
   * @return this Leave ID.
