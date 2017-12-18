@@ -1,7 +1,8 @@
 package com.hexaware.ftp01.persistence;
 
-import com.hexaware.ftp01.model.LeaveType;
 import com.hexaware.ftp01.model.LeaveDetails;
+
+import com.hexaware.ftp01.model.LeaveType;
 import java.util.Date;
 import java.util.List;
 

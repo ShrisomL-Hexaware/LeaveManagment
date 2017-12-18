@@ -2,6 +2,7 @@ package com.hexaware.ftp01.model;
 
 import java.util.Objects;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.hexaware.ftp01.persistence.DbConnection;
@@ -64,10 +65,11 @@ public class LeaveDetails {
   }
   @Override
   public final String toString() {
-    return "leave id :" + leaveId + " " + "leave type :" + leaveType + " " + "start date :" + startDate + " "
-      + "end date :" + endDate + " " + "number of days :" + numberOfDays + " " + "leave status :" + leaveStatus
-      + " " +  "leave reason :" + leaveReason + " " + "leave applied on :" + leaveAppliedOn + " "
-      + "managerComments :" + managerComments + " " + "empId :" + empId;
+    SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+    return "leave id :" + leaveId + " " + "leave type :" + leaveType + " " + "start date :" + sf.format(startDate)
+      + " " + "end date :" + sf.format(endDate) + " " + "number of days :" + numberOfDays + " " + "leave status :"
+      + leaveStatus + " " +  "leave reason : " + leaveReason + " " + "leave applied on :" + sf.format(leaveAppliedOn)
+      + " " + " managerComments :" + managerComments + " " + "empId :" + empId;
   }
   /**
    * @param argLeaveId to initialize leave id.
@@ -98,7 +100,8 @@ public class LeaveDetails {
     this.managerComments = argManagerComments;
     this.empId = argEmpId;
   }
-   /**
+
+  /**
    * The dao for leave details.
    * @return Leave details object.
    */
@@ -106,7 +109,7 @@ public class LeaveDetails {
     DbConnection db = new DbConnection();
     return db.getConnect().onDemand(LeaveDetailsDAO.class);
   }
-
+  
  /**
   * Gets the LeaveId.
   * @return this Leave ID.
@@ -244,29 +247,20 @@ public class LeaveDetails {
 
   /**
   * Gets the EmpId.
-  * @return this Emp ID.
+  * @return this EmpID.
   */
   public final int getEmpId() {
     return empId;
   }
  /**
   *
-  * @param argEmpId to set emp id.
+  * @param argEmpId to set empid.
   */
   public final void setEmpId(final int argEmpId) {
     this.empId = argEmpId;
   }
- /**
-  * list employee's leave details by id.
-  * @param empId id to get employee's leave details.
-  * @return LeaveDetails.
-  */
-  public static LeaveDetails[] listPendingApplication(final int empId) {
-    List<LeaveDetails> l = dao().finds(empId);
-    return l.toArray(new LeaveDetails[l.size()]);
-  }
 
-/**
+  /**
    * update leave status.
    * @param leaveStatus id to update leave status.
    * @param leaveId to update leave Id.
@@ -308,5 +302,14 @@ public class LeaveDetails {
   public static LeaveDetails listById(final int leaveId) {
     return dao().fetch(leaveId);
   }
-}
 
+  /**
+   * list pending leave details.
+   * @param empId id to get employee details.
+   * @return LeaveDetails array.
+   */
+  public static LeaveDetails[] listPendingApplication(final int empId) {
+    List<LeaveDetails> l = dao().finds(empId);
+    return l.toArray(new LeaveDetails[l.size()]);
+  }
+}

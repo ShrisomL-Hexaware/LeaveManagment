@@ -1,7 +1,7 @@
 package com.hexaware.ftp01.persistence;
 
 import org.skife.jdbi.v2.DBI;
-import org.skife.jdbi.v2.logging.PrintStreamLog;;
+//import org.skife.jdbi.v2.logging.PrintStreamLog;;
 
 /**
  */
@@ -18,7 +18,7 @@ public class DbConnection {
         dbc = "localhost:3306";
       }
       DBI dbi = new DBI("jdbc:mysql://" + dbc + "/FTP01?useSSL=false", "FTP01", "FTP01");
-      dbi.setSQLLog(new PrintStreamLog());
+      //dbi.setSQLLog(new PrintStreamLog());
       return dbi;
     } catch (ClassNotFoundException e) {
       throw new RuntimeException(e);
