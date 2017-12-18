@@ -2,6 +2,7 @@ package com.hexaware.ftp01.model;
 
 import java.util.Objects;
 import java.util.Date;
+import java.util.List;
 
 import com.hexaware.ftp01.persistence.DbConnection;
 import com.hexaware.ftp01.persistence.LeaveDetailsDAO;
@@ -255,13 +256,12 @@ public class LeaveDetails {
   public final void setEmpId(final int argEmpId) {
     this.empId = argEmpId;
   }
-
  /**
   * list employee's leave details by id.
-  * @param empID id to get employee's leave details.
+  * @param empId id to get employee's leave details.
   * @return LeaveDetails.
   */
-  public static LeaveDetails[] listPendingLeaveStatus(final int empId) {
+  public static LeaveDetails[] listPendingApplication(final int empId) {
     List<LeaveDetails> l = dao().finds(empId);
     return l.toArray(new LeaveDetails[l.size()]);
   }

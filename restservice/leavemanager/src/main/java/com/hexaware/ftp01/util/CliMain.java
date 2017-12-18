@@ -100,12 +100,12 @@ public class CliMain {
           System.out.println("Enter Leave Type :");
           String levType  = option.next();
           LeaveType leaveType = LeaveType.valueOf(levType);
- 
+
           System.out.println("Enter Starting Date(yyyy/MM/dd) :");
           String date1 = option.next();
           Date startDate = myFormat.parse(date1);
           System.out.println("Enter Ending Date(yyyy/MM/dd) :");
- 
+
           String date2 = option.next();
           Date endDate = myFormat.parse(date2);
           System.out.println("Total Number of days :");
@@ -150,7 +150,7 @@ public class CliMain {
       System.out.println("Enter Correct Employee Id");
     }
   }
-  
+
   private void approveOrDenyLeave() {
 
     System.out.println("Enter leave Id");
