@@ -64,13 +64,11 @@ public class LeaveDetails {
   }
   @Override
   public final String toString() {
-
     return "leave id :" + leaveId + " " + "leave type :" + leaveType + " " + "start date :" + startDate + " "
       + "end date :" + endDate + " " + "number of days :" + numberOfDays + " " + "leave status :" + leaveStatus
       + " " +  "leave reason :" + leaveReason + " " + "leave applied on :" + leaveAppliedOn + " "
       + "managerComments :" + managerComments + " " + "empId :" + empId;
   }
-
   /**
    * @param argLeaveId to initialize leave id.
    * @param argLeaveType to initialize leave type.
@@ -100,10 +98,10 @@ public class LeaveDetails {
     this.empId = argEmpId;
   }
 
- /**
-  * The dao for leave details.
-  * @return Leave details.
-  */
+   /**
+   * The dao for leave details.
+   * @return Leave details object.
+   */
   public static LeaveDetailsDAO dao() {
     DbConnection db = new DbConnection();
     return db.getConnect().onDemand(LeaveDetailsDAO.class);
@@ -116,6 +114,7 @@ public class LeaveDetails {
   public final int getLeaveId() {
     return leaveId;
   }
+
  /**
   *
   * @param argLeaveId to set leave id.
@@ -207,7 +206,6 @@ public class LeaveDetails {
     return leaveReason;
   }
  /**
-  *
   * @param argLeaveReason to set leave reason.
   */
   public final void setLeaveReason(final String argLeaveReason) {
@@ -258,19 +256,58 @@ public class LeaveDetails {
   public final void setEmpId(final int argEmpId) {
     this.empId = argEmpId;
   }
+
  /**
   * list employee's leave details by id.
   * @param empID id to get employee's leave details.
   * @return LeaveDetails.
   */
- /**
-  * list pending leave details.
-  * @param empId id to get employee details.
-  * @return LeaveDetails array.
-  */
-  public static LeaveDetails[] listPendingApplication(final int empId) {
+  public static LeaveDetails[] listPendingLeaveStatus(final int empId) {
     List<LeaveDetails> l = dao().finds(empId);
     return l.toArray(new LeaveDetails[l.size()]);
+  }
+
+/**
+   * update leave status.
+   * @param leaveStatus id to update leave status.
+   * @param leaveId to update leave Id.
+   * @param managerComments to update Manager Comments.
+   */
+  public static void status(final LeaveStatus leaveStatus, final int leaveId, final String managerComments) {
+    dao().update(leaveStatus, leaveId, managerComments);
+  }
+
+  /**
+   * update number od days after deny.
+   * @param leaveId to update leave Id.
+   */
+  public static void increment(final int leaveId) {
+    dao().increase(leaveId);
+  }
+/**
+ * list all leave details.
+ * @param empId for emp id
+ * @return all leave details
+ */
+  public static LeaveDetails[] listLeaveDetails(final int empId) {
+    List<LeaveDetails> ls = dao().list(empId);
+    return ls.toArray(new LeaveDetails[ls.size()]);
+  }
+/**
+  * list leave details by id.
+  * @param leaveId id to get employee details.
+  * @return Employee
+  */
+  public static LeaveDetails listAll(final int leaveId) {
+    return dao().fetch(leaveId);
+  }
+  /**
+   * list leave details by id.
+   * @param leaveId id to get leave details.
+   * @return Employee
+   */
+  public static LeaveDetails listById(final int leaveId) {
+    return dao().fetch(leaveId);
   }
 }
 
