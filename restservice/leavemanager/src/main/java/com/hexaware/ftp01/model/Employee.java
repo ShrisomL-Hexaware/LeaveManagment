@@ -289,8 +289,9 @@ public class Employee {
           empLeaveBalance = empLeaveBalance - levNumberOfDays;
           System.out.println("Leave applied for : " + levNumberOfDays + " Days");
           System.out.println("Your updated Leave Balance is : " + empLeaveBalance);
+          LeaveStatus levStatus;
           if (empID == 1000) {
-            LeaveStatus levStatus = LeaveStatus.APPROVED;
+            levStatus = LeaveStatus.APPROVED;
           } else {
             levStatus = LeaveStatus.PENDING;
           }
