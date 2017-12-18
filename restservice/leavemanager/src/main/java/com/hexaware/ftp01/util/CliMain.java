@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.util.InputMismatchException;
 
 import com.hexaware.ftp01.model.Employee;
 import com.hexaware.ftp01.model.LeaveDetails;
@@ -85,8 +86,7 @@ public class CliMain {
   }
   private void applyForLeave() {
     try {
-      System.out.println("To apply wait till friday");
-      System.out.println("Enter the empId");
+      System.out.println("Enter the empId :");
       int empId = option.nextInt();
       Employee employee = Employee.listById(empId);
       if (employee == null) {
