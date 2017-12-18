@@ -71,6 +71,14 @@ public class LeaveDetails {
       + leaveStatus + " " +  "leave reason : " + leaveReason + " " + "leave applied on :" + sf.format(leaveAppliedOn)
       + " " + " managerComments :" + managerComments + " " + "empId :" + empId;
   }
+
+  /**
+   * @param argLeaveId to initialize leave id.
+   */
+  public LeaveDetails(final int argLeaveId) {
+    this.leaveId = argLeaveId;
+  }
+
   /**
    * @param argLeaveId to initialize leave id.
    * @param argLeaveType to initialize leave type.
@@ -271,11 +279,50 @@ public class LeaveDetails {
   }
 
   /**
-   * update number od days after deny.
+   * update number of days after deny.
    * @param leaveId to update leave Id.
    */
   public static void increment(final int leaveId) {
     dao().increase(leaveId);
+  }
+
+  /**
+   * update number of days after deny.
+   * @param leaveId to update leave Id.
+   */
+  public static void decrement(final int leaveId) {
+    dao().decrease(leaveId);
+  }
+
+  /**
+   * Method to switch leave status.
+   * @param selectStatus to select option.
+   * @param argLeaveId to leave Id.
+   * @param argManagerComments to manager comment.
+   */
+  public final void approveDeny(final LeaveStatus selectStatus, final int argLeaveId,
+                                final String argManagerComments) {
+    LeaveDetails statusObj = new LeaveDetails(argLeaveId);
+    if (leaveStatus == LeaveStatus.PENDING && selectStatus == LeaveStatus.APPROVED) {
+      statusObj.status(LeaveStatus.APPROVED, argLeaveId, argManagerComments);
+    } else if (leaveStatus == LeaveStatus.PENDING && selectStatus == LeaveStatus.DENIED) {
+      statusObj.status(LeaveStatus.DENIED, argLeaveId, argManagerComments);
+      statusObj.increment(argLeaveId);
+    } else if (leaveStatus == LeaveStatus.APPROVED && selectStatus == LeaveStatus.DENIED) {
+      statusObj.status(LeaveStatus.DENIED, argLeaveId, argManagerComments);
+      statusObj.increment(argLeaveId);
+    } else if (leaveStatus == LeaveStatus.APPROVED && selectStatus == LeaveStatus.PENDING) {
+      statusObj.status(LeaveStatus.PENDING, argLeaveId, argManagerComments);
+      statusObj.increment(argLeaveId);
+    } else if (leaveStatus == LeaveStatus.DENIED && selectStatus == LeaveStatus.APPROVED) {
+      statusObj.status(LeaveStatus.APPROVED, argLeaveId, argManagerComments);
+      statusObj.decrement(argLeaveId);
+    } else if (leaveStatus == LeaveStatus.DENIED && selectStatus == LeaveStatus.PENDING) {
+      statusObj.status(LeaveStatus.PENDING, argLeaveId, argManagerComments);
+      statusObj.decrement(argLeaveId);
+    } else {
+      System.out.println("Enter correct choice");
+    }
   }
 /**
  * list all leave details.

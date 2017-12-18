@@ -154,7 +154,20 @@ public class CliMain {
   }
 
   private void approveOrDenyLeave() {
-    System.out.println("To approve or deny wait till friday");
+    System.out.println("Enter leave Id");
+    int leaveId = option.nextInt();
+    LeaveDetails leaveData = LeaveDetails.listById(leaveId);
+    if (leaveData == null) {
+      System.out.println("Sorry, No such Leave detail");
+    } else {
+      System.out.println(leaveData.toString());
+      System.out.println("Either 'APPROVED','DENIED' or 'PENDING'");
+      String select = option.next();
+      LeaveStatus selectStatus = LeaveStatus.valueOf(select);
+      System.out.println("Enter comments");
+      String managerComments = option.next();
+      leaveData.approveDeny(selectStatus, leaveId, managerComments);
+    }
   }
   /**
    * The main entry point.
