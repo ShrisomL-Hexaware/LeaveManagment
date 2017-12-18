@@ -2,6 +2,8 @@ package com.hexaware.ftp01.model;
 
 import com.hexaware.ftp01.persistence.DbConnection;
 import com.hexaware.ftp01.persistence.EmployeeDAO;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 import java.util.Objects;
 import java.util.List;
@@ -250,24 +252,39 @@ public class Employee {
    * @param levEndDate to get end date.
    * @param levNumberOfDays to get total days.
    * @param levReason to get reason of leave.
+   * @param date1 to get date in string.
+   * @param date2 to get date in string.
    * @throws IllegalArgumentException to handle exception.
+   * @throws ParseException to handle exception.
    */
   public final void applyForLeave(final LeaveType levType, final Date levStartDate, final Date levEndDate,
-                                  final int levNumberOfDays, final String levReason) throws IllegalArgumentException {
+                                  final int levNumberOfDays, final String levReason, final String date1,
+                                  final String date2) throws IllegalArgumentException, ParseException {
 
     Employee e = new Employee(empId);
     System.out.println("Your available leave balance was : " + empLeaveBalance);
     int empID = e.getEmpId();
+    SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
+    long epochstartDate = myFormat.parse(date1).getTime() / 1000;
+    long epochendDate = myFormat.parse(date2).getTime() / 1000;
     Date levAppliedOn = new Date();
-    if (empLeaveBalance > levNumberOfDays) {
-      empLeaveBalance = empLeaveBalance - levNumberOfDays;
-      System.out.println("Leave applied for : " + levNumberOfDays + " Days");
-      System.out.println("Your updated Leave Balance is : " + empLeaveBalance);
-      LeaveDetails.dao().insert(levType, levStartDate, levEndDate, levNumberOfDays, levReason,
-                                   levAppliedOn, empID);
-      dao().updateLeaveBalance(empLeaveBalance, empID);
+    if (levNumberOfDays < 0) {
+      throw new IllegalArgumentException("Enter positive value for number of days.");
     } else {
-      throw new IllegalArgumentException();
+      if ((epochendDate - epochstartDate) < 0) {
+        throw new IllegalArgumentException("Sorry, end date is before start date");
+      } else {
+        if (empLeaveBalance > levNumberOfDays) {
+          empLeaveBalance = empLeaveBalance - levNumberOfDays;
+          System.out.println("Leave applied for : " + levNumberOfDays + " Days");
+          System.out.println("Your updated Leave Balance is : " + empLeaveBalance);
+          LeaveDetails.dao().insert(levType, levStartDate, levEndDate, levNumberOfDays, levReason,
+                                   levAppliedOn, empID);
+          dao().updateLeaveBalance(empLeaveBalance, empID);
+        } else {
+          throw new IllegalArgumentException();
+        }
+      }
     }
   }
 }

@@ -27,12 +27,13 @@ public class CliMain {
     System.out.println("5. Pending Leave Status");
     System.out.println("6. Approve Or Deny");
     System.out.println("7. Exit");
+    int menuOption = option.nextInt();
     try {
       System.out.println("Enter your choice:");
-      int menuOption = option.nextInt();
       mainMenuDetails(menuOption);
     } catch (InputMismatchException e) {
       System.out.println("Enter the value 1 - 7");
+      mainMenuDetails(menuOption);
     }
   }
   private void mainMenuDetails(final int selectedOption) {
@@ -105,21 +106,11 @@ public class CliMain {
           System.out.println("Enter Ending Date(yyyy/MM/dd) :");
           String date2 = option.next();
           Date endDate = myFormat.parse(date2);
-          long epochstartDate = myFormat.parse(date1).getTime() / 1000;
-          long epochendDate = myFormat.parse(date2).getTime() / 1000;
-          if ((epochendDate - epochstartDate) < 0) {
-            throw new IllegalArgumentException("Sorry, end date is before start date");
-          } else {
-            System.out.println("Total Number of days :");
-            int numberOfDays = option.nextInt();
-            if (numberOfDays < 0) {
-              throw new IllegalArgumentException("Enter positive value for number of days.");
-            } else {
-              System.out.println("Reason :");
-              String leaveReason = option.next();
-              employee.applyForLeave(leaveType, startDate, endDate, numberOfDays, leaveReason);
-            }
-          }
+          System.out.println("Total Number of days :");
+          int numberOfDays = option.nextInt();
+          System.out.println("Reason :");
+          String leaveReason = option.next();
+          employee.applyForLeave(leaveType, startDate, endDate, numberOfDays, leaveReason, date1, date2);
         }
 
       } catch (IllegalArgumentException e) {
