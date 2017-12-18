@@ -2,6 +2,8 @@ package com.hexaware.ftp01.model;
 
 import com.hexaware.ftp01.persistence.DbConnection;
 import com.hexaware.ftp01.persistence.EmployeeDAO;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 import java.util.Objects;
 import java.util.List;
@@ -42,7 +44,10 @@ public class Employee {
       return false;
     }
     Employee emp = (Employee) obj;
-    if (Objects.equals(empId, emp.empId)) {
+    if (Objects.equals(empId, emp.empId) && Objects.equals(empPhone, emp.empPhone)
+        && Objects.equals(empName, emp.empName) && Objects.equals(empManagerId, emp.empManagerId)
+        && Objects.equals(empLeaveBalance, emp.empLeaveBalance) && Objects.equals(empEmail, emp.empEmail)
+        && Objects.equals(empDept, emp.empDept) && Objects.equals(empDoj, emp.empDoj)) {
       return true;
     }
     return false;
@@ -50,7 +55,14 @@ public class Employee {
 
   @Override
   public final int hashCode() {
-    return Objects.hash(empId);
+    return Objects.hash(empId, empPhone, empManagerId, empLeaveBalance, empLeaveBalance, empName, empEmail,
+                        empDept, empDoj);
+  }
+  @Override
+  public final String toString() {
+    return "emp id :" + empId + " " + "emp Name :" + empName + " " + "emp Phone :" + empPhone + " "
+      + "emp Manager Id :" + empManagerId + " " + "emp Email :" + empEmail + " " + "emp Dept :" + empDept
+      + " " +  "emp Leave Balance :" + empLeaveBalance + " " + "emp Doj :" + empDoj;
   }
   /**
    * @param argEmpId to initialize employee id.
@@ -242,11 +254,6 @@ public class Employee {
   public static Employee listById(final int empID) {
     return dao().find(empID);
   }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 384523688ac638f7e75e1c3ee3b49c074550d496
   /**
    * list employee leave balance.
    * @param levType to get type of leave.
@@ -254,23 +261,41 @@ public class Employee {
    * @param levEndDate to get end date.
    * @param levNumberOfDays to get total days.
    * @param levReason to get reason of leave.
+   * @param date1 to get date in string.
+   * @param date2 to get date in string.
    * @throws IllegalArgumentException to handle exception.
+   * @throws ParseException to handle exception.
    */
   public final void applyForLeave(final LeaveType levType, final Date levStartDate, final Date levEndDate,
-                                  final int levNumberOfDays, final String levReason) throws IllegalArgumentException {
-    System.out.println("Your available leave balance is : " + empLeaveBalance);
+                                  final int levNumberOfDays, final String levReason, final String date1,
+                                  final String date2) throws IllegalArgumentException, ParseException {
+
     Employee e = new Employee(empId);
+    System.out.println("Your available leave balance was : " + empLeaveBalance);
     int empID = e.getEmpId();
+    SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
+    int epochstartDate = myFormat.parse(date1).getTime() / 1000;
+    int epochendDate = myFormat.parse(date2).getTime() / 1000;
     Date levAppliedOn = new Date();
-    if (empLeaveBalance > levNumberOfDays) {
-      empLeaveBalance = empLeaveBalance - levNumberOfDays;
-      System.out.println("Leave applied for : " + e.getEmpLeaveBalance() + "Days");
-      System.out.println("Your updated Leave Balance is : " + empLeaveBalance);
-      LeaveDetails.dao().insert(levType, levStartDate, levEndDate, levNumberOfDays, levReason,
-                                   levAppliedOn, empID);
-      dao().updateLeaveBalance(empLeaveBalance, empID);
+    if (levNumberOfDays < 0) {
+      throw new IllegalArgumentException("Enter positive value for number of days.");
     } else {
-      throw new IllegalArgumentException();
+      if ((epochendDate - epochstartDate) < 0) {
+        throw new IllegalArgumentException("Sorry, end date is before start date");
+      } else if (levNumberOfDays > (epochendDate - epochstartDate)) {
+        throw new IllegalArgumentException("Enter correct Number of days for leave!");
+      } else {
+        if (empLeaveBalance > levNumberOfDays) {
+          empLeaveBalance = empLeaveBalance - levNumberOfDays;
+          System.out.println("Leave applied for : " + levNumberOfDays + " Days");
+          System.out.println("Your updated Leave Balance is : " + empLeaveBalance);
+          LeaveDetails.dao().insert(levType, levStartDate, levEndDate, levNumberOfDays, levReason,
+                                   levAppliedOn, empID);
+          dao().updateLeaveBalance(empLeaveBalance, empID);
+        } else {
+          throw new IllegalArgumentException("You dont have expected leave balance.!!");
+        }
+      }
     }
   }
 }

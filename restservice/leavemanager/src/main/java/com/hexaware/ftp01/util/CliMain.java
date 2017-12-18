@@ -1,13 +1,14 @@
 package com.hexaware.ftp01.util;
 import java.util.Scanner;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.util.InputMismatchException;
 
 import com.hexaware.ftp01.model.Employee;
 import com.hexaware.ftp01.model.LeaveDetails;
 import com.hexaware.ftp01.model.LeaveType;
+import com.hexaware.ftp01.model.LeaveStatus;
 
 /**
  * Class CliMain provides the command line interface to the leavemanagement
@@ -26,9 +27,14 @@ public class CliMain {
     System.out.println("5. Pending Leave Status");
     System.out.println("6. Approve Or Deny");
     System.out.println("7. Exit");
-    System.out.println("Enter your choice:");
     int menuOption = option.nextInt();
-    mainMenuDetails(menuOption);
+    try {
+      System.out.println("Enter your choice:");
+      mainMenuDetails(menuOption);
+    } catch (InputMismatchException e) {
+      System.out.println("Enter the value 1 - 7");
+      mainMenuDetails(menuOption);
+    }
   }
   private void mainMenuDetails(final int selectedOption) {
     switch (selectedOption) {
@@ -80,13 +86,13 @@ public class CliMain {
   }
 
   private void applyForLeave()  {
-    System.out.println("Enter the empId");
-    int empId = option.nextInt();
-    Employee employee = Employee.listById(empId);
-    if (employee == null) {
-      System.out.println("Sorry, No such employee");
-    } else {
-      try {
+    try {
+      System.out.println("Enter the empId");
+      int empId = option.nextInt();
+      Employee employee = Employee.listById(empId);
+      if (employee == null) {
+        throw new IllegalArgumentException("Sorry no such employee");
+      } else {
         if (employee.getEmpLeaveBalance() == 0) {
           throw new IllegalArgumentException("You dont have sufficient leave balance");
         } else {
@@ -94,38 +100,32 @@ public class CliMain {
           System.out.println("Enter Leave Type :");
           String levType  = option.next();
           LeaveType leaveType = LeaveType.valueOf(levType);
-          System.out.println("Enter Starting Date :");
+ 
+          System.out.println("Enter Starting Date(yyyy/MM/dd) :");
           String date1 = option.next();
           Date startDate = myFormat.parse(date1);
-          System.out.println("Enter Ending Date :");
+          System.out.println("Enter Ending Date(yyyy/MM/dd) :");
+ 
           String date2 = option.next();
           Date endDate = myFormat.parse(date2);
-          long epochstartDate = myFormat.parse(date1).getTime() / 1000;
-          long epochendDate = myFormat.parse(date2).getTime() / 1000;
-          if ((epochendDate - epochstartDate) < 0) {
-            throw new IllegalArgumentException("Sorry, end date is before start date");
-          } else {
-            System.out.println("Total Number of days :");
-            int numberOfDays = option.nextInt();
-            if (numberOfDays < 0) {
-              throw new IllegalArgumentException("Enter positive value for number of days.");
-            } else {
-              System.out.println("Reason :");
-              String leaveReason = option.next();
-              employee.applyForLeave(leaveType, startDate, endDate, numberOfDays, leaveReason);
-            }
-          }
+          System.out.println("Total Number of days :");
+          int numberOfDays = option.nextInt();
+          System.out.println("Reason :");
+          String leaveReason = option.next();
+          employee.applyForLeave(leaveType, startDate, endDate, numberOfDays, leaveReason, date1, date2);
         }
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage());
-      } catch (ParseException e) {
-        System.out.println(e.getMessage());
       }
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
+    } catch (ParseException e) {
+      System.out.println(e.getMessage());
     }
   }
   private void listLeaveHistory() {
     System.out.println("To see leave history wait till friday");
   }
+
+
 
   private void listPendingLeaveStatus() {
     try {
@@ -150,10 +150,35 @@ public class CliMain {
       System.out.println("Enter Correct Employee Id");
     }
   }
-
+  
   private void approveOrDenyLeave() {
 
-    System.out.println("To approve or deny wait till friday");
+    System.out.println("Enter leave Id");
+    int leaveId = option.nextInt();
+    LeaveDetails leaveData = LeaveDetails.listById(leaveId);
+    if (leaveData == null) {
+      System.out.println("Sorry, No such Leave detail");
+    } else {
+      System.out.println(leaveData.toString());
+      System.out.println("Select Option");
+      System.out.println("1.Approve");
+      System.out.println("2.Deny");
+      int select = option.nextInt();
+      if (select == 1) {
+        option.nextLine();
+        System.out.println("Enter comments");
+        String managerComments = option.nextLine();
+        LeaveDetails.status(LeaveStatus.APPROVED, leaveId, managerComments);
+      } else if (select == 2) {
+        option.nextLine();
+        System.out.println("Enter comments");
+        String managerComments = option.nextLine();
+        LeaveDetails.status(LeaveStatus.DENIED, leaveId, managerComments);
+        LeaveDetails.increment(leaveId);
+      } else {
+        System.out.println("Enter correct choice");
+      }
+    }
 
   }
   /**
