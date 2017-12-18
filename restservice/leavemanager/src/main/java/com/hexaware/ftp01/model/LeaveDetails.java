@@ -68,8 +68,8 @@ public class LeaveDetails {
     SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
     return "leave id :" + leaveId + " " + "leave type :" + leaveType + " " + "start date :" + sf.format(startDate)
       + " " + "end date :" + sf.format(endDate) + " " + "number of days :" + numberOfDays + " " + "leave status :"
-      + leaveStatus + " " +  "leave reason :" + leaveReason + " " + "leave applied on :" + sf.format(leaveAppliedOn)
-      + " " + "managerComments :" + managerComments + " " + "empId :" + empId;
+      + leaveStatus + " " +  "leave reason : " + leaveReason + " " + "leave applied on :" + sf.format(leaveAppliedOn)
+      + " " + " managerComments :" + managerComments + " " + "empId :" + empId;
   }
   /**
    * @param argLeaveId to initialize leave id.
