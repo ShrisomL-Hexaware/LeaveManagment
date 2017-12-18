@@ -9,5 +9,4 @@ public enum LeaveType {
  * leaveType to store leave type.
  */
     EL
-
 }

@@ -2,7 +2,6 @@ package com.hexaware.ftp01.model;
 
 import java.util.Objects;
 import java.util.Date;
-import java.util.List;
 
 import com.hexaware.ftp01.persistence.DbConnection;
 import com.hexaware.ftp01.persistence.LeaveDetailsDAO;
@@ -86,6 +85,7 @@ public class LeaveDetails {
                       final Date argEndDate, final int argNumberOfDays, final LeaveStatus argLeaveStatus,
                       final String argLeaveReason, final Date argLeaveAppliedOn, final String argManagerComments,
                       final int argEmpId) {
+
     this.leaveId = argLeaveId;
     this.leaveType = argLeaveType;
     this.startDate = new Date(argStartDate.getTime());
@@ -97,7 +97,6 @@ public class LeaveDetails {
     this.managerComments = argManagerComments;
     this.empId = argEmpId;
   }
-
    /**
    * The dao for leave details.
    * @return Leave details object.

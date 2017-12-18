@@ -121,10 +121,8 @@ public class CliMain {
       System.out.println(e.getMessage());
     }
   }
-
   private void listLeaveHistory() {
     System.out.println("To see leave history wait till friday");
-
   }
 
 
