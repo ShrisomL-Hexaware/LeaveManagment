@@ -23,6 +23,7 @@ public interface LeaveDetailsDAO  {
    * @param levStartDate the starting date of leave.
    * @param levEndDate the ending date of leave.
    * @param levNumberOfDays the total days for leave.
+   * @param levStatus to get status.
    * @param levReason the reason for leave.
    * @param levAppliedOn to get the date.
    * @param empID the employee Id.
@@ -36,6 +37,8 @@ public interface LeaveDetailsDAO  {
              " END_DATE, "
              +
              " NUMBER_OF_DAYS, "
+             +
+             " LEAVE_STATUS,"
              +
              " LEAVE_REASON, "
              +
@@ -53,6 +56,8 @@ public interface LeaveDetailsDAO  {
              +
              " :levNumberOfDays, "
              +
+             " :levStatus,"
+             +
              " :levReason, "
              +
              " :levAppliedOn, "
@@ -62,6 +67,7 @@ void insert(@Bind("levType") LeaveType levType,
                 @Bind("levStartDate") Date levStartDate,
                 @Bind("levEndDate") Date levEndDate,
                 @Bind("levNumberOfDays") int levNumberOfDays,
+                @Bind("levStatus") LeaveStatus levStatus,
                 @Bind("levReason") String levReason,
                 @Bind("levAppliedOn")Date levAppliedOn,
                 @Bind("empID") int empID);

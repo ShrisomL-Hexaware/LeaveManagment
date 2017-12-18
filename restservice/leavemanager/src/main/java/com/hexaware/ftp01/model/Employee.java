@@ -289,7 +289,12 @@ public class Employee {
           empLeaveBalance = empLeaveBalance - levNumberOfDays;
           System.out.println("Leave applied for : " + levNumberOfDays + " Days");
           System.out.println("Your updated Leave Balance is : " + empLeaveBalance);
-          LeaveDetails.dao().insert(levType, levStartDate, levEndDate, levNumberOfDays, levReason,
+          if (empID == 1000) {
+            LeaveStatus levStatus = LeaveStatus.APPROVED;
+          } else {
+            levStatus = LeaveStatus.PENDING;
+          }
+          LeaveDetails.dao().insert(levType, levStartDate, levEndDate, levNumberOfDays, levStatus, levReason,
                                    levAppliedOn, empID);
           dao().updateLeaveBalance(empLeaveBalance, empID);
         } else {
