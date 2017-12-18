@@ -44,7 +44,10 @@ public class Employee {
       return false;
     }
     Employee emp = (Employee) obj;
-    if (Objects.equals(empId, emp.empId)) {
+    if (Objects.equals(empId, emp.empId) && Objects.equals(empPhone, emp.empPhone)
+        && Objects.equals(empName, emp.empName) && Objects.equals(empManagerId, emp.empManagerId)
+        && Objects.equals(empLeaveBalance, emp.empLeaveBalance) && Objects.equals(empEmail, emp.empEmail)
+        && Objects.equals(empDept, emp.empDept) && Objects.equals(empDoj, emp.empDoj)) {
       return true;
     }
     return false;
@@ -52,7 +55,14 @@ public class Employee {
 
   @Override
   public final int hashCode() {
-    return Objects.hash(empId);
+    return Objects.hash(empId, empPhone, empManagerId, empLeaveBalance, empLeaveBalance, empName, empEmail,
+                        empDept, empDoj);
+  }
+  @Override
+  public final String toString() {
+    return "emp id :" + empId + " " + "emp Name :" + empName + " " + "emp Phone :" + empPhone + " "
+      + "emp Manager Id :" + empManagerId + " " + "emp Email :" + empEmail + " " + "emp Dept :" + empDept
+      + " " +  "emp Leave Balance :" + empLeaveBalance + " " + "emp Doj :" + empDoj;
   }
   /**
    * @param argEmpId to initialize employee id.
@@ -282,7 +292,7 @@ public class Employee {
                                    levAppliedOn, empID);
           dao().updateLeaveBalance(empLeaveBalance, empID);
         } else {
-          throw new IllegalArgumentException();
+          throw new IllegalArgumentException("You dont have expected leave balance.!!");
         }
       }
     }
