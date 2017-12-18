@@ -277,12 +277,13 @@ public class Employee {
     long epochstartDate = myFormat.parse(date1).getTime() / 1000;
     long epochendDate = myFormat.parse(date2).getTime() / 1000;
     Date levAppliedOn = new Date();
+    int diffOfDays = (int) ((levEndDate.getTime() - levStartDate.getTime()) / (1000 * 60 * 60 * 24));
     if (levNumberOfDays < 0) {
       throw new IllegalArgumentException("Enter positive value for number of days.");
     } else {
       if ((epochendDate - epochstartDate) < 0) {
         throw new IllegalArgumentException("Sorry, end date is before start date");
-      } else if (levNumberOfDays > (epochendDate - epochstartDate)) {
+      } else if (levNumberOfDays > (diffOfDays + 1)) {
         throw new IllegalArgumentException("Enter correct Number of days for leave!");
       } else {
         if (empLeaveBalance > levNumberOfDays) {
