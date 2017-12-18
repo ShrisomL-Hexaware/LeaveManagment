@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.util.InputMismatchException;
 
 import com.hexaware.ftp01.model.Employee;
 import com.hexaware.ftp01.model.LeaveDetails;
@@ -112,12 +111,11 @@ public class CliMain {
           String leaveReason = option.next();
           employee.applyForLeave(leaveType, startDate, endDate, numberOfDays, leaveReason, date1, date2);
         }
-
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage());
-      } catch (ParseException e) {
-        System.out.println(e.getMessage());
       }
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
+    } catch (ParseException e) {
+      System.out.println(e.getMessage());
     }
   }
 
