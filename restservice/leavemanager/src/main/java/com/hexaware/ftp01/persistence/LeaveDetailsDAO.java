@@ -137,6 +137,17 @@ void insert(@Bind("levType") LeaveType levType,
             + "LEAVE_HISTORY.NUMBER_OF_DAYS "
             + "WHERE LEAVE_HISTORY.LEAVE_ID= :leaveId")
   void increase(@Bind("leaveId") int leaveId);
+
+  /**
+   * Update the number of days after deny of the selected leave id.
+   * @param leaveId the leave id
+   */
+  @SqlUpdate("UPDATE EMPLOYEE INNER JOIN LEAVE_HISTORY "
+            + "ON EMPLOYEE.EMP_ID = LEAVE_HISTORY.EMP_ID "
+            + "SET EMPLOYEE.EMP_LEAVE_BALANCE = EMPLOYEE.EMP_LEAVE_BALANCE - "
+            + "LEAVE_HISTORY.NUMBER_OF_DAYS "
+            + "WHERE LEAVE_HISTORY.LEAVE_ID= :leaveId")
+  void decrease(@Bind("leaveId") int leaveId);
      /**
      * close with no args is used to close the connection.
      */
