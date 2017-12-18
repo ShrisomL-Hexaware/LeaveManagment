@@ -275,14 +275,16 @@ public class Employee {
     System.out.println("Your available leave balance was : " + empLeaveBalance);
     int empID = e.getEmpId();
     SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
-    long epochstartDate = myFormat.parse(date1).getTime() / 1000;
-    long epochendDate = myFormat.parse(date2).getTime() / 1000;
+    int epochstartDate = myFormat.parse(date1).getTime() / 1000;
+    int epochendDate = myFormat.parse(date2).getTime() / 1000;
     Date levAppliedOn = new Date();
     if (levNumberOfDays < 0) {
       throw new IllegalArgumentException("Enter positive value for number of days.");
     } else {
       if ((epochendDate - epochstartDate) < 0) {
         throw new IllegalArgumentException("Sorry, end date is before start date");
+      } else if (levNumberOfDays > (epochendDate - epochstartDate)) {
+        throw new IllegalArgumentException("Enter correct Number of days for leave!");
       } else {
         if (empLeaveBalance > levNumberOfDays) {
           empLeaveBalance = empLeaveBalance - levNumberOfDays;
