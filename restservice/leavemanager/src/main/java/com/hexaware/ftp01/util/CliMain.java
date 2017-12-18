@@ -139,13 +139,17 @@ public class CliMain {
                         + "   " + "end date" + "   " + "number of days" + "   " + "leave status"
                         + "   " +  "leave reason" + "   " + "leave applied on" + "   "
                         + "managerComments" + "   " + "empId");
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
         for (LeaveDetails leave : leaveDetails) {
-          System.out.println(leave.getLeaveId() + " " + leave.getLeaveType() + " " + sf.format(leave.getStartDate())
-                          + "   " + sf.format(leave.getEndDate()) + "   " + leave.getNumberOfDays()
-                          + "   " + leave.getLeaveStatus() + "   " + leave.getLeaveReason()
-                          + "   " + sf.format(leave.getLeaveAppliedOn()) + "   " + leave.getManagerComments()
-                          + "   " + leave.getEmpId());
+          System.out.println(leave.getLeaveId() + "         " + leave.getLeaveType()
+                          + "       " + sf.format(leave.getStartDate())
+                          + "  " + sf.format(leave.getEndDate())
+                          + "    " + leave.getNumberOfDays()
+                          + "            " + leave.getLeaveStatus()
+                          + "     " + leave.getLeaveReason()
+                          + "        " + sf.format(leave.getLeaveAppliedOn())
+                          + "       " + leave.getManagerComments()
+                          + "        " + leave.getEmpId());
         }
       }
     } catch (InputMismatchException em) {
