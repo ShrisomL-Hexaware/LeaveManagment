@@ -29,10 +29,9 @@ public class CliMain {
       System.out.println("5. Pending Leave Status");
       System.out.println("6. Approve Or Deny");
       System.out.println("7. Exit");
-      System.out.println("Enter your choice:");
-      int menuOption = option.nextInt();
       try {
         System.out.println("Enter your choice:");
+        int menuOption = option.nextInt();
         flag = true;
         mainMenuDetails(menuOption);
       } catch (InputMismatchException e) {
