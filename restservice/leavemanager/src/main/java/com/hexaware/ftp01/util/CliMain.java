@@ -8,6 +8,7 @@ import java.util.InputMismatchException;
 import com.hexaware.ftp01.model.Employee;
 import com.hexaware.ftp01.model.LeaveDetails;
 import com.hexaware.ftp01.model.LeaveType;
+import com.hexaware.ftp01.model.LeaveStatus;
 
 /**
  * Class CliMain provides the command line interface to the leavemanagement
@@ -29,7 +30,6 @@ public class CliMain {
     System.out.println("Enter your choice:");
     int menuOption = option.nextInt();
     try {
-      System.out.println("Enter your choice:");
       mainMenuDetails(menuOption);
     } catch (InputMismatchException e) {
       System.out.println("Enter the value 1 - 7");
@@ -60,7 +60,7 @@ public class CliMain {
         // halt since normal exit throws a stacktrace due to jdbc threads not responding
         Runtime.getRuntime().halt(0);
       default:
-        System.out.println("Choose either 1, 2 or 3");
+        System.out.println("Choose either 1, 2, 3, 4, 5, 6 oe 7");
     }
     mainMenu();
   }
@@ -163,9 +163,11 @@ public class CliMain {
       System.out.println(leaveData.toString());
       System.out.println("Either 'APPROVED','DENIED' or 'PENDING'");
       String select = option.next();
-      LeaveStatus selectStatus = LeaveStatus.valueOf(select);
+      String s = select.toUpperCase();
+      LeaveStatus selectStatus = LeaveStatus.valueOf(s);
+      option.nextLine();
       System.out.println("Enter comments");
-      String managerComments = option.next();
+      String managerComments = option.nextLine();
       leaveData.approveDeny(selectStatus, leaveId, managerComments);
     }
   }
