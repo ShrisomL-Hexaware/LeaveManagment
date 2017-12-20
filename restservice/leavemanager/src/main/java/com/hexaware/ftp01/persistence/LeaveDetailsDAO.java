@@ -5,12 +5,13 @@ import com.hexaware.ftp01.model.LeaveDetails;
 import com.hexaware.ftp01.model.LeaveType;
 import java.util.Date;
 import java.util.List;
+import com.hexaware.ftp01.model.LeaveStatus;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
-import com.hexaware.ftp01.model.LeaveStatus;
+
 
 /**
  * The DAO class for employee.
@@ -154,6 +155,7 @@ void insert(@Bind("levType") LeaveType levType,
             + "LEAVE_HISTORY.NUMBER_OF_DAYS "
             + "WHERE LEAVE_HISTORY.LEAVE_ID= :leaveId")
   void decrease(@Bind("leaveId") int leaveId);
+    /**
      /**
      * close with no args is used to close the connection.
      */
