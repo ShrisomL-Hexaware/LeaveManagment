@@ -143,10 +143,33 @@ public class CliMain {
       System.out.println(e.getMessage());
     }
   }
-
   private void listLeaveHistory() {
-    System.out.println("To see leave history wait till friday");
+    try {
+      System.out.println("Enter the Employee  Id");
+      int empId = option.nextInt();
+      LeaveDetails leave = LeaveDetails.listById(empId);
+      if (leave == null) {
+        System.out.println("OOPS ,  sorry there is no such an employee");
+      } else {
+        LeaveDetails[] leaveDetails = LeaveDetails.listLeaveDetailsById(empId);
+        System.out.println("leave id" + " " + "leave type" + " " + "start date"
+                        + "   " + "end date" + "   " + "number of days" + "   " + "leave status"
+                        + "   " +  "leave reason" + "   " + "leave applied on" + "   "
+                        + "managerComments" + "   " + "empId");
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+        for (LeaveDetails ls : leaveDetails) {
+          System.out.println(ls.getLeaveId() + " " + ls.getLeaveType() + " " + sf.format(ls.getStartDate())
+                          + "   " + sf.format(ls.getEndDate()) + "   " + ls.getNumberOfDays()
+                          + "   " + ls.getLeaveStatus() + "   " + ls.getLeaveReason()
+                          + "   " + sf.format(ls.getLeaveAppliedOn()) + "   " + ls.getManagerComments()
+                          + "   " + ls.getEmpId());
+        }
+      }
+    } catch (InputMismatchException e) {
+      System.out.println("Enter Correct Employee Id");
+    }
   }
+
 
   private void listPendingLeaveStatus() {
     try {
