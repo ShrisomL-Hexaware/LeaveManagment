@@ -3,7 +3,6 @@ package com.hexaware.ftp01.model;
 import com.hexaware.ftp01.persistence.EmployeeDAO;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
@@ -35,18 +34,29 @@ public class EmployeeTest {
   /**
    * Tests the equals/hashcode methods of the employee class.
    */
-  @Test
   public final void testEmployee() {
-    Employee e100 = new Employee(100);
-    Employee e101 = new Employee(101);
-    assertNotEquals(e100, null);
-    assertNotEquals(e100, new Integer(100));
-    assertEquals(e100, new Employee(100));
-    assertNotEquals(e101, new Employee(100));
-    assertEquals(e100.hashCode(), new Employee(100).hashCode());
-    assertEquals(e100.getEmpId(), new Employee(100).getEmpId());
-    e101.setEmpId(100);
-    assertEquals(e101, new Employee(100));
+    Employee e100 = new Employee(2001, "Anushree Beohar", 8871676607L, "AnushreeB@hexaware.com", "HEXAVARSITY",
+                                 1000, 0, "2014-11-17");
+    Employee e101 = new Employee(2001, "Anushree Beohar", 8871676607L, "AnushreeB@hexaware.com", "HEXAVARSITY",
+                                 1000, 0, "2014-11-17");
+    assertEquals(e100.hashCode(), new Employee(2001, "Anushree Beohar", 8871676607L, "AnushreeB@hexaware.com",
+                                               "HEXAVARSITY", 1000, 0, "2014-11-17").hashCode());
+    assertEquals(2001, e100.getEmpId());
+    e101.setEmpId(2001);
+    assertEquals("Anushree Beohar", e100.getEmpName());
+    e101.setEmpName("Anushree Beohar");
+    assertEquals(8871676607L, e100.getEmpPhone());
+    e101.setEmpPhone(8871676607L);
+    assertEquals("AnushreeB@hexaware.com", e100.getEmpEmail());
+    e101.setEmpEmail("AnushreeB@hexaware.com");
+    assertEquals("HEXAVARSITY", e100.getEmpDept());
+    e101.setEmpDept("HEXAVARSITY");
+    assertEquals(1000, e100.getEmpManagerId());
+    e101.setEmpManagerId(1000);
+    assertEquals(0, e100.getEmpLeaveBalance());
+    e101.setEmpLeaveBalance(0);
+    assertEquals("2014-11-17", e100.getEmpDoj());
+    e101.setEmpDoj("2014-11-17");
   }
 
 
