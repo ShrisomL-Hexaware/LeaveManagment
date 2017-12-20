@@ -125,11 +125,11 @@ public class LeaveDetailsTest {
    */
   @Test
   public final void testListById(@Mocked final LeaveDetailsDAO dao) {
-    final LeaveDetails l100 = new LeaveDetails(100);
+    final LeaveDetails l100 = new LeaveDetails(5);
     new Expectations() {
       {
-        dao.fetch(100); result = l100;
-        dao.fetch(-1); result = null;
+        dao.find(5); result = l100;
+        dao.find(-1); result = null;
       }
     };
     new MockUp<LeaveDetails>() {
@@ -138,7 +138,7 @@ public class LeaveDetailsTest {
         return dao;
       }
     };
-    LeaveDetails l = LeaveDetails.listById(100);
+    LeaveDetails l = LeaveDetails.listById(5);
     assertEquals(l100, l);
 
     l = LeaveDetails.listById(-1);
