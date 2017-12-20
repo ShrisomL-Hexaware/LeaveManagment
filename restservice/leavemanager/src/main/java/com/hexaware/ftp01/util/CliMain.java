@@ -151,7 +151,7 @@ public class CliMain {
     try {
       System.out.println("Enter the Employee  Id");
       int empId = option.nextInt();
-      LeaveDetails leave = LeaveDetails.listById(empId);
+      LeaveDetails leave = LeaveDetails.listByDetailsId(empId);
       if (leave == null) {
         System.out.println("OOPS ,  sorry there is no such an employee");
       } else {
@@ -161,12 +161,12 @@ public class CliMain {
                         + "   " +  "leave reason" + "   " + "leave applied on" + "   "
                         + "managerComments" + "   " + "empId");
         SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
-        for (LeaveDetails ls : leaveDetails) {
-          System.out.println(ls.getLeaveId() + " " + ls.getLeaveType() + " " + sf.format(ls.getStartDate())
-                          + "   " + sf.format(ls.getEndDate()) + "   " + ls.getNumberOfDays()
-                          + "   " + ls.getLeaveStatus() + "   " + ls.getLeaveReason()
-                          + "   " + sf.format(ls.getLeaveAppliedOn()) + "   " + ls.getManagerComments()
-                          + "   " + ls.getEmpId());
+        for (LeaveDetails ld : leaveDetails) {
+          System.out.println(ld.getLeaveId() + " " + ld.getLeaveType() + " " + sf.format(ld.getStartDate())
+                          + "   " + sf.format(ld.getEndDate()) + "   " + ld.getNumberOfDays()
+                          + "   " + ld.getLeaveStatus() + "   " + ld.getLeaveReason()
+                          + "   " + sf.format(ld.getLeaveAppliedOn()) + "   " + ld.getManagerComments()
+                          + "   " + ld.getEmpId());
         }
       }
     } catch (InputMismatchException e) {
