@@ -224,6 +224,7 @@ public class CliMain {
       leaveData.approveDeny(selectStatus, leaveId, managerComments);
     }
   }
+  
   /**
    * The main entry point.
    * @param ar the list of arguments

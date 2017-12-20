@@ -113,7 +113,7 @@ void insert(@Bind("levType") LeaveType levType,
   @Mapper(LeaveDetailsMapper.class)
   LeaveDetails find(@Bind("empID") int empID);
 
-    /**
+  /**
    * return all the leave details of the selected employee.
    * @param leaveId the id of the employee
    * @return the leave detail object

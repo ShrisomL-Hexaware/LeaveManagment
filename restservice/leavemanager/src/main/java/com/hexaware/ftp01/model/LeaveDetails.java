@@ -350,6 +350,7 @@ public class LeaveDetails {
     List<LeaveDetails> ls = dao().list(empId);
     return ls.toArray(new LeaveDetails[ls.size()]);
   }
+  
 /**
   * list leave details by id.
   * @param leaveId id to get employee details.
@@ -358,6 +359,7 @@ public class LeaveDetails {
   public static LeaveDetails listAll(final int leaveId) {
     return dao().fetch(leaveId);
   }
+
   /**
    * list pending leave details.
    * @param empId id to get employee details.
