@@ -18,52 +18,72 @@ public class CliMain {
   private Scanner option = new Scanner(System.in, "UTF-8");
 
   private void mainMenu() {
-    System.out.println("Leave Management System");
-    System.out.println("-----------------------");
-    System.out.println("1. List All Employees Info");
-    System.out.println("2. Display Employee Info");
-    System.out.println("3. Apply For leave");
-    System.out.println("4. Leave History");
-    System.out.println("5. Pending Leave Status");
-    System.out.println("6. Approve Or Deny");
-    System.out.println("7. Exit");
-    System.out.println("Enter your choice:");
-    int menuOption = option.nextInt();
-    try {
-      mainMenuDetails(menuOption);
-    } catch (InputMismatchException e) {
-      System.out.println("Enter the value 1 - 7");
-      mainMenuDetails(menuOption);
+
+    boolean flag = false;
+    while (!flag) {
+      System.out.println("Leave Management System");
+      System.out.println("-----------------------");
+      System.out.println("1. List All Employees Info");
+      System.out.println("2. Display Employee Info");
+      System.out.println("3. Apply For leave");
+      System.out.println("4. Leave History");
+      System.out.println("5. Pending Leave Status");
+      System.out.println("6. Approve Or Deny");
+      System.out.println("7. Exit");
+      try {
+        System.out.println("Enter your choice:");
+        int menuOption = option.nextInt();
+        flag = true;
+        mainMenuDetails(menuOption);
+      } catch (InputMismatchException e) {
+        System.out.println("Enter the value 1 - 7");
+        flag = false;
+        option.nextLine();
+      }
+
     }
   }
+
   private void mainMenuDetails(final int selectedOption) {
-    switch (selectedOption) {
-      case 1:
-        listEmployeesDetails();
-        break;
-      case 2:
-        listEmployeeDetail();
-        break;
-      case 3:
-        applyForLeave();
-        break;
-      case 4:
-        listLeaveHistory();
-        break;
-      case 5:
-        listPendingLeaveStatus();
-        break;
-      case 6:
-        approveOrDenyLeave();
-        break;
-      case 7:
-        // halt since normal exit throws a stacktrace due to jdbc threads not responding
-        Runtime.getRuntime().halt(0);
-      default:
-        System.out.println("Choose either 1, 2, 3, 4, 5, 6 oe 7");
+
+    boolean flag = false;
+    while (!flag) {
+      try {
+        switch (selectedOption) {
+          case 1:
+            listEmployeesDetails();
+            break;
+          case 2:
+            listEmployeeDetail();
+            break;
+          case 3:
+            applyForLeave();
+            break;
+          case 4:
+            listLeaveHistory();
+            break;
+          case 5:
+            listPendingLeaveStatus();
+            break;
+          case 6:
+            approveOrDenyLeave();
+            break;
+          case 7:
+            // halt since normal exit throws a stacktrace due to jdbc threads not responding
+            Runtime.getRuntime().halt(0);
+          default:
+            System.out.println("Choose either 1, 2 or 3");
+        }
+        mainMenu();
+        flag = true;
+      } catch (InputMismatchException e) {
+        flag = false;
+        option.nextLine();
+      }
+
     }
-    mainMenu();
   }
+
   private void listEmployeeDetail() {
     System.out.println("Enter an Employee Id");
     int empId = option.nextInt();
@@ -84,6 +104,7 @@ public class CliMain {
                          + e.getEmpDoj());
     }
   }
+
   private void applyForLeave() {
     try {
       System.out.println("Enter the empId :");
@@ -101,10 +122,18 @@ public class CliMain {
           LeaveType leaveType = LeaveType.valueOf(levType);
           System.out.println("Enter Starting Date(yyyy/MM/dd) :");
           String date1 = option.next();
-          Date startDate = myFormat.parse(date1);
+          myFormat.setLenient(false);
           System.out.println("Enter Ending Date(yyyy/MM/dd) :");
           String date2 = option.next();
+          Date startDate = myFormat.parse(date1);
           Date endDate = myFormat.parse(date2);
+          try {
+            myFormat.parse(date1.trim());
+            myFormat.parse(date2.trim());
+          } catch (ParseException e) {
+            System.out.println("Wrong Date!!");
+            mainMenu();
+          }
           System.out.println("Total Number of days :");
           int numberOfDays = option.nextInt();
           System.out.println("Reason :");
@@ -118,6 +147,7 @@ public class CliMain {
       System.out.println(e.getMessage());
     }
   }
+
   private void listLeaveHistory() {
     System.out.println("To see leave history wait till friday");
   }
