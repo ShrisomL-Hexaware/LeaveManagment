@@ -18,6 +18,7 @@ public class CliMain {
   private Scanner option = new Scanner(System.in, "UTF-8");
 
   private void mainMenu() {
+
     boolean flag = false;
     while (!flag) {
       System.out.println("Leave Management System");
@@ -39,10 +40,12 @@ public class CliMain {
         flag = false;
         option.nextLine();
       }
+
     }
   }
 
   private void mainMenuDetails(final int selectedOption) {
+
     boolean flag = false;
     while (!flag) {
       try {
@@ -77,6 +80,7 @@ public class CliMain {
         flag = false;
         option.nextLine();
       }
+
     }
   }
 
@@ -189,9 +193,11 @@ public class CliMain {
       System.out.println(leaveData.toString());
       System.out.println("Either 'APPROVED','DENIED' or 'PENDING'");
       String select = option.next();
-      LeaveStatus selectStatus = LeaveStatus.valueOf(select);
+      String s = select.toUpperCase();
+      LeaveStatus selectStatus = LeaveStatus.valueOf(s);
+      option.nextLine();
       System.out.println("Enter comments");
-      String managerComments = option.next();
+      String managerComments = option.nextLine();
       leaveData.approveDeny(selectStatus, leaveId, managerComments);
     }
   }
