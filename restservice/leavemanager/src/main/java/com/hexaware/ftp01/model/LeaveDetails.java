@@ -278,11 +278,11 @@ public class LeaveDetails {
   }
  /**
   * list employee details by id.
-  * @param empID id to get employee details.
+  * @param leaveId id to get employee details.
   * @return Employee.
   */
-  public static LeaveDetails listById(final int empID) {
-    return dao().find(empID);
+  public static LeaveDetails listById(final int leaveId) {
+    return dao().find(leaveId);
   }
 
   /**
@@ -350,6 +350,7 @@ public class LeaveDetails {
     List<LeaveDetails> ls = dao().list(empId);
     return ls.toArray(new LeaveDetails[ls.size()]);
   }
+
 /**
   * list leave details by id.
   * @param leaveId id to get employee details.
@@ -358,6 +359,7 @@ public class LeaveDetails {
   public static LeaveDetails listAll(final int leaveId) {
     return dao().fetch(leaveId);
   }
+
   /**
    * list pending leave details.
    * @param empId id to get employee details.
