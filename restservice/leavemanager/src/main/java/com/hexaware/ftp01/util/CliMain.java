@@ -116,6 +116,7 @@ public class CliMain {
         if (employee.getEmpLeaveBalance() == 0) {
           throw new IllegalArgumentException("You dont have sufficient leave balance");
         } else {
+          System.out.println("Available leave Balance is :" + employee.getEmpLeaveBalance());
           SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
           System.out.println("Enter Leave Type :");
           String levType  = option.next();
@@ -138,7 +139,9 @@ public class CliMain {
           int numberOfDays = option.nextInt();
           System.out.println("Reason :");
           String leaveReason = option.next();
-          employee.applyForLeave(leaveType, startDate, endDate, numberOfDays, leaveReason, date1, date2);
+          String applyMessage = employee.applyForLeave(leaveType, startDate, endDate, numberOfDays,
+                                leaveReason, date1, date2);
+          System.out.println(applyMessage);
         }
       }
     } catch (ParseException e) {
