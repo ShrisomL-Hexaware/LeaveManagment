@@ -157,7 +157,7 @@ public class CliMain {
         throw new IllegalArgumentException("Sorry, No such employee");
       } else {
         if (leave.length == 0) {
-          throw new IllegalArgumentException("Employee " + empId + " does not have leave history");
+          throw new IllegalArgumentException("Employee " + empId + " has no  leave history");
         } else {
           LeaveDetails.listLeaveDetailsById(empId);
           System.out.println("leave id" + " " + "leave type" + " " + "start date"
