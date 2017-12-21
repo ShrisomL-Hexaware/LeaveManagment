@@ -60,6 +60,13 @@ public class EmployeeTest {
     e101.setEmpDoj("2014-11-17");
   }
 
+  /**
+   *Test the applyForLeave method of the employee class.
+   */
+  public final void testApplyForLeave() {
+
+  }
+
 
   /**
    * tests that empty employee list is handled correctly.

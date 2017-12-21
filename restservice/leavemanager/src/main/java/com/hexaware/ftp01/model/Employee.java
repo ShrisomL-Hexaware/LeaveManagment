@@ -265,36 +265,39 @@ public class Employee {
    * @param date2 to get date in string.
    * @throws IllegalArgumentException to handle exception.
    * @throws ParseException to handle exception.
+   * @return apply message.
    */
-  public final void applyForLeave(final LeaveType levType, final Date levStartDate, final Date levEndDate,
+  public final String applyForLeave(final LeaveType levType, final Date levStartDate, final Date levEndDate,
                                   final int levNumberOfDays, final String levReason, final String date1,
                                   final String date2) throws IllegalArgumentException, ParseException {
 
     Employee e = new Employee(empId);
-    System.out.println("Your available leave balance was : " + empLeaveBalance);
     int empID = e.getEmpId();
+    String applyMessage;
     SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
     long epochstartDate = myFormat.parse(date1).getTime() / 1000;
     long epochendDate = myFormat.parse(date2).getTime() / 1000;
     Date levAppliedOn = new Date();
     int diffOfDays = (int) ((levEndDate.getTime() - levStartDate.getTime()) / (1000 * 60 * 60 * 24));
-    if (levNumberOfDays < 0) {
-      throw new IllegalArgumentException("Enter positive value for number of days.");
+    if (levNumberOfDays < 1) {
+      throw new IllegalArgumentException("Number of days for leave cannot be less than 1 day!!");
     } else {
       if ((epochendDate - epochstartDate) < 0) {
-        throw new IllegalArgumentException("Sorry, end date is before start date");
+        throw new IllegalArgumentException("Sorry, end date is before start date.");
       } else if (levNumberOfDays > (diffOfDays + 1)) {
         throw new IllegalArgumentException("Enter correct Number of days for leave!");
       } else {
-        if (empLeaveBalance > levNumberOfDays) {
+        if (empLeaveBalance >= levNumberOfDays) {
           empLeaveBalance = empLeaveBalance - levNumberOfDays;
           System.out.println("Leave applied for : " + levNumberOfDays + " Days");
           System.out.println("Your updated Leave Balance is : " + empLeaveBalance);
           LeaveStatus levStatus;
           if (empManagerId == 0) {
             levStatus = LeaveStatus.APPROVED;
+            applyMessage = "Leave is applied Boss!!";
           } else {
             levStatus = LeaveStatus.PENDING;
+            applyMessage = "Leave application forwarded to manager";
           }
           LeaveDetails.dao().insert(levType, levStartDate, levEndDate, levNumberOfDays, levStatus, levReason,
                                    levAppliedOn, empID);
@@ -304,5 +307,6 @@ public class Employee {
         }
       }
     }
+    return applyMessage;
   }
 }
