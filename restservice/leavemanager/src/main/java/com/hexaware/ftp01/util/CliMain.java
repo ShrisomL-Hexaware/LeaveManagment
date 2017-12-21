@@ -152,20 +152,20 @@ public class CliMain {
       System.out.println("Enter the Employee  Id");
       int empId = option.nextInt();
       Employee employee = Employee.listById(empId);
+      LeaveDetails[] leave = LeaveDetails.listLeaveDetailsById(empId);
       if (employee == null) {
-        System.out.println("Sorry, No such employee");
+        throw new IllegalArgumentException("Sorry, No such employee");
       } else {
-        LeaveDetails leave = LeaveDetails.listByDetailsId(empId);
-        if (leave == null) {
-          System.out.println("Employee " + empId + " does not have leave history");
+        if (leave.length == 0) {
+          throw new IllegalArgumentException("Employee " + empId + " does not have leave history");
         } else {
-          LeaveDetails[] leaveDetails = LeaveDetails.listLeaveDetailsById(empId);
+          LeaveDetails.listLeaveDetailsById(empId);
           System.out.println("leave id" + " " + "leave type" + " " + "start date"
                               + "   " + "end date" + "   " + "number of days" + "   " + "leave status"
                               + "   " +  "leave reason" + "   " + "leave applied on" + "   "
                               + "managerComments" + "   " + "empId");
           SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
-          for (LeaveDetails ld : leaveDetails) {
+          for (LeaveDetails ld : leave) {
             System.out.println(ld.getLeaveId() + " " + ld.getLeaveType() + " " + sf.format(ld.getStartDate())
                                + "   " + sf.format(ld.getEndDate()) + "   " + ld.getNumberOfDays()
                                + "   " + ld.getLeaveStatus() + "   " + ld.getLeaveReason()
@@ -176,6 +176,8 @@ public class CliMain {
       }
     } catch (InputMismatchException e) {
       System.out.println("Enter Correct Employee Id");
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
     }
   }
 

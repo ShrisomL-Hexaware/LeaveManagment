@@ -285,15 +285,6 @@ public class LeaveDetails {
     return dao().find(leaveId);
   }
   /**
-  * list employee details by id.
-  * @param empId id to get employee details.
-  * @return Employee.
-  */
-  public static LeaveDetails listByDetailsId(final int empId) {
-    return dao().findLeaveHistory(empId);
-  }
-
-  /**
    * update leave status.
    * @param leaveStatus id to update leave status.
    * @param leaveId to update leave Id.
