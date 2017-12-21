@@ -151,22 +151,27 @@ public class CliMain {
     try {
       System.out.println("Enter the Employee  Id");
       int empId = option.nextInt();
-      LeaveDetails leave = LeaveDetails.listByDetailsId(empId);
-      if (leave == null) {
-        System.out.println("OOPS ,  sorry there is no such an employee");
+      Employee employee = Employee.listById(empId);
+      if (employee == null) {
+        System.out.println("Sorry, No such employee");
       } else {
-        LeaveDetails[] leaveDetails = LeaveDetails.listLeaveDetailsById(empId);
-        System.out.println("leave id" + " " + "leave type" + " " + "start date"
-                        + "   " + "end date" + "   " + "number of days" + "   " + "leave status"
-                        + "   " +  "leave reason" + "   " + "leave applied on" + "   "
-                        + "managerComments" + "   " + "empId");
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
-        for (LeaveDetails ld : leaveDetails) {
-          System.out.println(ld.getLeaveId() + " " + ld.getLeaveType() + " " + sf.format(ld.getStartDate())
-                          + "   " + sf.format(ld.getEndDate()) + "   " + ld.getNumberOfDays()
-                          + "   " + ld.getLeaveStatus() + "   " + ld.getLeaveReason()
-                          + "   " + sf.format(ld.getLeaveAppliedOn()) + "   " + ld.getManagerComments()
-                          + "   " + ld.getEmpId());
+        LeaveDetails leave = LeaveDetails.listByDetailsId(empId);
+        if (leave == null) {
+          System.out.println("Employee " + empId + " does not have leave history");
+        } else {
+          LeaveDetails[] leaveDetails = LeaveDetails.listLeaveDetailsById(empId);
+          System.out.println("leave id" + " " + "leave type" + " " + "start date"
+                              + "   " + "end date" + "   " + "number of days" + "   " + "leave status"
+                              + "   " +  "leave reason" + "   " + "leave applied on" + "   "
+                              + "managerComments" + "   " + "empId");
+          SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+          for (LeaveDetails ld : leaveDetails) {
+            System.out.println(ld.getLeaveId() + " " + ld.getLeaveType() + " " + sf.format(ld.getStartDate())
+                               + "   " + sf.format(ld.getEndDate()) + "   " + ld.getNumberOfDays()
+                               + "   " + ld.getLeaveStatus() + "   " + ld.getLeaveReason()
+                               + "   " + sf.format(ld.getLeaveAppliedOn()) + "   " + ld.getManagerComments()
+                               + "   " + ld.getEmpId());
+          }
         }
       }
     } catch (InputMismatchException e) {

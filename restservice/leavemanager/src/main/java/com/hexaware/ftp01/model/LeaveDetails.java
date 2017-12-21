@@ -290,7 +290,7 @@ public class LeaveDetails {
   * @return Employee.
   */
   public static LeaveDetails listByDetailsId(final int empId) {
-    return dao().find(empId);
+    return dao().findLeaveHistory(empId);
   }
 
   /**
