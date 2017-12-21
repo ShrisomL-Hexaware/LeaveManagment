@@ -267,15 +267,6 @@ public class LeaveDetails {
   public final void setEmpId(final int argEmpId) {
     this.empId = argEmpId;
   }
-    /**
-   * list employee details by id.
-   * @param empID id to get employee details.
-   * @return Employee
-   */
-  public static LeaveDetails[] listLeaveDetailsById(final int empID) {
-    List<LeaveDetails> ls = dao().list(empID);
-    return ls.toArray(new LeaveDetails[ls.size()]);
-  }
  /**
   * list employee details by id.
   * @param leaveId id to get employee details.
@@ -284,7 +275,6 @@ public class LeaveDetails {
   public static LeaveDetails listById(final int leaveId) {
     return dao().find(leaveId);
   }
-
   /**
    * update leave status.
    * @param leaveStatus id to update leave status.
@@ -348,6 +338,16 @@ public class LeaveDetails {
  */
   public static LeaveDetails[] listLeaveDetails(final int empId) {
     List<LeaveDetails> ls = dao().list(empId);
+    return ls.toArray(new LeaveDetails[ls.size()]);
+  }
+
+    /**
+   * list employee details by id.
+   * @param empID id to get employee details.
+   * @return Employee
+   */
+  public static LeaveDetails[] listLeaveDetailsById(final int empID) {
+    List<LeaveDetails> ls = dao().listHistory(empID);
     return ls.toArray(new LeaveDetails[ls.size()]);
   }
 

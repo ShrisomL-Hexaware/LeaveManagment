@@ -96,6 +96,15 @@ void insert(@Bind("levType") LeaveType levType,
   List<LeaveDetails> finds(@Bind("empId") int empId);
 
   /**
+   * return all the details of all the employees.
+   * @param leaveID the employee Id.
+   * @return the employee array
+   */
+  @SqlQuery("SELECT * FROM LEAVE_HISTORY WHERE LEAVE_ID = :leaveID")
+  @Mapper(LeaveDetailsMapper.class)
+  LeaveDetails find(@Bind("leaveID") int leaveID);
+
+  /**
    * return all the details of all the employee's leave details.
    * @param leaveId the id of the employee
    * @return the employee array
@@ -105,13 +114,13 @@ void insert(@Bind("levType") LeaveType levType,
   List<LeaveDetails> list(@Bind("leaveId") int leaveId);
 
   /**
-   * return all the leave history of the selected employee.
-   * @param leaveId the id of the employee
-   * @return the leave history object
+   * return all the details of the employee's having leave details.
+   * @param empID the id of the employee
+   * @return the employee array
    */
-  @SqlQuery("SELECT * FROM LEAVE_HISTORY WHERE LEAVE_ID = :leaveId")
+  @SqlQuery("SELECT * FROM LEAVE_HISTORY WHERE EMP_ID = :empID")
   @Mapper(LeaveDetailsMapper.class)
-  LeaveDetails find(@Bind("leaveId") int leaveId);
+  List<LeaveDetails> listHistory(@Bind("empID") int empID);
 
   /**
    * return all the leave details of the selected employee.
