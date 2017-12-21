@@ -100,7 +100,7 @@ void insert(@Bind("levType") LeaveType levType,
    * @param leaveID the employee Id.
    * @return the employee array
    */
-  @SqlQuery("SELECT * FROM LEAVE_HISTORY WHERE EMP_ID = :leaveID")
+  @SqlQuery("SELECT * FROM LEAVE_HISTORY WHERE LEAVE_ID = :leaveID")
   @Mapper(LeaveDetailsMapper.class)
   LeaveDetails find(@Bind("leaveID") int leaveID);
 
