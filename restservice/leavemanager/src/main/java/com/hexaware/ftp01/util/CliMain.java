@@ -223,12 +223,13 @@ public class CliMain {
       System.out.println(leaveData.toString());
       System.out.println("Either 'APPROVED','DENIED' or 'PENDING'");
       String select = option.next();
-      String s = select.toUpperCase();
-      LeaveStatus selectStatus = LeaveStatus.valueOf(s);
+      String sd = select.toUpperCase();
+      LeaveStatus selectStatus = LeaveStatus.valueOf(sd);
       option.nextLine();
       System.out.println("Enter comments");
       String managerComments = option.nextLine();
-      leaveData.approveDeny(selectStatus, leaveId, managerComments);
+      String s = leaveData.approveDeny(selectStatus, leaveId, managerComments);
+      System.out.println(s);
     }
   }
 
