@@ -3,6 +3,7 @@ package com.hexaware.ftp01.model;
 import com.hexaware.ftp01.persistence.LeaveDetailsDAO;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
@@ -144,5 +145,43 @@ public class LeaveDetailsTest {
     l = LeaveDetails.listById(-1);
     assertNull(l);
   }
+  /**
+   * Tests that a fetch of a specific employee works correctly.
+   * @param dao mocking the dao class
+   * @throws ParseException to handle parse exception.
+   */
+  @Test
+  public final void testlistPendingApplication(@Mocked final LeaveDetailsDAO dao) throws ParseException {
+    new Expectations() {
+      {
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+        dao.finds(2001);
+        ArrayList<LeaveDetails> ld = new ArrayList<LeaveDetails>();
+        ld.add(new LeaveDetails(9, LeaveType.EL, sf.parse("2017/12/28"), sf.parse("2017/12/02"),
+                                3, LeaveStatus.PENDING, "TRIP", sf.parse("2017/12/21"),
+                                "NULL", 3001));
+        ld.add(new LeaveDetails(9, LeaveType.EL, sf.parse("2017/12/28"), sf.parse("2017/12/02"),
+                                3, LeaveStatus.PENDING, "TRIP", sf.parse("2017/12/21"),
+                                "NULL", 3001));
+        result = ld;
+      }
+    };
+    new MockUp<LeaveDetails>() {
+      @Mock
+      LeaveDetailsDAO dao() {
+        return dao;
+      }
+    };
+    SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+    LeaveDetails[] ld = LeaveDetails.listPendingApplication(2001);
+    LeaveDetails[] ld1 = new LeaveDetails[2];
+    ld1[0] = new LeaveDetails(9, LeaveType.EL, sf.parse("2017/12/28"), sf.parse("2017/12/02"),
+                                3, LeaveStatus.PENDING, "TRIP", sf.parse("2017/12/21"),
+                                "NULL", 3001);
+    ld1[1] = new LeaveDetails(9, LeaveType.EL, sf.parse("2017/12/28"), sf.parse("2017/12/02"),
+                                3, LeaveStatus.PENDING, "TRIP", sf.parse("2017/12/21"),
+                                "NULL", 3001);
+    assertArrayEquals(ld1, ld);
+    System.out.println("Pending leave Test successful");
+  }
 }
-
