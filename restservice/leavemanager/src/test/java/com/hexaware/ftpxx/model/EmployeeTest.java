@@ -16,6 +16,9 @@ import mockit.Mock;
 import mockit.integration.junit4.JMockit;
 
 import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Test class for Employee.
@@ -61,12 +64,43 @@ public class EmployeeTest {
 
   /**
    *Test the applyForLeave method of the employee class.
+   * @param dao mocking the dao class.
+   * @throws ParseException to handle parse exception.
    */
-  public final void testApplyForLeave() {
+  @Test
+  public final void testApplyForLeave(@Mocked final EmployeeDAO dao)throws ParseException {
+
+    SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+    final Date dt1 = sf.parse("2017/12/12");
+    final Date dt2 = sf.parse("2017/12/13");
+    final Date dt3 = sf.parse("2017/12/14");
+    final String dt4 = "2017/12/12";
+    final String dt5 = "2017/12/13";
+    new Expectations() {
+      {
+        dao.insert(LeaveType.EL, dt1, dt2, 2, LeaveStatus.PENDING, "sick", dt3, 2001);
+        dao.insert(LeaveType.EL, dt1, dt2, 2, LeaveStatus.APPROVED, "Fever", dt3, 1000);
+      }
+    };
+    new MockUp<Employee>() {
+      @Mock
+      EmployeeDAO dao() {
+        return dao;
+      }
+    };
     Employee e100 = new Employee(2001, "Anushree Beohar", 8871676607L, "AnushreeB@hexaware.com", "HEXAVARSITY",
                                  1000, 0, "2014-11-17");
-  }
+    Employee e101 = new Employee(1000, "Shrisom Laha", 8961260400L, "ShrisomL@hexaware.com", "HEXAVARSITY",
+                                 0, 0, "2014-11-17");
 
+    String s = "Leave application forwarded to manager";
+    String s1 = "Leave is applied Boss!!";
+
+    String str = e100.applyForLeave(LeaveType.EL, dt1, dt2, 2, "sick", dt4, dt5);
+    String str1 = e101.applyForLeave(LeaveType.EL, dt1, dt2, 2, "Fever", dt4, dt5);
+    assertEquals(s, str);
+    assertEquals(s1, str1);
+  }
 
   /**
    * tests that empty employee list is handled correctly.
