@@ -34,6 +34,7 @@ public class EmployeeTest {
   /**
    * Tests the equals/hashcode methods of the employee class.
    */
+  @Test
   public final void testEmployee() {
     Employee e100 = new Employee(2001, "Anushree Beohar", 8871676607L, "AnushreeB@hexaware.com", "HEXAVARSITY",
                                  1000, 0, "2014-11-17");
