@@ -3,6 +3,7 @@ package com.hexaware.ftp01.model;
 
 import com.hexaware.ftp01.persistence.LeaveDetailsDAO;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNull;
@@ -195,7 +196,7 @@ public class LeaveDetailsTest {
     new Expectations() {
       {
         SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
-        dao.listHistory(3001);
+        dao.list(3001);
         ArrayList<LeaveDetails> ld = new ArrayList<LeaveDetails>();
         ld.add(new LeaveDetails(120, LeaveType.EL, sf.parse("2017/01/03"), sf.parse("2017/01/05"), 2,
                               LeaveStatus.APPROVED, "HIGH FEVER", sf.parse("2017/01/02"), "ACCEPTED", 3001));
