@@ -203,7 +203,7 @@ public class LeaveDetailsTest {
         ld.add(new LeaveDetails(120, LeaveType.EL, sf.parse("2017/01/03"), sf.parse("2017/01/05"), 2,
                               LeaveStatus.APPROVED, "HIGH FEVER", sf.parse("2017/01/02"), "ACCEPTED", 3001));
         result = ld;
-       }
+      }
     };
     new MockUp<LeaveDetails>() {
       @Mock
@@ -220,8 +220,9 @@ public class LeaveDetailsTest {
                                          LeaveStatus.APPROVED, "HIGH FEVER", sf.parse("2017/01/02"), "ACCEPTED", 3001);
     assertArrayEquals(ld1, ld);
     System.out.println(" Testing of list_leave_details.");
+  }
 
-  /** 
+  /**
    * Tests that a fetch of a specific employee works correctly.
    * @param dao mocking the dao class
    * @throws ParseException to handle parse exception.
