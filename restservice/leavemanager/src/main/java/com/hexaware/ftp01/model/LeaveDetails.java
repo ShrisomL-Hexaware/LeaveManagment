@@ -331,17 +331,8 @@ public class LeaveDetails {
       System.out.println("Enter correct choice");
     }
   }
-/**
- * list all leave details.
- * @param empId for emp id
- * @return all leave details
- */
-  public static LeaveDetails[] listLeaveDetails(final int empId) {
-    List<LeaveDetails> ls = dao().list(empId);
-    return ls.toArray(new LeaveDetails[ls.size()]);
-  }
 
-    /**
+  /**
    * list employee details by id.
    * @param empID id to get employee details.
    * @return Employee
@@ -351,7 +342,7 @@ public class LeaveDetails {
     return ls.toArray(new LeaveDetails[ls.size()]);
   }
 
-/**
+ /**
   * list leave details by id.
   * @param leaveId id to get employee details.
   * @return Employee

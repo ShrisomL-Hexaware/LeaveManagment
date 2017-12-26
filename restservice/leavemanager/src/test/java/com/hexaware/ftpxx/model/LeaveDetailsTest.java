@@ -81,7 +81,7 @@ public class LeaveDetailsTest {
   public final void testListAllEmpty(@Mocked final LeaveDetailsDAO dao) {
     new Expectations() {
       {
-        dao.list(2000); result = new ArrayList<LeaveDetails>();
+        dao.listHistory(2000); result = new ArrayList<LeaveDetails>();
       }
     };
     new MockUp<LeaveDetails>() {
@@ -90,7 +90,7 @@ public class LeaveDetailsTest {
         return dao;
       }
     };
-    LeaveDetails[] ls = LeaveDetails.listLeaveDetails(2000);
+    LeaveDetails[] ls = LeaveDetails.listLeaveDetailsById(2000);
     assertEquals(0, ls.length);
   }
 
@@ -106,7 +106,7 @@ public class LeaveDetailsTest {
         ls.add(new LeaveDetails(1));
         ls.add(new LeaveDetails(10));
         ls.add(new LeaveDetails(100));
-        dao.list(2000); result = ls;
+        dao.listHistory(2000); result = ls;
       }
     };
     new MockUp<LeaveDetails>() {
@@ -115,7 +115,7 @@ public class LeaveDetailsTest {
         return dao;
       }
     };
-    LeaveDetails[] ls = LeaveDetails.listLeaveDetails(2000);
+    LeaveDetails[] ls = LeaveDetails.listLeaveDetailsById(2000);
     assertEquals(3, ls.length);
     assertEquals(new LeaveDetails(1), ls[0]);
     assertEquals(new LeaveDetails(10), ls[1]);
@@ -196,7 +196,7 @@ public class LeaveDetailsTest {
     new Expectations() {
       {
         SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
-        dao.list(3001);
+        dao.listHistory(3001);
         ArrayList<LeaveDetails> ld = new ArrayList<LeaveDetails>();
         ld.add(new LeaveDetails(120, LeaveType.EL, sf.parse("2017/01/03"), sf.parse("2017/01/05"), 2,
                               LeaveStatus.APPROVED, "HIGH FEVER", sf.parse("2017/01/02"), "ACCEPTED", 3001));
@@ -212,7 +212,7 @@ public class LeaveDetailsTest {
       }
     };
     SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
-    LeaveDetails[] ld = LeaveDetails.listLeaveDetails(3001);
+    LeaveDetails[] ld = LeaveDetails.listLeaveDetailsById(3001);
     LeaveDetails[] ld1 = new LeaveDetails[2];
     ld1[0] = new LeaveDetails(120, LeaveType.EL, sf.parse("2017/01/03"), sf.parse("2017/01/05"), 2,
                                          LeaveStatus.APPROVED, "HIGH FEVER", sf.parse("2017/01/02"), "ACCEPTED", 3001);
