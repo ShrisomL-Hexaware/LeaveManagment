@@ -21,6 +21,7 @@ import mockit.integration.junit4.JMockit;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.util.Date;
 
 /**
  * Test class for LeaveDetails.
@@ -42,7 +43,7 @@ public class LeaveDetailsTest {
    */
   @Test
   public final void testLeaveDetails()throws ParseException {
-    SimpleDateFormat sf = new SimpleDateFormat("yyyy/mm/dd");
+    SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
     LeaveDetails l100 = new LeaveDetails(5, LeaveType.EL, sf.parse("2017/12/20"), sf.parse("2017/12/23"), 4,
                                          LeaveStatus.APPROVED, "trip", sf.parse("2017/12/18"), "enjoy", 2000);
     LeaveDetails l101 = new LeaveDetails(5, LeaveType.EL, sf.parse("2017/12/20"), sf.parse("2017/12/23"), 4,
@@ -70,6 +71,16 @@ public class LeaveDetailsTest {
     l101.setManagerComments("enjoy");
     assertEquals(2000, l100.getEmpId());
     l101.setEmpId(2000);
+
+    Date sdt = sf.parse("2017/12/20");
+    Date edt = sf.parse("2017/12/23");
+    Date adt = sf.parse("2017/12/18");
+    String ts = ("leave id :" + 5 + " " + "leave type :" + LeaveType.EL + " " + "start date :" +  sf.format(sdt)
+              + " " + "end date :" + sf.format(edt) + " " + "number of days :" + 4 + " " + "leave status :"
+              + LeaveStatus.APPROVED + " " +  "leave reason : " + "trip" + " " + "leave applied on :" + sf.format(adt)
+              + " " + " managerComments :" + "enjoy" + " " + "empId :" + 2000);
+    String s = l100.toString();
+    assertEquals(s, ts);
   }
 
 
@@ -243,7 +254,7 @@ public class LeaveDetailsTest {
         return dao;
       }
     };
-    SimpleDateFormat sf = new SimpleDateFormat("yyyy/mm/dd");
+    SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
     LeaveDetails l100 = new LeaveDetails(5, LeaveType.EL, sf.parse("2017/12/20"), sf.parse("2017/12/23"),
                                          4, LeaveStatus.APPROVED, "trip", sf.parse("2017/12/18"), "enjoy", 2000);
     LeaveDetails l101 = new LeaveDetails(6, LeaveType.EL, sf.parse("2017/12/26"), sf.parse("2017/12/28"),
