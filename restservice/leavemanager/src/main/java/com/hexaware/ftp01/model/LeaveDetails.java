@@ -306,30 +306,38 @@ public class LeaveDetails {
    * @param selectStatus to select option.
    * @param argLeaveId to leave Id.
    * @param argManagerComments to manager comment.
+   * @return s to return string.
    */
-  public final void approveDeny(final LeaveStatus selectStatus, final int argLeaveId,
-                                final String argManagerComments) {
+  public final String approveDeny(final LeaveStatus selectStatus, final int argLeaveId,
+                                  final String argManagerComments) {
+    String s = null;
     LeaveDetails statusObj = new LeaveDetails(argLeaveId);
     if (leaveStatus == LeaveStatus.PENDING && selectStatus == LeaveStatus.APPROVED) {
       statusObj.status(LeaveStatus.APPROVED, argLeaveId, argManagerComments);
+      s = "Leave is approved for the Employee ID" + " " + empId;
     } else if (leaveStatus == LeaveStatus.PENDING && selectStatus == LeaveStatus.DENIED) {
       statusObj.status(LeaveStatus.DENIED, argLeaveId, argManagerComments);
       statusObj.increment(argLeaveId);
+      s = "Leave is denied for the Employee ID" + " " + empId;
     } else if (leaveStatus == LeaveStatus.APPROVED && selectStatus == LeaveStatus.DENIED) {
       statusObj.status(LeaveStatus.DENIED, argLeaveId, argManagerComments);
       statusObj.increment(argLeaveId);
+      s = "Leave is denied for the Employee ID" + " " + empId;
     } else if (leaveStatus == LeaveStatus.APPROVED && selectStatus == LeaveStatus.PENDING) {
       statusObj.status(LeaveStatus.PENDING, argLeaveId, argManagerComments);
-      statusObj.increment(argLeaveId);
+      s = "Leave is pending for the Employee ID" + " " + empId;
     } else if (leaveStatus == LeaveStatus.DENIED && selectStatus == LeaveStatus.APPROVED) {
       statusObj.status(LeaveStatus.APPROVED, argLeaveId, argManagerComments);
       statusObj.decrement(argLeaveId);
+      s = "Leave is approved for the Employee ID" + " " + empId;
     } else if (leaveStatus == LeaveStatus.DENIED && selectStatus == LeaveStatus.PENDING) {
       statusObj.status(LeaveStatus.PENDING, argLeaveId, argManagerComments);
       statusObj.decrement(argLeaveId);
+      s = "Leave is pending for the Employee ID" + " " + empId;
     } else {
-      System.out.println("Enter correct choice");
+      s = "Enter correct choice";
     }
+    return s;
   }
 
   /**

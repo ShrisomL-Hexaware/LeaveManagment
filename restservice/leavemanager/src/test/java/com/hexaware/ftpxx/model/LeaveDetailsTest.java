@@ -122,7 +122,7 @@ public class LeaveDetailsTest {
     assertEquals(new LeaveDetails(100), ls[2]);
   }
 
-    /**
+  /**
    * Tests that a fetch of a specific leave details works correctly.
    * @param dao mocking the dao class
    */
@@ -221,4 +221,39 @@ public class LeaveDetailsTest {
     assertArrayEquals(ld1, ld);
     System.out.println(" Testing of list_leave_details.");
   }
+
+  /**
+   * Tests that a fetch of a specific employee works correctly.
+   * @param dao mocking the dao class
+   * @throws ParseException to handle parse exception.
+   */
+  @Test
+  public final void testapproveDeny(@Mocked final LeaveDetailsDAO dao)throws ParseException {
+    new Expectations() {
+      {
+        dao.update(LeaveStatus.DENIED, 5, "enjoy");
+        dao.update(LeaveStatus.APPROVED, 6, "wait for it");
+        dao.increase(5);
+        dao.decrease(6);
+      }
+    };
+    new MockUp<LeaveDetails>() {
+      @Mock
+      LeaveDetailsDAO dao() {
+        return dao;
+      }
+    };
+    SimpleDateFormat sf = new SimpleDateFormat("yyyy/mm/dd");
+    LeaveDetails l100 = new LeaveDetails(5, LeaveType.EL, sf.parse("2017/12/20"), sf.parse("2017/12/23"),
+                                         4, LeaveStatus.APPROVED, "trip", sf.parse("2017/12/18"), "enjoy", 2000);
+    LeaveDetails l101 = new LeaveDetails(6, LeaveType.EL, sf.parse("2017/12/26"), sf.parse("2017/12/28"),
+                                         4, LeaveStatus.DENIED, "sick", sf.parse("2017/12/19"), "wait for it", 3001);
+    String ld = l100.approveDeny(LeaveStatus.DENIED, 5, "enjoy");
+    String ld1 = "Leave is denied for the Employee ID" + " " + 2000;
+    assertEquals(ld1, ld);
+    String ld2 = l101.approveDeny(LeaveStatus.APPROVED, 6, "wait for it");
+    String ld3 = "Leave is approved for the Employee ID" + " " + 3001;
+    assertEquals(ld2, ld3);
+  }
 }
+
