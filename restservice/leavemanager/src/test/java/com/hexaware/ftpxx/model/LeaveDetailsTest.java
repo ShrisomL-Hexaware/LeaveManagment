@@ -248,12 +248,26 @@ public class LeaveDetailsTest {
                                          4, LeaveStatus.APPROVED, "trip", sf.parse("2017/12/18"), "enjoy", 2000);
     LeaveDetails l101 = new LeaveDetails(6, LeaveType.EL, sf.parse("2017/12/26"), sf.parse("2017/12/28"),
                                          4, LeaveStatus.DENIED, "sick", sf.parse("2017/12/19"), "wait for it", 3001);
+    LeaveDetails l102 = new LeaveDetails(7, LeaveType.EL, sf.parse("2017/12/27"), sf.parse("2017/12/28"),
+                                         2, LeaveStatus.PENDING, "rest", sf.parse("2017/12/22"), "go ahead", 3001);
     String ld = l100.approveDeny(LeaveStatus.DENIED, 5, "enjoy");
     String ld1 = "Leave is denied for the Employee ID" + " " + 2000;
     assertEquals(ld1, ld);
     String ld2 = l101.approveDeny(LeaveStatus.APPROVED, 6, "wait for it");
     String ld3 = "Leave is approved for the Employee ID" + " " + 3001;
     assertEquals(ld2, ld3);
+    String ld4 = l102.approveDeny(LeaveStatus.DENIED, 7, "go ahead");
+    String ld5 = "Leave is denied for the Employee ID" + " " + 3001;
+    assertEquals(ld5, ld4);
+    String ld6 = l102.approveDeny(LeaveStatus.APPROVED, 7, "go ahead");
+    String ld7 = "Leave is approved for the Employee ID" + " " + 3001;
+    assertEquals(ld7, ld6);
+    String ld8 = l101.approveDeny(LeaveStatus.PENDING, 6, "wait for it");
+    String ld9 = "Leave is pending for the Employee ID" + " " + 3001;
+    assertEquals(ld9, ld8);
+    String ld10 = l100.approveDeny(LeaveStatus.PENDING, 5, "enjoy");
+    String ld11 = "Leave is pending for the Employee ID" + " " + 2000;
+    assertEquals(ld11, ld10);
   }
 }
 
