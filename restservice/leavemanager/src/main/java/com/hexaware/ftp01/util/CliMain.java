@@ -1,6 +1,5 @@
 package com.hexaware.ftp01.util;
 import java.util.Scanner;
-import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.InputMismatchException;
@@ -126,8 +125,6 @@ public class CliMain {
           myFormat.setLenient(false);
           System.out.println("Enter Ending Date(yyyy/MM/dd) :");
           String date2 = option.next();
-          Date startDate = myFormat.parse(date1);
-          Date endDate = myFormat.parse(date2);
           try {
             myFormat.parse(date1.trim());
             myFormat.parse(date2.trim());
@@ -139,7 +136,7 @@ public class CliMain {
           int numberOfDays = option.nextInt();
           System.out.println("Reason :");
           String leaveReason = option.next();
-          String applyMessage = employee.applyForLeave(leaveType, startDate, endDate, numberOfDays,
+          String applyMessage = employee.applyForLeave(leaveType, numberOfDays,
                                 leaveReason, date1, date2);
           System.out.println(applyMessage);
         }

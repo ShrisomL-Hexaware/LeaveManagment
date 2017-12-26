@@ -257,24 +257,24 @@ public class Employee {
   /**
    * list employee leave balance.
    * @param levType to get type of leave.
-   * @param levStartDate to get start date.
-   * @param levEndDate to get end date.
    * @param levNumberOfDays to get total days.
    * @param levReason to get reason of leave.
-   * @param date1 to get date in string.
-   * @param date2 to get date in string.
+   * @param date1 to get startdate in string.
+   * @param date2 to get enddate in string.
    * @throws IllegalArgumentException to handle exception.
    * @throws ParseException to handle exception.
    * @return apply message.
    */
-  public final String applyForLeave(final LeaveType levType, final Date levStartDate, final Date levEndDate,
-                                  final int levNumberOfDays, final String levReason, final String date1,
-                                  final String date2) throws IllegalArgumentException, ParseException {
+  public final String applyForLeave(final LeaveType levType, final int levNumberOfDays, final String levReason,
+                                    final String date1, final String date2)
+                                    throws IllegalArgumentException, ParseException {
 
     Employee e = new Employee(empId);
     int empID = e.getEmpId();
     String applyMessage;
     SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
+    Date levStartDate = myFormat.parse(date1);
+    Date levEndDate = myFormat.parse(date2);
     long epochstartDate = myFormat.parse(date1).getTime() / 1000;
     long epochendDate = myFormat.parse(date2).getTime() / 1000;
     Date levAppliedOn = new Date();

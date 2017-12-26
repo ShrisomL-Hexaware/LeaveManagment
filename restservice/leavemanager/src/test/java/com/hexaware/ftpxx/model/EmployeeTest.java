@@ -17,8 +17,8 @@ import mockit.integration.junit4.JMockit;
 
 import java.util.ArrayList;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * Test class for Employee.
@@ -70,17 +70,16 @@ public class EmployeeTest {
    */
   @Test
   public final void testApplyForLeave(@Mocked final EmployeeDAO dao)throws ParseException {
-
-    SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
-    final Date dt1 = sf.parse("2017/12/12");
-    final Date dt2 = sf.parse("2017/12/13");
-    final Date dt3 = sf.parse("2017/12/14");
-    final String dt4 = "2017/12/12";
-    final String dt5 = "2017/12/13";
+    SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+    final Date dt1 = sf.parse("26/12/2017");
+    final Date dt2 = sf.parse("28/12/2017");
+    final Date dt3 = sf.parse("14/11/2017");
+    final String dt4 = "26/12/2017";
+    final String dt5 = "28/12/2017";
     new Expectations() {
       {
-        dao.insert(LeaveType.EL, dt1, dt2, 2, LeaveStatus.PENDING, "sick", dt3, 2001);
-        dao.insert(LeaveType.EL, dt1, dt2, 2, LeaveStatus.APPROVED, "Fever", dt3, 1000);
+        dao.insert(LeaveType.EL, dt1, dt2, 2, LeaveStatus.PENDING, "sick", dt3, 2000);
+        dao.insert(LeaveType.EL, dt1, dt2, 2, LeaveStatus.APPROVED, "Wedding", dt3, 5000);
       }
     };
     new MockUp<Employee>() {
@@ -90,15 +89,13 @@ public class EmployeeTest {
       }
     };
     Employee e100 = new Employee(2001, "Anushree Beohar", 8871676607L, "AnushreeB@hexaware.com", "HEXAVARSITY",
-                                 1000, 0, "2014-11-17");
+                                 1000, 3, "2014-14-17");
     Employee e101 = new Employee(1000, "Shrisom Laha", 8961260400L, "ShrisomL@hexaware.com", "HEXAVARSITY",
-                                 0, 0, "2014-11-17");
-
+                                 0, 2, "2014-14-17");
     String s = "Leave application forwarded to manager";
     String s1 = "Leave is applied Boss!!";
-
-    String str = e100.applyForLeave(LeaveType.EL, dt1, dt2, 2, "sick", dt4, dt5);
-    String str1 = e101.applyForLeave(LeaveType.EL, dt1, dt2, 2, "Fever", dt4, dt5);
+    String str = e100.applyForLeave(LeaveType.EL, 2, "sick", dt4, dt5);
+    String str1 = e101.applyForLeave(LeaveType.EL, 2, "Wedding", dt4, dt5);
     assertEquals(s, str);
     assertEquals(s1, str1);
   }
