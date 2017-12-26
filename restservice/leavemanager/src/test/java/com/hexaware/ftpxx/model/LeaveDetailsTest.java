@@ -187,7 +187,6 @@ public class LeaveDetailsTest {
     System.out.println("Pending leave Test successful");
   }
   /**
-<<<<<<< HEAD
    * Tests that a fetch of a specific employee works correctly.
    * @param dao mocking the dao class
    * @throws ParseException to handle parse exception.
@@ -227,11 +226,6 @@ public class LeaveDetailsTest {
    * Tests that a fetch of a specific employee works correctly.
    * @param dao mocking the dao class
    * @throws ParseException to handle parse exception.
-=======
-   * Tests that a fetch of a specific leave details works correctly.
-   * @param dao mocking the dao class
-   * @throws ParseException to handle exception.
->>>>>>> 082919c18ee66691ee0bb7289660b5d03874267b
    */
   @Test
   public final void testapproveDeny(@Mocked final LeaveDetailsDAO dao)throws ParseException {
