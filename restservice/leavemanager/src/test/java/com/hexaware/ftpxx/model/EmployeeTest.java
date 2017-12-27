@@ -78,9 +78,8 @@ public class EmployeeTest {
    // final String dt5 = "2017/12/28";
     new Expectations() {
       {
-        dao.insert(LeaveType.EL, dt1, dt2, 2, LeaveStatus.PENDING, "sick", dt3, 2000);
-        dao.insert(LeaveType.EL, dt1, dt2, 2, LeaveStatus.APPROVED, "Wedding", dt3,
-                   5000);
+        dao.updateLeaveBalance(1, 2001);
+        dao.updateLeaveBalance(0, 1000);
       }
     };
     new MockUp<Employee>() {
