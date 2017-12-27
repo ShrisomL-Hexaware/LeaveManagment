@@ -40,11 +40,11 @@ public class EmployeeTest {
   @Test
   public final void testEmployee() {
     Employee e100 = new Employee(2001, "Anushree Beohar", 8871676607L, "AnushreeB@hexaware.com", "HEXAVARSITY",
-                                 1000, 0, "2014-11-17");
+                                 1000, 0, "2014/11/17");
     Employee e101 = new Employee(2001, "Anushree Beohar", 8871676607L, "AnushreeB@hexaware.com", "HEXAVARSITY",
-                                 1000, 0, "2014-11-17");
+                                 1000, 0, "2014/11/17");
     assertEquals(e100.hashCode(), new Employee(2001, "Anushree Beohar", 8871676607L, "AnushreeB@hexaware.com",
-                                               "HEXAVARSITY", 1000, 0, "2014-11-17").hashCode());
+                                               "HEXAVARSITY", 1000, 0, "2014/11/17").hashCode());
     assertEquals(2001, e100.getEmpId());
     e101.setEmpId(2001);
     assertEquals("Anushree Beohar", e100.getEmpName());
@@ -59,8 +59,8 @@ public class EmployeeTest {
     e101.setEmpManagerId(1000);
     assertEquals(0, e100.getEmpLeaveBalance());
     e101.setEmpLeaveBalance(0);
-    assertEquals("2014-11-17", e100.getEmpDoj());
-    e101.setEmpDoj("2014-11-17");
+    assertEquals("2014/11/17", e100.getEmpDoj());
+    e101.setEmpDoj("2014/11/17");
   }
 
   /**
@@ -70,16 +70,17 @@ public class EmployeeTest {
    */
   @Test
   public final void testApplyForLeave(@Mocked final EmployeeDAO dao)throws ParseException {
-    SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
-    final Date dt1 = sf.parse("26/12/2017");
-    final Date dt2 = sf.parse("28/12/2017");
-    final Date dt3 = sf.parse("14/11/2017");
-    final String dt4 = "26/12/2017";
-    final String dt5 = "28/12/2017";
+    SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+    final Date dt1 = sf.parse("2017/12/26");
+    final Date dt2 = sf.parse("2017/12/28");
+    final Date dt3 = sf.parse("2017/12/23");
+   // final String dt4 = "2017/12/26";
+   // final String dt5 = "2017/12/28";
     new Expectations() {
       {
         dao.insert(LeaveType.EL, dt1, dt2, 2, LeaveStatus.PENDING, "sick", dt3, 2000);
-        dao.insert(LeaveType.EL, dt1, dt2, 2, LeaveStatus.APPROVED, "Wedding", dt3, 5000);
+        dao.insert(LeaveType.EL, dt1, dt2, 2, LeaveStatus.APPROVED, "Wedding", dt3,
+                   5000);
       }
     };
     new MockUp<Employee>() {
@@ -89,15 +90,29 @@ public class EmployeeTest {
       }
     };
     Employee e100 = new Employee(2001, "Anushree Beohar", 8871676607L, "AnushreeB@hexaware.com", "HEXAVARSITY",
-                                 1000, 3, "2014-14-17");
+                                 1000, 3, "2014/12/17");
     Employee e101 = new Employee(1000, "Shrisom Laha", 8961260400L, "ShrisomL@hexaware.com", "HEXAVARSITY",
-                                 0, 2, "2014-14-17");
+                                 0, 2, "2014/12/17");
     String s = "Leave application forwarded to manager";
     String s1 = "Leave is applied Boss!!";
-    String str = e100.applyForLeave(LeaveType.EL, 2, "sick", dt4, dt5);
-    String str1 = e101.applyForLeave(LeaveType.EL, 2, "Wedding", dt4, dt5);
+    //String s2 = "Number of days for leave cannot be less than 1 day!!";
+    //String s3 = "Sorry, end date is before start date.";
+    //String s4 = "Enter correct Number of days for leave!";
+    //String s5 = "You dont have expected leave balance.!!";
+
+    String str = e100.applyForLeave(LeaveType.EL, 2, "sick", dt1, dt2);
+    String str1 = e101.applyForLeave(LeaveType.EL, 2, "Wedding", dt1, dt2);
+    //String str2 = e100.applyForLeave(LeaveType.EL, 0, "sick", dt4, dt5);
+    //String str3 = e101.applyForLeave(LeaveType.EL, 2, "Wedding", dt5, dt4);
+
+    //String str4 = e100.applyForLeave(LeaveType.EL, 3, "sick", dt4, dt5);
+    //String str5 = e101.applyForLeave(LeaveType.EL, 3, "Wedding", dt5, dt4);
     assertEquals(s, str);
     assertEquals(s1, str1);
+    //assertEquals(s2, str2);
+    //assertEquals(s3, str3);
+    //assertEquals(s4, str4);
+    //assertEquals(s5, str5);
   }
 
   /**

@@ -8,6 +8,7 @@ import com.hexaware.ftp01.model.Employee;
 import com.hexaware.ftp01.model.LeaveDetails;
 import com.hexaware.ftp01.model.LeaveType;
 import com.hexaware.ftp01.model.LeaveStatus;
+import java.util.Date;
 
 /**
  * Class CliMain provides the command line interface to the leavemanagement
@@ -108,6 +109,7 @@ public class CliMain {
     try {
       System.out.println("Enter the empId :");
       int empId = option.nextInt();
+      SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
       Employee employee = Employee.listById(empId);
       if (employee == null) {
         System.out.println("Sorry, No such employee");
@@ -116,28 +118,29 @@ public class CliMain {
           throw new IllegalArgumentException("You dont have sufficient leave balance");
         } else {
           System.out.println("Available leave Balance is :" + employee.getEmpLeaveBalance());
-          SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
           System.out.println("Enter Leave Type :");
           String levType  = option.next();
           LeaveType leaveType = LeaveType.valueOf(levType);
           System.out.println("Enter Starting Date(yyyy/MM/dd) :");
           String date1 = option.next();
-          myFormat.setLenient(false);
           System.out.println("Enter Ending Date(yyyy/MM/dd) :");
           String date2 = option.next();
           try {
+            myFormat.setLenient(false);
             myFormat.parse(date1.trim());
             myFormat.parse(date2.trim());
           } catch (ParseException e) {
             System.out.println("Wrong Date!!");
             mainMenu();
           }
+          Date leaveStartDate = myFormat.parse(date1);
+          Date leaveEndDate = myFormat.parse(date2);
           System.out.println("Total Number of days :");
           int numberOfDays = option.nextInt();
           System.out.println("Reason :");
           String leaveReason = option.next();
           String applyMessage = employee.applyForLeave(leaveType, numberOfDays,
-                                leaveReason, date1, date2);
+                                leaveReason, leaveStartDate, leaveEndDate);
           System.out.println(applyMessage);
         }
       }

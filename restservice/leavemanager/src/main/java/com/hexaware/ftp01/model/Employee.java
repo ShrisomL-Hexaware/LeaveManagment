@@ -259,22 +259,22 @@ public class Employee {
    * @param levType to get type of leave.
    * @param levNumberOfDays to get total days.
    * @param levReason to get reason of leave.
-   * @param date1 to get startdate in string.
-   * @param date2 to get enddate in string.
+   * @param levStartDate to get startdate.
+   * @param levEndDate to get enddate.
    * @throws IllegalArgumentException to handle exception.
    * @throws ParseException to handle exception.
    * @return apply message.
    */
   public final String applyForLeave(final LeaveType levType, final int levNumberOfDays, final String levReason,
-                                    final String date1, final String date2)
+                                    final Date levStartDate, final Date levEndDate)
                                     throws IllegalArgumentException, ParseException {
 
     Employee e = new Employee(empId);
     int empID = e.getEmpId();
     String applyMessage;
     SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
-    Date levStartDate = myFormat.parse(date1);
-    Date levEndDate = myFormat.parse(date2);
+    String date1 = myFormat.format(levStartDate);
+    String date2 = myFormat.format(levEndDate);
     long epochstartDate = myFormat.parse(date1).getTime() / 1000;
     long epochendDate = myFormat.parse(date2).getTime() / 1000;
     Date levAppliedOn = new Date();
