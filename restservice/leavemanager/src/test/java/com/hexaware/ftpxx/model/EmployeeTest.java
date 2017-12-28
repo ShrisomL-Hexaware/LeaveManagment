@@ -38,7 +38,7 @@ public class EmployeeTest {
    * Tests the equals/hashcode methods of the employee class.
    */
   @Test
-  public final void testEmployee() {
+  public final void testEmployeeLeaveBalance() {
     Employee e100 = new Employee(2001, "Anushree Beohar", 8871676607L, "AnushreeB@hexaware.com", "HEXAVARSITY",
                                  1000, 0, "2014/11/17");
     Employee e101 = new Employee(2001, "Anushree Beohar", 8871676607L, "AnushreeB@hexaware.com", "HEXAVARSITY",
@@ -62,7 +62,13 @@ public class EmployeeTest {
     assertEquals("2014/11/17", e100.getEmpDoj());
     e101.setEmpDoj("2014/11/17");
   }
-
+   /**
+   * Tests the equals/hashcode methods of the employee class.
+   */
+  @Test
+  public final void testEmployee() {
+    Employee emp = new Employee(2001, 3);
+  }
   /**
    *Test the applyForLeave method of the employee class.
    * @param dao mocking the dao class.

@@ -261,6 +261,8 @@ public class LeaveDetailsTest {
                                          4, LeaveStatus.DENIED, "sick", sf.parse("2017/12/19"), "wait for it", 3001);
     LeaveDetails l102 = new LeaveDetails(7, LeaveType.EL, sf.parse("2017/12/27"), sf.parse("2017/12/28"),
                                          2, LeaveStatus.PENDING, "rest", sf.parse("2017/12/22"), "go ahead", 3001);
+    LeaveDetails l103 = new LeaveDetails(5, LeaveType.EL, sf.parse("2017/12/20"), sf.parse("2017/12/23"),
+                                         4, LeaveStatus.PENDING, "trip", sf.parse("2017/12/18"), "enjoy", 2000);
     String ld = l100.approveDeny(LeaveStatus.DENIED, 5, "enjoy");
     String ld1 = "Leave is denied for the Employee ID" + " " + 2000;
     assertEquals(ld1, ld);
@@ -279,6 +281,9 @@ public class LeaveDetailsTest {
     String ld10 = l100.approveDeny(LeaveStatus.PENDING, 5, "enjoy");
     String ld11 = "Leave is pending for the Employee ID" + " " + 2000;
     assertEquals(ld11, ld10);
+    String ld12 = l103.approveDeny(LeaveStatus.PENDING, 5, "ENJOY");
+    String ld13 = "Enter correct choice";
+    assertEquals(ld12, ld13);
   }
 }
 
