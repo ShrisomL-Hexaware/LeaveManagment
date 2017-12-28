@@ -36,7 +36,7 @@ public class LeaveDetailsRest {
    * @return the leave details
    */
   @GET
-  @Path("{empId}/empId")
+  @Path("{empId}/listpendingdetails")
   @Produces(MediaType.APPLICATION_JSON)
   public final LeaveDetails[] listPendingApplication(@PathParam("empId") final int empId) {
     final LeaveDetails[] leavedetails = LeaveDetails.listPendingApplication(empId);
