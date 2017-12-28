@@ -30,4 +30,19 @@ public class LeaveDetailsRest {
     }
     return ld;
   }
+  /**
+   * Returns a specific leave details's details.
+   * @param empId the empId of the employee
+   * @return the leave details
+   */
+  @GET
+  @Path("{empId}/empId")
+  @Produces(MediaType.APPLICATION_JSON)
+  public final LeaveDetails[] listPendingApplication(@PathParam("empId") final int empId) {
+    final LeaveDetails[] leavedetails = LeaveDetails.listPendingApplication(empId);
+    if (leavedetails == null) {
+      throw new NotFoundException("No such Employee ID: " + empId);
+    }
+    return leavedetails;
+  }
 }
